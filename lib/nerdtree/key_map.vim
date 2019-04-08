@@ -130,6 +130,7 @@ endfunction
 
 "FUNCTION: KeyMap.Create(options) {{{1
 function! s:KeyMap.Create(options)
+    " TODO WHAT IS quickhelpText??
     let opts = extend({'scope': 'all', 'quickhelpText': ''}, copy(a:options))
 
     "dont override other mappings unless the 'override' option is given

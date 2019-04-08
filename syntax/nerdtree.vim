@@ -5,15 +5,6 @@ exec 'syn match NERDTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
 "highlighting for the .. (up dir) line at the top of the tree
 execute "syn match NERDTreeUp #\\V". s:tree_up_dir_line ."#"
 
-"quickhelp syntax elements
-syn match NERDTreeHelpKey #" \{1,2\}[^ ]*:#ms=s+2,me=e-1
-syn match NERDTreeHelpKey #" \{1,2\}[^ ]*,#ms=s+2,me=e-1
-syn match NERDTreeHelpTitle #" .*\~$#ms=s+2,me=e-1
-syn match NERDTreeToggleOn #(on)#ms=s+1,he=e-1
-syn match NERDTreeToggleOff #(off)#ms=e-3,me=e-1
-syn match NERDTreeHelpCommand #" :.\{-}\>#hs=s+3
-syn match NERDTreeHelp  #^".*# contains=NERDTreeHelpKey,NERDTreeHelpTitle,NERDTreeIgnore,NERDTreeToggleOff,NERDTreeToggleOn,NERDTreeHelpCommand
-
 "highlighting for sym links
 syn match NERDTreeLinkTarget #->.*# containedin=NERDTreeDir,NERDTreeFile
 syn match NERDTreeLinkFile #.* ->#me=e-3 containedin=NERDTreeFile
@@ -52,10 +43,6 @@ hi def link NERDTreePartFile Type
 hi def link NERDTreeExecFile Title
 hi def link NERDTreeDirSlash Identifier
 
-hi def link NERDTreeHelp String
-hi def link NERDTreeHelpKey Identifier
-hi def link NERDTreeHelpCommand Identifier
-hi def link NERDTreeHelpTitle Macro
 hi def link NERDTreeToggleOn Question
 hi def link NERDTreeToggleOff WarningMsg
 
