@@ -49,7 +49,6 @@ call s:initVariable("g:NERDTreeNaturalSort", 0)
 call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
 call s:initVariable("g:NERDTreeChDirMode", 0)
 call s:initVariable("g:NERDTreeCreatePrefix", "silent")
-call s:initVariable("g:NERDTreeMinimalUI", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
@@ -61,7 +60,6 @@ call s:initVariable("g:NERDTreeQuitOnOpen", 0)
 call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeShowFiles", 1)
 call s:initVariable("g:NERDTreeShowHidden", 0)
-call s:initVariable("g:NERDTreeSortDirs", 1)
 
 call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
 call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")

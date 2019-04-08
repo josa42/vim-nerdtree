@@ -174,11 +174,6 @@ function! s:UI.isIgnoreFilterEnabled()
     return self._ignoreEnabled == 1
 endfunction
 
-" FUNCTION: s:UI.isMinimal() {{{1
-function! s:UI.isMinimal()
-    return g:NERDTreeMinimalUI
-endfunction
-
 " FUNCTION: s:UI.MarkupReg() {{{1
 function! s:UI.MarkupReg()
     return '^ *['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.']\? '
