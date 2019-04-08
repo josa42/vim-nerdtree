@@ -526,13 +526,6 @@ function! s:TreeDirNode.openExplorer()
     call self.open({'where': 'p'})
 endfunction
 
-" FUNCTION: TreeDirNode.openInNewTab(options) {{{1
-unlet s:TreeDirNode.openInNewTab
-function! s:TreeDirNode.openInNewTab(options)
-    call nerdtree#deprecated('TreeDirNode.openInNewTab', 'is deprecated, use open() instead')
-    call self.open({'where': 't'})
-endfunction
-
 " FUNCTION: TreeDirNode._openInNewTab() {{{1
 function! s:TreeDirNode._openInNewTab()
     tabnew
