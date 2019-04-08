@@ -104,8 +104,6 @@ endfunction
 " FUNCTION: nerdtree#loadClassFiles() {{{2
 function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/path.vim
-    runtime lib/nerdtree/menu_controller.vim
-    runtime lib/nerdtree/menu_item.vim
     runtime lib/nerdtree/key_map.vim
     runtime lib/nerdtree/tree_file_node.vim
     runtime lib/nerdtree/tree_dir_node.vim
@@ -124,7 +122,7 @@ function! nerdtree#postSourceActions()
 
     "load all nerdtree plugins
     runtime! nerdtree_plugin/**/*.vim
-endfunction
+endfunctio:
 
 " SECTION: View Functions {{{1
 "============================================================

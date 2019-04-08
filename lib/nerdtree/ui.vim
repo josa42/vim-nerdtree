@@ -83,7 +83,6 @@ function! s:UI._dumpHelp()
         let help .= "\"    but leave old root open\n"
         let help .= "\" ". g:NERDTreeMapRefresh .": refresh cursor dir\n"
         let help .= "\" ". g:NERDTreeMapRefreshRoot .": refresh current root\n"
-        let help .= "\" ". g:NERDTreeMapMenu .": Show menu\n"
         let help .= "\" ". g:NERDTreeMapChdir .":change the CWD to the\n"
         let help .= "\"    selected dir\n"
         let help .= "\" ". g:NERDTreeMapCWD .":change tree root to CWD\n"

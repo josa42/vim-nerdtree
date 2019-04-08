@@ -51,7 +51,6 @@ call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
 call s:initVariable("g:NERDTreeChDirMode", 0)
 call s:initVariable("g:NERDTreeCreatePrefix", "silent")
 call s:initVariable("g:NERDTreeMinimalUI", 0)
-call s:initVariable("g:NERDTreeMinimalMenu", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
@@ -110,7 +109,6 @@ call s:initVariable("g:NERDTreeMapChangeRoot", "C")
 call s:initVariable("g:NERDTreeMapChdir", "cd")
 call s:initVariable("g:NERDTreeMapCloseChildren", "X")
 call s:initVariable("g:NERDTreeMapCloseDir", "x")
-call s:initVariable("g:NERDTreeMapMenu", "m")
 call s:initVariable("g:NERDTreeMapHelp", "?")
 call s:initVariable("g:NERDTreeMapJumpFirstChild", "K")
 call s:initVariable("g:NERDTreeMapJumpLastChild", "J")
@@ -137,8 +135,6 @@ call s:initVariable("g:NERDTreeMapToggleZoom", "A")
 call s:initVariable("g:NERDTreeMapUpdir", "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen", "U")
 call s:initVariable("g:NERDTreeMapCWD", "CD")
-call s:initVariable("g:NERDTreeMenuDown", "j")
-call s:initVariable("g:NERDTreeMenuUp", "k")
 
 "SECTION: Load class files{{{2
 call nerdtree#loadClassFiles()
@@ -166,19 +162,6 @@ endif
 
 " SECTION: Public API {{{1
 "============================================================
-function! NERDTreeAddMenuItem(options)
-    call g:NERDTreeMenuItem.Create(a:options)
-endfunction
-
-function! NERDTreeAddMenuSeparator(...)
-    let opts = a:0 ? a:1 : {}
-    call g:NERDTreeMenuItem.CreateSeparator(opts)
-endfunction
-
-function! NERDTreeAddSubmenu(options)
-    return g:NERDTreeMenuItem.Create(a:options)
-endfunction
-
 function! NERDTreeAddKeyMap(options)
     call g:NERDTreeKeyMap.Create(a:options)
 endfunction

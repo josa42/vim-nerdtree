@@ -49,8 +49,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeCurrentDir" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapMenu, 'scope': "Node", 'callback': s."showMenu" })
-
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpParent, 'scope': "Node", 'callback': s."jumpToParent" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpFirstChild, 'scope': "Node", 'callback': s."jumpToFirstChild" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpLastChild, 'scope': "Node", 'callback': s."jumpToLastChild" })
@@ -466,12 +464,6 @@ function s:SID()
     endif
     return s:sid
 endfun
-
-" FUNCTION: s:showMenu(node) {{{1
-function! s:showMenu(node)
-    let mc = g:NERDTreeMenuController.New(g:NERDTreeMenuItem.AllEnabled())
-    call mc.showMenu()
-endfunction
 
 " FUNCTION: s:toggleIgnoreFilter() {{{1
 function! s:toggleIgnoreFilter()
