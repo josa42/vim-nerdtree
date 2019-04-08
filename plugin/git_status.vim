@@ -14,14 +14,6 @@ if exists('g:loaded_nerdtree_git_status')
 endif
 let g:loaded_nerdtree_git_status = 1
 
-if !exists('g:NERDTreeShowGitStatus')
-    let g:NERDTreeShowGitStatus = 1
-endif
-
-if g:NERDTreeShowGitStatus == 0
-    finish
-endif
-
 if !exists('g:NERDTreeMapNextHunk')
     let g:NERDTreeMapNextHunk = ']c'
 endif
@@ -352,8 +344,7 @@ function! s:SetupListeners()
     call g:NERDTreePathNotifier.AddListener('refreshFlags', 'NERDTreeGitStatusRefreshListener')
 endfunction
 
-if g:NERDTreeShowGitStatus && executable('git')
-    call s:NERDTreeGitStatusKeyMapping()
+if executable('git')
     call s:SetupListeners()
 endif
 
