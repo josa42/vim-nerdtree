@@ -14,14 +14,6 @@ if exists('g:loaded_nerdtree_git_status')
 endif
 let g:loaded_nerdtree_git_status = 1
 
-if !exists('g:NERDTreeMapNextHunk')
-    let g:NERDTreeMapNextHunk = ']c'
-endif
-
-if !exists('g:NERDTreeMapPrevHunk')
-    let g:NERDTreeMapPrevHunk = '[c'
-endif
-
 if !exists('g:NERDTreeUpdateOnWrite')
     let g:NERDTreeUpdateOnWrite = 1
 endif
@@ -201,23 +193,6 @@ function! s:NERDTreeGetFileGitStatusKey(us, them)
         return 'Unknown'
     endif
 endfunction
-
-" FUNCTION: s:jumpToNextHunk(node) {{{2
-function! s:jumpToNextHunk(node)
-    let l:position = search('\[[^{RO}].*\]', '')
-    if l:position
-        call nerdtree#echo('Jump to next hunk ')
-    endif
-endfunction
-
-" FUNCTION: s:jumpToPrevHunk(node) {{{2
-function! s:jumpToPrevHunk(node)
-    let l:position = search('\[[^{RO}].*\]', 'b')
-    if l:position
-        call nerdtree#echo('Jump to prev hunk ')
-    endif
-endfunction
-
 " Function: s:SID()   {{{2
 function s:SID()
     if !exists('s:sid')
@@ -226,27 +201,7 @@ function s:SID()
     return s:sid
 endfun
 
-" FUNCTION: s:NERDTreeGitStatusKeyMapping {{{2
-function! s:NERDTreeGitStatusKeyMapping()
-    let l:s = '<SNR>' . s:SID() . '_'
 
-    call NERDTreeAddKeyMap({
-        \ 'key': g:NERDTreeMapNextHunk,
-        \ 'scope': 'Node',
-        \ 'callback': l:s.'jumpToNextHunk',
-        \ 'quickhelpText': 'Jump to next git hunk' })
-
-    call NERDTreeAddKeyMap({
-        \ 'key': g:NERDTreeMapPrevHunk,
-        \ 'scope': 'Node',
-        \ 'callback': l:s.'jumpToPrevHunk',
-        \ 'quickhelpText': 'Jump to prev git hunk' })
-
-endfunction
-
-augroup nerdtreegitplugin
-    autocmd CursorHold * silent! call s:CursorHoldUpdate()
-augroup END
 " FUNCTION: s:CursorHoldUpdate() {{{2
 function! s:CursorHoldUpdate()
     if g:NERDTreeUpdateOnCursorHold != 1
@@ -272,11 +227,6 @@ function! s:CursorHoldUpdate()
     exec l:altwinnr . 'wincmd w'
     exec l:winnr . 'wincmd w'
 endfunction
-
-augroup nerdtreegitplugin
-    autocmd BufWritePost * call s:FileUpdate(expand('%:p'))
-augroup END
-
 " FUNCTION: s:FileUpdate(fname) {{{2
 function! s:FileUpdate(fname)
     if g:NERDTreeUpdateOnWrite != 1
@@ -307,10 +257,6 @@ function! s:FileUpdate(fname)
     exec l:altwinnr . 'wincmd w'
     exec l:winnr . 'wincmd w'
 endfunction
-
-augroup AddHighlighting
-    autocmd FileType nerdtree call s:AddHighlighting()
-augroup END
 
 function! s:AddHighlighting()
     let l:synmap = {
@@ -347,6 +293,13 @@ endfunction
 if executable('git')
     call s:SetupListeners()
 endif
+
+augroup nerdtreegitplugin
+    autocmd!
+    autocmd CursorHold * silent! call s:CursorHoldUpdate()
+    autocmd BufWritePost * call s:FileUpdate(expand('%:p'))
+    autocmd FileType nerdtree call s:AddHighlighting()
+augroup END
 
 
 " vim: set sw=4 sts=4 et fdm=marker:
