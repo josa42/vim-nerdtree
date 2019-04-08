@@ -105,12 +105,7 @@ function! s:Path.compareTo(path)
         endif
         "if the sort sequences are the same then compare the paths
         "alphabetically
-        let pathCompare = g:NERDTreeCaseSensitiveSort ? thisPath <# thatPath : thisPath <? thatPath
-        if pathCompare
-            return -1
-        else
-            return 1
-        endif
+        return thisPath <? thatPath ? -1 : 1
     endif
 endfunction
 
@@ -374,9 +369,7 @@ function! s:Path.getSortKey()
         if !g:NERDTreeSortHiddenFirst
             let path = substitute(path, '^[._]', '', '')
         endif
-        if !g:NERDTreeCaseSensitiveSort
-            let path = tolower(path)
-        endif
+        let path = tolower(path)
 
         call extend(self._sortKey, (g:NERDTreeNaturalSort ? self._splitChunks(path) : [path]))
     endif
