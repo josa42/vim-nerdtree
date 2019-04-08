@@ -90,11 +90,6 @@ call s:initVariable("g:NERDTreeWinPos", "left")
 call s:initVariable("g:NERDTreeWinSize", 31)
 
 "init the shell commands that will be used to copy nodes, and remove dir trees
-"
-"Note: the space after the command is important
-call s:initVariable("g:NERDTreeRemoveDirCmd", 'rm -rf ')
-call s:initVariable("g:NERDTreeCopyCmd", 'cp -r ')
-
 
 "SECTION: Init variable calls for key mappings {{{2
 call s:initVariable("g:NERDTreeMapActivateNode", "o")

@@ -39,13 +39,6 @@ function! s:TreeFileNode.copy(dest)
     endif
 endfunction
 
-" FUNCTION: TreeFileNode.delete {{{1
-" Removes this node from the tree and calls the Delete method for its path obj
-function! s:TreeFileNode.delete()
-    call self.path.delete()
-    call self.parent.removeChild(self)
-endfunction
-
 " FUNCTION: TreeFileNode.displayString() {{{1
 "
 " Returns a string that specifies how the node should be represented as a
