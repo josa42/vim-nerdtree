@@ -293,7 +293,7 @@ endfunction
 " zoom (maximize/minimize) the NERDTree window
 function! s:UI.toggleZoom()
     if exists("b:NERDTreeZoomed") && b:NERDTreeZoomed
-        let size = exists("b:NERDTreeOldWindowSize") ? b:NERDTreeOldWindowSize : g:NERDTreeWinSize
+        let size = g:NERDTreeWinSize
         exec "silent vertical resize ". size
         let b:NERDTreeZoomed = 0
     else
