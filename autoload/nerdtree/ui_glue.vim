@@ -7,7 +7,6 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
-    call NERDTreeAddKeyMap({ 'key': '<MiddleMouse>', 'scope': 'all', 'callback': s . 'handleMiddleMouse' })
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': "all", 'callback': s."handleLeftClick" })
     call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "DirNode", 'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "FileNode", 'callback': s."activateFileNode" })
@@ -237,27 +236,6 @@ function! s:handleLeftClick()
                 return
             endif
         endif
-    endif
-endfunction
-
-" FUNCTION: s:handleMiddleMouse() {{{1
-function! s:handleMiddleMouse()
-
-    " A middle mouse click does not automatically position the cursor as one
-    " would expect. Forcing the execution of a regular left mouse click here
-    " fixes this problem.
-    execute "normal! \<LeftMouse>"
-
-    let l:currentNode = g:NERDTreeFileNode.GetSelected()
-    if empty(l:currentNode)
-        call nerdtree#echoError('use the pointer to select a node')
-        return
-    endif
-
-    if l:currentNode.path.isDirectory
-        call l:currentNode.openExplorer()
-    else
-        call l:currentNode.open({'where': 'h'})
     endif
 endfunction
 
