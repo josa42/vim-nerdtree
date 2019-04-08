@@ -284,6 +284,7 @@ endfunction
 augroup nerdtreegitplugin
     autocmd BufWritePost * call s:FileUpdate(expand('%:p'))
 augroup END
+
 " FUNCTION: s:FileUpdate(fname) {{{2
 function! s:FileUpdate(fname)
     if g:NERDTreeUpdateOnWrite != 1
@@ -318,6 +319,7 @@ endfunction
 augroup AddHighlighting
     autocmd FileType nerdtree call s:AddHighlighting()
 augroup END
+
 function! s:AddHighlighting()
     let l:synmap = {
                 \ 'NERDTreeGitStatusModified'    : s:NERDTreeGetIndicator('Modified'),
