@@ -6,20 +6,6 @@
 let s:UI = {}
 let g:NERDTreeUI = s:UI
 
-" FUNCTION: s:UI.centerView() {{{2
-" centers the nerd tree window around the cursor (provided the nerd tree
-" options permit)
-function! s:UI.centerView()
-    if g:NERDTreeAutoCenter
-        let current_line = winline()
-        let lines_to_top = current_line
-        let lines_to_bottom = winheight(g:NERDTree.GetWinNum()) - current_line
-        if lines_to_top < g:NERDTreeAutoCenterThreshold || lines_to_bottom < g:NERDTreeAutoCenterThreshold
-            normal! zz
-        endif
-    endif
-endfunction
-
 " FUNCTION: s:UI.new(nerdtree) {{{1
 function! s:UI.New(nerdtree)
     let newObj = copy(self)
@@ -287,7 +273,6 @@ endfunction
 function! s:UI.toggleIgnoreFilter()
     let self._ignoreEnabled = !self._ignoreEnabled
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 " FUNCTION: s:UI.toggleShowFiles() {{{1
@@ -295,7 +280,6 @@ endfunction
 function! s:UI.toggleShowFiles()
     let self._showFiles = !self._showFiles
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 " FUNCTION: s:UI.toggleShowHidden() {{{1
@@ -303,7 +287,6 @@ endfunction
 function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
     call self.renderViewSavingPosition()
-    call self.centerView()
 endfunction
 
 " FUNCTION: s:UI.toggleZoom() {{{1

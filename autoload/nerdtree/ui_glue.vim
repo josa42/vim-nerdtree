@@ -297,7 +297,6 @@ function! s:jumpToChild(node, last)
     let l:target = a:last ? l:children[len(l:children) - 1] : l:children[0]
 
     call l:target.putCursorHere(1, 0)
-    call b:NERDTree.ui.centerView()
 endfunction
 
 " FUNCTION: s:jumpToParent(node) {{{1
@@ -316,14 +315,12 @@ function! s:jumpToParent(node)
     endif
 
     call l:node.parent.putCursorHere(1, 0)
-    call b:NERDTree.ui.centerView()
 endfunction
 
 " FUNCTION: s:jumpToRoot() {{{1
 " moves the cursor to the root node
 function! s:jumpToRoot()
     call b:NERDTree.root.putCursorHere(1, 0)
-    call b:NERDTree.ui.centerView()
 endfunction
 
 " FUNCTION: s:jumpToNextSibling(node) {{{1
@@ -351,7 +348,6 @@ function! s:jumpToSibling(node, forward)
     endif
 
     call l:sibling.putCursorHere(1, 0)
-    call b:NERDTree.ui.centerView()
 endfunction
 
 " FUNCTION: s:openHSplit(target) {{{1
