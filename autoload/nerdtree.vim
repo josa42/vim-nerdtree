@@ -126,16 +126,6 @@ function! nerdtree#postSourceActions()
     runtime! nerdtree_plugin/**/*.vim
 endfunction
 
-"FUNCTION: nerdtree#runningWindows(dir) {{{2
-function! nerdtree#runningWindows()
-    return has("win16") || has("win32") || has("win64")
-endfunction
-
-"FUNCTION: nerdtree#runningCygwin(dir) {{{2
-function! nerdtree#runningCygwin()
-    return has("win32unix")
-endfunction
-
 " SECTION: View Functions {{{1
 "============================================================
 

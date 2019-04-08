@@ -13,13 +13,7 @@ let g:NERDTreePath = s:Path
 " FUNCTION: Path.AbsolutePathFor(pathStr) {{{1
 function! s:Path.AbsolutePathFor(pathStr)
     let l:prependWorkingDir = 0
-
-    if nerdtree#runningWindows()
-        let l:prependWorkingDir = a:pathStr !~# '^.:\(\\\|\/\)\?' && a:pathStr !~# '^\(\\\\\|\/\/\)'
-    else
-        let l:prependWorkingDir = a:pathStr !~# '^/'
-    endif
-
+    let l:prependWorkingDir = a:pathStr !~# '^/'
     let l:result = a:pathStr
 
     if l:prependWorkingDir
@@ -273,17 +267,7 @@ endfunction
 "
 " If running windows, cache the drive letter for this path
 function! s:Path.extractDriveLetter(fullpath)
-    if nerdtree#runningWindows()
-        if a:fullpath =~ '^\(\\\\\|\/\/\)'
-            "For network shares, the 'drive' consists of the first two parts of the path, i.e. \\boxname\share
-            let self.drive = substitute(a:fullpath, '^\(\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\).*', '\1', '')
-            let self.drive = substitute(self.drive, '/', '\', "g")
-        else
-            let self.drive = substitute(a:fullpath, '\(^[a-zA-Z]:\).*', '\1', '')
-        endif
-    else
-        let self.drive = ''
-    endif
+    let self.drive = ''
 
 endfunction
 
@@ -296,10 +280,6 @@ endfunction
 
 " FUNCTION: Path._escChars() {{{1
 function! s:Path._escChars()
-    if nerdtree#runningWindows()
-        return " `\|\"#%&,?()\*^<>$"
-    endif
-
     return " \\`\|\"#%&,?()\*^<>[]$"
 endfunction
 
@@ -324,11 +304,7 @@ endfunction
 " Return:
 " a new Path object
 function! s:Path.getParent()
-    if nerdtree#runningWindows()
-        let path = self.drive . '\' . join(self.pathSegments[0:-2], '\')
-    else
-        let path = '/'. join(self.pathSegments[0:-2], '/')
-    endif
+    let path = '/'. join(self.pathSegments[0:-2], '/')
 
     return s:Path.New(path)
 endfunction
@@ -540,11 +516,7 @@ endfunction
 " Args:
 " path: the other path obj to compare this with
 function! s:Path.equals(path)
-    if nerdtree#runningWindows()
-        return self.str() ==? a:path.str()
-    else
-        return self.str() ==# a:path.str()
-    endif
+    return self.str() ==# a:path.str()
 endfunction
 
 " FUNCTION: Path.New(pathStr) {{{1
@@ -564,15 +536,6 @@ endfunction
 " consideration is taken for the use of the 'shellslash' option on Windows
 " systems.
 function! s:Path.Slash()
-
-    if nerdtree#runningWindows()
-        if exists('+shellslash') && &shellslash
-            return '/'
-        endif
-
-        return '\'
-    endif
-
     return '/'
 endfunction
 
@@ -593,7 +556,7 @@ endfunction
 function! s:Path.readInfoFromDisk(fullpath)
     call self.extractDriveLetter(a:fullpath)
 
-    let fullpath = s:Path.WinToUnixPath(a:fullpath)
+    let fullpath = a:fullpath
 
     if getftype(fullpath) ==# "fifo"
         throw "NERDTree.InvalidFiletypeError: Cant handle FIFO files: " . a:fullpath
@@ -629,13 +592,7 @@ function! s:Path.readInfoFromDisk(fullpath)
 
         "if the link is a dir then slap a / on the end of its dest
         if isdirectory(self.symLinkDest)
-
-            "we always wanna treat MS windows shortcuts as files for
-            "simplicity
-            if hardPath !~# '\.lnk$'
-
-                let self.symLinkDest = self.symLinkDest . '/'
-            endif
+            let self.symLinkDest = self.symLinkDest . '/'
         endif
     endif
 endfunction
@@ -751,13 +708,6 @@ function! s:Path._strForEdit()
 
     " Make the path relative to the current working directory, if possible.
     let l:result = fnamemodify(self.str(), ':.')
-
-    " On Windows, the drive letter may be removed by "fnamemodify()".  Add it
-    " back, if necessary.
-    if nerdtree#runningWindows() && l:result[0] == s:Path.Slash()
-        let l:result = self.drive . l:result
-    endif
-
     let l:result = fnameescape(l:result)
 
     if empty(l:result)
@@ -770,17 +720,9 @@ endfunction
 " FUNCTION: Path._strForGlob() {{{1
 function! s:Path._strForGlob()
     let lead = s:Path.Slash()
-
-    "if we are running windows then slap a drive letter on the front
-    if nerdtree#runningWindows()
-        let lead = self.drive . '\'
-    endif
-
     let toReturn = lead . join(self.pathSegments, s:Path.Slash())
+    let toReturn = escape(toReturn, self._escChars())
 
-    if !nerdtree#runningWindows()
-        let toReturn = escape(toReturn, self._escChars())
-    endif
     return toReturn
 endfunction
 
@@ -790,11 +732,6 @@ endfunction
 function! s:Path._str()
     let l:separator = s:Path.Slash()
     let l:leader = l:separator
-
-    if nerdtree#runningWindows()
-        let l:leader = self.drive . l:separator
-    endif
-
     return l:leader . join(self.pathSegments, l:separator)
 endfunction
 
@@ -818,32 +755,6 @@ function! s:Path.tabnr()
         endfor
     endfor
     return 0
-endfunction
-
-" FUNCTION: Path.WinToUnixPath(pathstr){{{1
-" Takes in a windows path and returns the unix equiv
-"
-" A class level method
-"
-" Args:
-" pathstr: the windows path to convert
-function! s:Path.WinToUnixPath(pathstr)
-    if !nerdtree#runningWindows()
-        return a:pathstr
-    endif
-
-    let toReturn = a:pathstr
-
-    "remove the x:\ of the front
-    let toReturn = substitute(toReturn, '^.*:\(\\\|/\)\?', '/', "")
-
-    "remove the \\ network share from the front
-    let toReturn = substitute(toReturn, '^\(\\\\\|\/\/\)[^\\\/]*\(\\\|\/\)[^\\\/]*\(\\\|\/\)\?', '/', "")
-
-    "convert all \ chars to /
-    let toReturn = substitute(toReturn, '\', '/', "g")
-
-    return toReturn
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:
