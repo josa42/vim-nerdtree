@@ -53,7 +53,6 @@ if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
 call s:initVariable("g:NERDTreeHighlightCursorline", 1)
-call s:initVariable("g:NERDTreeHijackNetrw", 1)
 call s:initVariable("g:NERDTreeMouseMode", 1)
 call s:initVariable("g:NERDTreeNotificationThreshold", 100)
 call s:initVariable("g:NERDTreeQuitOnOpen", 0)
@@ -147,13 +146,6 @@ augroup NERDTree
     "disallow insert mode in the NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
 augroup END
-
-if g:NERDTreeHijackNetrw
-    augroup NERDTreeHijackNetrw
-        autocmd VimEnter * silent! autocmd! FileExplorer
-        au BufEnter,VimEnter * call nerdtree#checkForBrowse(expand("<amatch>"))
-    augroup END
-endif
 
 " SECTION: Public API {{{1
 "============================================================
