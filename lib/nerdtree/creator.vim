@@ -286,13 +286,9 @@ function! s:Creator._setCommonBufOptions()
     setlocal nospell
     setlocal nowrap
 
-    if g:NERDTreeShowLineNumbers
-        setlocal nu
-    else
-        setlocal nonu
-        if v:version >= 703
-            setlocal nornu
-        endif
+    setlocal nonu
+    if v:version >= 703
+        setlocal nornu
     endif
 
     iabc <buffer>

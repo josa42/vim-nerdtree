@@ -61,7 +61,6 @@ call s:initVariable("g:NERDTreeQuitOnOpen", 0)
 call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeShowFiles", 1)
 call s:initVariable("g:NERDTreeShowHidden", 0)
-call s:initVariable("g:NERDTreeShowLineNumbers", 0)
 call s:initVariable("g:NERDTreeSortDirs", 1)
 
 call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
