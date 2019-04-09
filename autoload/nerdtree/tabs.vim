@@ -172,13 +172,9 @@ endfun
 "
 " restore focus to the window that was focused before leaving current tab
 fun! nerdtree#tabs#restoreFocus()
-  if g:nerdtree_tabs_synchronize_focus
-    if s:is_nerdtree_globally_focused
-      call nerdtree#tabs#focus()
-    elseif exists("t:NERDTreeTabLastWindow") && exists("t:NERDTreeBufName") && t:NERDTreeTabLastWindow != bufwinnr(t:NERDTreeBufName)
-      exe t:NERDTreeTabLastWindow . "wincmd w"
-    endif
-  elseif exists("t:NERDTreeTabLastWindow")
+  if s:is_nerdtree_globally_focused
+    call nerdtree#tabs#focus()
+  elseif exists("t:NERDTreeTabLastWindow") && exists("t:NERDTreeBufName") && t:NERDTreeTabLastWindow != bufwinnr(t:NERDTreeBufName)
     exe t:NERDTreeTabLastWindow . "wincmd w"
   endif
 endfun
