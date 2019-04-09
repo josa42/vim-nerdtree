@@ -478,8 +478,6 @@ endfunction
 "
 " The dictionary may have the following keys:
 "  'format'
-"  'escape'
-"  'truncateTo'
 "
 " The 'format' key may have a value of:
 "  'Edit' - a string to be used with ":edit" and similar commands
@@ -487,9 +485,6 @@ endfunction
 "
 " The 'escape' key, if specified, will cause the output to be escaped with
 " Vim's internal "shellescape()" function.
-"
-" The 'truncateTo' key shortens the length of the path to that given by the
-" value associated with 'truncateTo'. A '<' is prepended.
 function! s:Path.str(...)
     let options = a:0 ? a:1 : {}
     let toReturn = ""
@@ -505,35 +500,9 @@ function! s:Path.str(...)
         let toReturn = self._str()
     endif
 
-    if nerdtree#has_opt(options, 'escape')
-        let toReturn = shellescape(toReturn)
-    endif
-
-    if has_key(options, 'truncateTo')
-        let limit = options['truncateTo']
-        if strdisplaywidth(toReturn) > limit-1
-            while strdisplaywidth(toReturn) > limit-1 && strchars(toReturn) > 0
-                let toReturn = substitute(toReturn, '^.', '', '')
-            endwhile
-            if len(split(toReturn, '/')) > 1
-                let toReturn = '</' . join(split(toReturn, '/')[1:], '/') . '/'
-            else
-                let toReturn = '<' . toReturn
-            endif
-        endif
-    endif
-
     return toReturn
 endfunction
 
-" FUNCTION: Path._strForUI() {{{1
-function! s:Path._strForUI()
-    let toReturn = '/' . join(self.pathSegments, '/')
-    if self.isDirectory && toReturn != '/'
-        let toReturn  = toReturn . '/'
-    endif
-    return toReturn
-endfunction
 
 " FUNCTION: Path._strForEdit() {{{1
 " Return a string representation of this Path that is suitable for use as an

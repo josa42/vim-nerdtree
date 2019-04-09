@@ -89,10 +89,18 @@ function! s:TreeDirNode.createChild(path, inOrder)
     return newTreeNode
 endfunction
 
+" function! s:TreeFileNode.displayString(width)
+"     let flags = self.path.flagSet.renderToString()
+"     let flen = nerdtree#string#len(flags)
+"
+"     return s:truncate(self.path.displayString(), a:width - flen) . flags
+" endfunction
+
+
 " FUNCTION: TreeDirNode.displayString() {{{1
 " Assemble and return a string that can represent this TreeDirNode object in
 " the NERDTree window.
-function! s:TreeDirNode.displayString()
+function! s:TreeDirNode.displayString(width)
     let l:result = ''
 
     " Build a label that identifies this TreeDirNode.
@@ -112,7 +120,9 @@ function! s:TreeDirNode.displayString()
 
     let l:flags = l:cascade[-1].path.flagSet.renderToString()
 
-    let l:result = l:symbol . ' ' . l:flags . l:label
+    let l:result = l:symbol . ' ' . l:label
+    let l:result = nerdtree#string#trunc(l:result, a:width - nerdtree#string#len(l:flags)) . l:flags
+
     return l:result
 endfunction
 

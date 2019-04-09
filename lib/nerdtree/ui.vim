@@ -6,6 +6,8 @@
 let s:UI = {}
 let g:NERDTreeUI = s:UI
 
+let s:lineOffset = 0
+
 " FUNCTION: s:UI.new(nerdtree) {{{1
 function! s:UI.New(nerdtree)
     let newObj = copy(self)
@@ -24,106 +26,35 @@ endfunction
 function! s:UI.getPath(ln)
     let line = getline(a:ln)
 
-    let rootLine = self.getRootLineNum()
-
-    if a:ln == rootLine
+    if a:ln == s:lineOffset
         return self.nerdtree.root.path
     endif
 
-    if a:ln < rootLine
+    if a:ln < s:lineOffset
         return {}
     endif
 
-    let indent = self._indentLevelFor(line)
+    let idx = (a:ln - s:lineOffset - 1)
 
-    " remove the tree parts and the leading space
-    let curFile = self._stripMarkup(line)
-
-    let dir = ""
-    let lnum = a:ln
-    while lnum > 0
-        let lnum = lnum - 1
-        let curLine = getline(lnum)
-        let curLineStripped = self._stripMarkup(curLine)
-
-        " have we reached the top of the tree?
-        if lnum == rootLine
-            let dir = self.nerdtree.root.path.str({'format': 'UI'}) . dir
-            break
-        endif
-        if curLineStripped =~# '/$'
-            let lpindent = self._indentLevelFor(curLine)
-            if lpindent < indent
-                let indent = indent - 1
-
-                let dir = substitute (curLineStripped,'^\\', "", "") . dir
-                continue
-            endif
-        endif
-    endwhile
-    let curFile = self.nerdtree.root.path.drive . dir . curFile
-    let toReturn = g:NERDTreePath.New(curFile)
-    return toReturn
+    return self.nerdtree.root.registry.items[idx].path
 endfunction
 
 " FUNCTION: s:UI.getLineNum(node) {{{1
 " Return the line number where the given node is rendered.  Return -1 if the
 " given node is not visible.
 function! s:UI.getLineNum(node)
+    " if a:node.isRoot()
+    "     return self.getRootLineNum()
+    " endif
 
-    if a:node.isRoot()
-        return self.getRootLineNum()
-    endif
-
-    let l:pathComponents = [substitute(self.nerdtree.root.path.str({'format': 'UI'}), '/\s*$', '', '')]
-    let l:currentPathComponent = 1
-
-    let l:fullPath = a:node.path.str({'format': 'UI'})
-
-    for l:lineNumber in range(self.getRootLineNum() + 1, line('$'))
-        let l:currentLine = getline(l:lineNumber)
-        let l:indentLevel = self._indentLevelFor(l:currentLine)
-
-        if l:indentLevel != l:currentPathComponent
-            continue
-        endif
-
-        let l:currentLine = self._stripMarkup(l:currentLine)
-        let l:currentPath =  join(l:pathComponents, '/') . '/' . l:currentLine
-
-        " Directories: If the current path "starts with" the full path, then
-        " either the paths are equal or the line is a cascade containing the
-        " full path.
-        if l:fullPath[-1:] == '/' && stridx(l:currentPath, l:fullPath) == 0
-            return l:lineNumber
-        endif
-
-        " Files: The paths must exactly match.
-        if l:fullPath ==# l:currentPath
-            return l:lineNumber
-        endif
-
-        " Otherwise: If the full path starts with the current path and the
-        " current path is a directory, we add a new path component.
-        if stridx(l:fullPath, l:currentPath) == 0 && l:currentPath[-1:] == '/'
-            let l:currentLine = substitute(l:currentLine, '/\s*$', '', '')
-            call add(l:pathComponents, l:currentLine)
-            let l:currentPathComponent += 1
-        endif
-    endfor
-
-    return -1
+    return a:node.idx + s:lineOffset + 1
 endfunction
 
-" FUNCTION: s:UI.getRootLineNum(){{{1
-" gets the line number of the root node
-function! s:UI.getRootLineNum()
-    let rootLine = 1
-    while getline(rootLine) !~# '^\(/\|<\)'
-        let rootLine = rootLine + 1
-    endwhile
-    return rootLine
-endfunction
+" " FUNCTION: s:UI.getRootLineNum(){{{1
+" " gets the line number of the root node
+" function! s:UI.getRootLineNum()
+"     return s:lineOffset
+" endfunction
 
 " FUNCTION: s:UI.getShowHidden() {{{1
 function! s:UI.getShowHidden()
@@ -193,16 +124,6 @@ function! s:UI.setShowHidden(val)
     let self._showHidden = a:val
 endfunction
 
-" FUNCTION: s:UI._stripMarkup(line){{{1
-" find the filename in the given line, and return it.
-"
-" Args:
-" line: the subject line
-function! s:UI._stripMarkup(line)
-    let l:line = substitute(a:line, '^.\{-}' . g:NERDTreeNodeDelimiter, '', '')
-    return substitute(l:line, g:NERDTreeNodeDelimiter.'.*$', '', '')
-endfunction
-
 " FUNCTION: s:UI.render() {{{1
 function! s:UI.render()
     setlocal noreadonly modifiable
@@ -216,10 +137,17 @@ function! s:UI.render()
     " delete all lines in the buffer (being careful not to clobber a register)
     silent 1,$delete _
 
+    for i in range(1,s:lineOffset+1)
+        call setline(i, "")
+    endfor
+
+    call cursor(1 + s:lineOffset, col("."))
+
+
     " draw the header line
-    let header = self.nerdtree.root.path.str({'format': 'UI', 'truncateTo': winwidth(0)})
-    call setline(line(".")+1, header)
-    call cursor(line(".")+1, col("."))
+    " let header = self.nerdtree.root.path.str({'format': 'UI', 'truncateTo': winwidth(0)})
+    " call setline(line(".")+1, header)
+    " call cursor(line(".")+1, col("."))
 
     " draw the tree
     silent put =self.nerdtree.root.renderToString()

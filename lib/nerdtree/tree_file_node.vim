@@ -46,8 +46,11 @@ endfunction
 "
 " Return:
 " a string that can be used in the view to represent this node
-function! s:TreeFileNode.displayString()
-    return self.path.flagSet.renderToString() . self.path.displayString()
+function! s:TreeFileNode.displayString(width)
+    let flags = self.path.flagSet.renderToString()
+    let flen = nerdtree#string#len(flags)
+
+    return nerdtree#string#trunc(self.path.displayString(), a:width - flen) . flags
 endfunction
 
 " FUNCTION: TreeFileNode.equals(treenode) {{{1
@@ -243,7 +246,9 @@ endfunction
 " FUNCTION: TreeFileNode.renderToString {{{1
 " returns a string representation for this tree to be rendered in the view
 function! s:TreeFileNode.renderToString()
-    return self._renderToString(0, 0)
+    let self.registry = { 'idx': 0, 'items': {} }
+    let self.idx = 0
+    return self._renderToString(0, 0, self.registry)
 endfunction
 
 " Args:
@@ -251,7 +256,7 @@ endfunction
 " drawText: 1 if we should actually draw the line for this node (if 0 then the
 " child nodes are rendered only)
 " for each depth in the tree
-function! s:TreeFileNode._renderToString(depth, drawText)
+function! s:TreeFileNode._renderToString(depth, drawText, reg)
     let output = ""
     if a:drawText ==# 1
 
@@ -261,7 +266,12 @@ function! s:TreeFileNode._renderToString(depth, drawText)
             let treeParts = treeParts . '  '
         endif
 
-        let line = treeParts . self.displayString()
+        let self.idx = a:reg.idx
+        let idx = a:reg.idx
+        let a:reg.items[idx] = self
+
+        let line = treeParts . self.displayString(winwidth(0) - ((a:depth) * 2))
+        let a:reg.idx += 1
 
         let output = output . line . "\n"
     endif
@@ -272,12 +282,13 @@ function! s:TreeFileNode._renderToString(depth, drawText)
         let childNodesToDraw = self.getVisibleChildren()
 
         if self.isCascadable() && a:depth > 0
-
-            let output = output . childNodesToDraw[0]._renderToString(a:depth, 0)
+            let childNodesToDraw[0].idx = self.idx
+            let a:reg.items[idx] = childNodesToDraw[0]
+            let output = output . childNodesToDraw[0]._renderToString(a:depth, 0, a:reg)
 
         elseif len(childNodesToDraw) > 0
             for i in childNodesToDraw
-                let output = output . i._renderToString(a:depth + 1, 1)
+                let output = output . i._renderToString(a:depth + 1, 1, a:reg)
             endfor
         endif
     endif
