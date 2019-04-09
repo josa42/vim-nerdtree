@@ -380,18 +380,6 @@ function! s:refreshCurrent(node)
     redraw!
 endfunction
 
-" FUNCTION: nerdtree#ui_glue#setupCommands() {{{1
-function! nerdtree#ui_glue#setupCommands()
-    command! -n=? -complete=dir -bar NERDTree :call g:NERDTreeCreator.CreateTabTree('<args>')
-    command! -n=? -complete=dir -bar NERDTreeToggle :call g:NERDTreeCreator.ToggleTabTree('<args>')
-    command! -n=0 -bar NERDTreeClose :call g:NERDTree.Close()
-    command! -n=0 -bar NERDTreeMirror call g:NERDTreeCreator.CreateMirror()
-    command! -n=? -complete=file -bar NERDTreeFind call s:findAndRevealPath('<args>')
-    command! -n=0 -bar NERDTreeRefreshRoot call s:refreshRoot()
-    command! -n=0 -bar NERDTreeFocus call NERDTreeFocus()
-    command! -n=0 -bar NERDTreeCWD call NERDTreeCWD()
-endfunction
-
 " Function: s:SID()   {{{1
 function s:SID()
     if !exists("s:sid")
@@ -399,6 +387,18 @@ function s:SID()
     endif
     return s:sid
 endfun
+
+" FUNCTION: nerdtree#ui_glue#setupCommands() {{{1
+function! nerdtree#ui_glue#setupCommands()
+    command! -n=? -complete=dir -bar  NERDTree           :call g:NERDTreeCreator.CreateTabTree('<args>')
+    command! -n=? -complete=dir -bar  NERDTreeToggle     :call g:NERDTreeCreator.ToggleTabTree('<args>')
+    command! -n=0 -bar                NERDTreeClose      :call g:NERDTree.Close()
+    command! -n=0 -bar                NERDTreeMirror      call g:NERDTreeCreator.CreateMirror()
+    command! -n=? -complete=file -bar NERDTreeFind        call s:findAndRevealPath('<args>')
+    command! -n=0 -bar                NERDTreeRefreshRoot call s:refreshRoot()
+    command! -n=0 -bar                NERDTreeFocus       call NERDTreeFocus()
+    command! -n=0 -bar                NERDTreeCWD         call NERDTreeCWD()
+endfunction
 
 " FUNCTION: s:toggleIgnoreFilter() {{{1
 function! s:toggleIgnoreFilter()
