@@ -41,7 +41,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleZoom, 'scope': "all", 'callback': s."toggleZoom" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleHidden, 'scope': "all", 'callback': s."toggleShowHidden" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFiles, 'scope': "all", 'callback': s."toggleShowFiles" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeCurrentDir" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
@@ -432,11 +431,6 @@ endfun
 " FUNCTION: s:toggleIgnoreFilter() {{{1
 function! s:toggleIgnoreFilter()
     call b:NERDTree.ui.toggleIgnoreFilter()
-endfunction
-
-" FUNCTION: s:toggleShowFiles() {{{1
-function! s:toggleShowFiles()
-    call b:NERDTree.ui.toggleShowFiles()
 endfunction
 
 " FUNCTION: s:toggleShowHidden() {{{1

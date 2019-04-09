@@ -308,10 +308,6 @@ function! s:Path.ignore(nerdtree)
         return 1
     endif
 
-    if a:nerdtree.ui.getShowFiles() ==# 0 && self.isDirectory ==# 0
-        return 1
-    endif
-
     return 0
 endfunction
 

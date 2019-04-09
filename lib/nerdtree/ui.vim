@@ -11,7 +11,6 @@ function! s:UI.New(nerdtree)
     let newObj = copy(self)
     let newObj.nerdtree = a:nerdtree
     let newObj._ignoreEnabled = 1
-    let newObj._showFiles = g:NERDTreeShowFiles
     let newObj._showHidden = g:NERDTreeShowHidden
 
     return newObj
@@ -128,11 +127,6 @@ function! s:UI.getRootLineNum()
         let rootLine = rootLine + 1
     endwhile
     return rootLine
-endfunction
-
-" FUNCTION: s:UI.getShowFiles() {{{1
-function! s:UI.getShowFiles()
-    return self._showFiles
 endfunction
 
 " FUNCTION: s:UI.getShowHidden() {{{1
@@ -275,12 +269,6 @@ function! s:UI.toggleIgnoreFilter()
     call self.renderViewSavingPosition()
 endfunction
 
-" FUNCTION: s:UI.toggleShowFiles() {{{1
-" toggles the display of hidden files
-function! s:UI.toggleShowFiles()
-    let self._showFiles = !self._showFiles
-    call self.renderViewSavingPosition()
-endfunction
 
 " FUNCTION: s:UI.toggleShowHidden() {{{1
 " toggles the display of hidden files
