@@ -11,14 +11,14 @@
 "
 " SECTION: Script init stuff {{{1
 "============================================================
-if exists("loaded_nerd_tree")
+if exists("loaded_nerdtree")
     finish
 endif
 if v:version < 800
     echoerr "NERDTree: this plugin requires vim >= 8. DOWNLOAD IT! You'll thank me later!"
     finish
 endif
-let loaded_nerd_tree = 1
+let loaded_nerdtree = 1
 
 "for line continuation - i.e dont want C in &cpo
 let s:old_cpo = &cpo
@@ -89,7 +89,7 @@ call s:initVariable("g:NERDTreeNodeDelimiter", "\x07")
 
 if !exists('g:NERDTreeStatusline')
     "the exists() crap here is a hack to stop vim spazzing out when
-    "loading a session that was created with an open nerd tree. It spazzes
+    "loading a session that was created with an open NERDTree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)
     let g:NERDTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
 
@@ -153,7 +153,7 @@ call nerdtree#ui_glue#setupCommands()
 "============================================================
 augroup NERDTree
     autocmd!
-    "Save the cursor position whenever we close the nerd tree
+    "Save the cursor position whenever we close the NERDTree
     exec "autocmd BufLeave ". g:NERDTreeCreator.BufNamePrefix() ."* if g:NERDTree.IsOpen() | call b:NERDTree.ui.saveScreenState() | endif"
 
     "disallow insert mode in the NERDTree

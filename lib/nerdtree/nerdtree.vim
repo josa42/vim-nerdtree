@@ -64,7 +64,7 @@ function! s:NERDTree.Close()
 endfunction
 
 "FUNCTION: s:NERDTree.CloseIfQuitOnOpen() {{{1
-"Closes the NERD tree window if the close on open option is set
+"Closes the NERDTree window if the close on open option is set
 function! s:NERDTree.CloseIfQuitOnOpen()
     if and(g:NERDTreeQuitOnOpen,1) && s:NERDTree.IsOpen()
         call s:NERDTree.Close()
@@ -72,20 +72,20 @@ function! s:NERDTree.CloseIfQuitOnOpen()
 endfunction
 
 "FUNCTION: s:NERDTree.CursorToTreeWin(){{{1
-"Places the cursor in the nerd tree window
+"Places the cursor in the NERDTree window
 function! s:NERDTree.CursorToTreeWin()
     call g:NERDTree.MustBeOpen()
     call nerdtree#exec(g:NERDTree.GetWinNum() . "wincmd w")
 endfunction
 
 " Function: s:NERDTree.ExistsForBuffer()   {{{1
-" Returns 1 if a nerd tree root exists in the current buffer
+" Returns 1 if a NERDTree root exists in the current buffer
 function! s:NERDTree.ExistsForBuf()
     return exists("b:NERDTree")
 endfunction
 
 " Function: s:NERDTree.ExistsForTab()   {{{1
-" Returns 1 if a nerd tree root exists in the current tab
+" Returns 1 if a NERDTree root exists in the current tab
 function! s:NERDTree.ExistsForTab()
     if !exists("t:NERDTreeBufName")
         return
@@ -119,7 +119,7 @@ function! s:NERDTree.getRoot()
 endfunction
 
 "FUNCTION: s:NERDTree.GetWinNum() {{{1
-"gets the nerd tree window number for this tab
+"gets the NERDTree window number for this tab
 function! s:NERDTree.GetWinNum()
     if exists("t:NERDTreeBufName")
         return bufwinnr(t:NERDTreeBufName)

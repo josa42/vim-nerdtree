@@ -26,7 +26,7 @@ endfunction
 
 " FUNCTION: s:Creator.BufNamePrefix() {{{1
 function! s:Creator.BufNamePrefix()
-    return 'NERD_tree_'
+    return 'NERDTree_'
 endfunction
 
 " FUNCTION: s:Creator.CreateTabTree(a:name) {{{1
@@ -117,7 +117,7 @@ endfunction
 
 " FUNCTION: s:Creator.createMirror() {{{1
 function! s:Creator.createMirror()
-    "get the names off all the nerd tree buffers
+    "get the names off all the NERDTree buffers
     let treeBufNames = []
     for i in range(1, tabpagenr("$"))
         let nextName = self._tabpagevar(i, 'NERDTreeBufName')
@@ -207,14 +207,14 @@ function! s:Creator.New()
 endfunction
 
 " FUNCTION: s:Creator._nextBufferName() {{{2
-" returns the buffer name for the next nerd tree
+" returns the buffer name for the next NERDTree
 function! s:Creator._nextBufferName()
     let name = s:Creator.BufNamePrefix() . self._nextBufferNumber()
     return name
 endfunction
 
 " FUNCTION: s:Creator._nextBufferNumber() {{{2
-" the number to add to the nerd tree buffer name to make the buf name unique
+" the number to add to the NERDTree buffer name to make the buf name unique
 function! s:Creator._nextBufferNumber()
     if !exists("s:Creator._NextBufNum")
         let s:Creator._NextBufNum = 1
@@ -330,11 +330,11 @@ function! s:Creator.ToggleTabTree(dir)
 endfunction
 
 " FUNCTION: s:Creator.toggleTabTree(dir) {{{1
-" Toggles the NERD tree. I.e the NERD tree is open, it is closed, if it is
+" Toggles the NERDTree. I.e the NERDTree is open, it is closed, if it is
 " closed it is restored or initialized (if it doesnt exist)
 "
 " Args:
-" dir: the full path for the root node (is only used if the NERD tree is being
+" dir: the full path for the root node (is only used if the NERDTree is being
 " initialized.
 function! s:Creator.toggleTabTree(dir)
     if g:NERDTree.ExistsForTab()

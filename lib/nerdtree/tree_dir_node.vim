@@ -410,7 +410,7 @@ function! s:TreeDirNode._initChildren(silent)
     redraw!
 
     if invalidFilesFound
-        call nerdtree#echoWarning(invalidFilesFound . " file(s) could not be loaded into the NERD tree")
+        call nerdtree#echoWarning(invalidFilesFound . " file(s) could not be loaded into the NERDTree")
     endif
     return self.getChildCount()
 endfunction
@@ -554,7 +554,7 @@ function! s:TreeDirNode.refresh()
         call self.sortChildren()
 
         if invalidFilesFound
-            call nerdtree#echoWarning("some files could not be loaded into the NERD tree")
+            call nerdtree#echoWarning("some files could not be loaded into the NERDTree")
         endif
     endif
 endfunction

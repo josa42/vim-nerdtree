@@ -648,7 +648,7 @@ Moves the cursor up.
 The plugin provides the following settings that can customise the behaviour
 the NERDTree. These settings should be set in your vimrc, using `:let`.
 
-|loaded_nerd_tree|            Turns off the script.
+|loaded_nerdtree|            Turns off the script.
 
 |NERDTreeAutoCenter|          Controls whether the NERDTree window centers
                             when the cursor moves within a specified
@@ -761,10 +761,10 @@ To enable any of the below settings you should put an appropriate >
     let <setting>=<value>
 <line in your ~/.vimrc.
 
-                                                              *loaded_nerd_tree*
+                                                              *loaded_nerdtree*
 If this plugin is making you feel homicidal, it may be a good idea to turn it
 off with this line in your vimrc: >
-    let loaded_nerd_tree=1
+    let loaded_nerdtree=1
 <
 ------------------------------------------------------------------------------
                                                             *NERDTreeAutoCenter*
@@ -1247,7 +1247,7 @@ tree and/or get information from it: >
     g:NERDTreeFileNode
     g:NERDTreeBookmark
 <
-See the code/comments in NERD_tree.vim to find how to use these objects. The
+See the code/comments in NERDTree.vim to find how to use these objects. The
 following code conventions are used:
     * class members start with a capital letter
     * instance members start with a lower case letter

@@ -101,7 +101,7 @@ endfunction
 " Args:
 " winnumber: the number of the window in question
 function! s:Opener._isWindowUsable(winnumber)
-    "gotta split if theres only one window (i.e. the NERD tree)
+    "gotta split if theres only one window (i.e. the NERDTree)
     if winnr("$") ==# 1
         return 0
     endif
