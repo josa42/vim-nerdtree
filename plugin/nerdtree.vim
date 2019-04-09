@@ -155,9 +155,7 @@ call s:initVariable("g:nerdtree_tabs_open_on_gui_startup", 1)
 call s:initVariable("g:nerdtree_tabs_open_on_console_startup", 0)
 
 " do not open NERDTree if vim starts in diff mode
-if !exists('g:nerdtree_tabs_no_startup_for_diff')
-    let g:nerdtree_tabs_no_startup_for_diff = 1
-endif
+call s:initVariable('g:nerdtree_tabs_no_startup_for_diff', 1)
 
 " On startup - focus NERDTree when opening a directory, focus the file if
 " editing a specified file. When set to `2`, always focus file after startup.
