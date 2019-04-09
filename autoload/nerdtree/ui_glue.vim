@@ -7,54 +7,54 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>', 'scope': "all", 'callback': s."handleLeftClick" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "DirNode", 'callback': s."activateDirNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "FileNode", 'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>', 'scope': "all", 'callback': s."activateAll" })
+    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."handleLeftClick" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "DirNode",   'callback': s."activateDirNode" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "FileNode",  'callback': s."activateFileNode" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "all",       'callback': s."activateAll" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "DirNode", 'callback': s."activateDirNode" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "FileNode", 'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode, 'scope': "all", 'callback': s."activateAll" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "DirNode",   'callback': s."activateDirNode" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "FileNode",  'callback': s."activateFileNode" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "all",       'callback': s."activateAll" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenSplit, 'scope': "Node", 'callback': s."openHSplit" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenVSplit, 'scope': "Node", 'callback': s."openVSplit" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenSplit,        'scope': "Node",      'callback': s."openHSplit" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenVSplit,       'scope': "Node",      'callback': s."openVSplit" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreview, 'scope': "Node", 'callback': s."previewNodeCurrent" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreviewVSplit, 'scope': "Node", 'callback': s."previewNodeVSplit" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreviewSplit, 'scope': "Node", 'callback': s."previewNodeHSplit" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreview,          'scope': "Node",      'callback': s."previewNodeCurrent" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreviewVSplit,    'scope': "Node",      'callback': s."previewNodeVSplit" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapPreviewSplit,     'scope': "Node",      'callback': s."previewNodeHSplit" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenRecursively, 'scope': "DirNode", 'callback': s."openNodeRecursively" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenRecursively,  'scope': "DirNode",   'callback': s."openNodeRecursively" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdir, 'scope': 'all', 'callback': s . 'upDirCurrentRootClosed' })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdirKeepOpen, 'scope': 'all', 'callback': s . 'upDirCurrentRootOpen' })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChangeRoot, 'scope': 'Node', 'callback': s . 'chRoot' })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdir,            'scope': 'all',       'callback': s . 'upDirCurrentRootClosed' })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdirKeepOpen,    'scope': 'all',       'callback': s . 'upDirCurrentRootOpen' })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChangeRoot,       'scope': 'Node',      'callback': s . 'chRoot' })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChdir, 'scope': "Node", 'callback': s."chCwd" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChdir,            'scope': "Node",      'callback': s."chCwd" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapQuit, 'scope': "all", 'callback': s."closeTreeWindow" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapQuit,             'scope': "all",       'callback': s."closeTreeWindow" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD, 'scope': "all", 'callback': "nerdtree#ui_glue#chRootCwd" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD,              'scope': "all",       'callback': "nerdtree#ui_glue#chRootCwd" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot, 'scope': "all", 'callback': s."refreshRoot" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefresh, 'scope': "Node", 'callback': s."refreshCurrent" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot,      'scope': "all",       'callback': s."refreshRoot" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefresh,          'scope': "Node",      'callback': s."refreshCurrent" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleHidden, 'scope': "all", 'callback': s."toggleShowHidden" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleHidden,     'scope': "all",       'callback': s."toggleShowHidden" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters,    'scope': "all",       'callback': s."toggleIgnoreFilter" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir, 'scope': "Node", 'callback': s."closeCurrentDir" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren, 'scope': "DirNode", 'callback': s."closeChildren" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseDir,         'scope': "Node",      'callback': s."closeCurrentDir" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCloseChildren,    'scope': "DirNode",   'callback': s."closeChildren" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpParent, 'scope': "Node", 'callback': s."jumpToParent" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpFirstChild, 'scope': "Node", 'callback': s."jumpToFirstChild" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpLastChild, 'scope': "Node", 'callback': s."jumpToLastChild" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpRoot, 'scope': "all", 'callback': s."jumpToRoot" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpNextSibling, 'scope': "Node", 'callback': s."jumpToNextSibling" })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpPrevSibling, 'scope': "Node", 'callback': s."jumpToPrevSibling" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpParent,       'scope': "Node",      'callback': s."jumpToParent" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpFirstChild,   'scope': "Node",      'callback': s."jumpToFirstChild" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpLastChild,    'scope': "Node",      'callback': s."jumpToLastChild" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpRoot,         'scope': "all",       'callback': s."jumpToRoot" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpNextSibling,  'scope': "Node",      'callback': s."jumpToNextSibling" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapJumpPrevSibling,  'scope': "Node",      'callback': s."jumpToPrevSibling" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTab, 'scope': 'Node', 'callback': s . 'openInNewTab' })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTabSilent, 'scope': 'Node', 'callback': s . 'openInNewTabSilent' })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTab,        'scope': 'Node',      'callback': s . 'openInNewTab' })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTabSilent,  'scope': 'Node',      'callback': s . 'openInNewTabSilent' })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenExpl, 'scope': "DirNode", 'callback': s."openExplorer" })
+    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenExpl,         'scope': "DirNode",   'callback': s."openExplorer" })
 endfunction
 
 
