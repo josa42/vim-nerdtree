@@ -9,6 +9,24 @@
 "              Want To Public License, Version 2, as published by Sam Hocevar.
 "              See http://sam.zoy.org/wtfpl/COPYING for more details.
 " ============================================================================
+function! nerdtree#git#load()
+  if executable('git')
+      call g:NERDTreePathNotifier.AddListener('init',         'nerdtree#git#statusRefreshListener')
+      call g:NERDTreePathNotifier.AddListener('refresh',      'nerdtree#git#statusRefreshListener')
+      call g:NERDTreePathNotifier.AddListener('refreshFlags', 'nerdtree#git#statusRefreshListener')
+
+      augroup nerdtreegit
+          autocmd!
+          autocmd CursorHold   *        silent! call nerdtree#git#cursorHoldUpdate()
+          autocmd BufWritePost *                call nerdtree#git#fileUpdate(expand('%:p'))
+          autocmd FileType     nerdtree         call nerdtree#git#addHighlighting()
+      augroup END
+
+      return 1
+  endif
+
+  return 0
+endfunction
 
 function! nerdtree#git#statusRefreshListener(event)
     if !exists('b:NOT_A_GIT_REPOSITORY')

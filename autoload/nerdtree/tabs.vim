@@ -339,8 +339,6 @@ fun! nerdtree#tabs#load()
     return
   endif
 
-  let g:NERDTreeHijackNetrw = 0
-
   let s:disable_handlers_for_tabdo = 0
 
   " global on/off NERDTree state
@@ -367,6 +365,27 @@ fun! nerdtree#tabs#load()
     autocmd BufWinEnter * call <SID>BufWinEnterHandler()
     autocmd BufRead * call <SID>BufReadHandler()
   augroup END
+
+  " noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call nerdtree#tabs#openAllTabs()
+  " noremap <silent> <script> <Plug>NERDTreeTabsClose    :call nerdtree#tabs#closeAllTabs()
+  " noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call nerdtree#tabs#toggleAllTabs()
+  " noremap <silent> <script> <Plug>NERDTreeTabsFind     :call nerdtree#tabs#findFile()
+  " noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call nerdtree#tabs#mirrorOrCreate()
+  " noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call nerdtree#tabs#mirrorToggle()
+  " noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call nerdtree#tabs#steppedOpen()
+  " noremap <silent> <script> <Plug>NERDTreeSteppedClose :call nerdtree#tabs#steppedClose()
+  " noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call nerdtree#tabs#focusToggle()
+
+  command! NERDTreeTabsOpen     call nerdtree#tabs#openAllTabs()
+  command! NERDTreeTabsClose    call nerdtree#tabs#closeAllTabs()
+  command! NERDTreeTabsToggle   call nerdtree#tabs#toggleAllTabs()
+  command! NERDTreeTabsFind     call nerdtree#tabs#findFile()
+  command! NERDTreeMirrorOpen   call nerdtree#tabs#mirrorOrCreate()
+  command! NERDTreeMirrorToggle call nerdtree#tabs#mirrorToggle()
+  command! NERDTreeSteppedOpen  call nerdtree#tabs#steppedOpen()
+  command! NERDTreeSteppedClose call nerdtree#tabs#steppedClose()
+  command! NERDTreeFocusToggle  call nerdtree#tabs#focusToggle()
+"
 
   let g:nerdtree_tabs_loaded = 1
 endfun

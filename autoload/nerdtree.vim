@@ -119,9 +119,6 @@ endfunction
 " FUNCTION: nerdtree#postSourceActions() {{{2
 function! nerdtree#postSourceActions()
     call nerdtree#ui_glue#createDefaultBindings()
-
-    "load all nerdtree plugins
-    runtime! nerdtree_plugin/**/*.vim
 endfunctio:
 
 " SECTION: View Functions {{{1
