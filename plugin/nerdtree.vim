@@ -139,6 +139,7 @@ call nerdtree#ui_glue#setupCommands()
 
 " SECTION: Auto commands {{{1
 "============================================================
+
 augroup NERDTree
     autocmd!
     "Save the cursor position whenever we close the NERDTree
@@ -146,8 +147,11 @@ augroup NERDTree
 
     "disallow insert mode in the NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
-augroup END
 
+    " Hijack Netrw
+    autocmd VimEnter * silent! autocmd! FileExplorer
+    autocmd BufEnter,VimEnter * call nerdtree#checkForBrowse(expand("<amatch>"))
+augroup END
 
 " SECTION: Public API {{{1
 "============================================================
