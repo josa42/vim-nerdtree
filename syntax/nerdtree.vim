@@ -28,13 +28,8 @@ syn match NERDTreeFlags #^ *\zs\[[^\]]*\]# containedin=NERDTreeFile,NERDTreeExec
 syn match NERDTreeFlags #\[[^\]]*\]# containedin=NERDTreeDir
 
 "highlighing to conceal the delimiter around the file/dir name
-if has("conceal")
-    exec 'syn match NERDTreeNodeDelimiters #\%d' . char2nr(g:NERDTreeNodeDelimiter) . '# conceal containedin=ALL'
-    setlocal conceallevel=3 concealcursor=nvic
-else
-    exec 'syn match NERDTreeNodeDelimiters #\%d' . char2nr(g:NERDTreeNodeDelimiter) . '# containedin=ALL'
-    hi! link NERDTreeNodeDelimiters Ignore
-endif
+exec 'syn match NERDTreeNodeDelimiters #\%d' . char2nr(g:NERDTreeNodeDelimiter) . '# conceal containedin=ALL'
+setlocal conceallevel=3 concealcursor=nvic
 
 syn match NERDTreeCWD #^[</].*$#
 

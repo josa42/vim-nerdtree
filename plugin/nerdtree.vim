@@ -14,8 +14,8 @@
 if exists("loaded_nerd_tree")
     finish
 endif
-if v:version < 700
-    echoerr "NERDTree: this plugin requires vim >= 7. DOWNLOAD IT! You'll thank me later!"
+if v:version < 800
+    echoerr "NERDTree: this plugin requires vim >= 8. DOWNLOAD IT! You'll thank me later!"
     finish
 endif
 let loaded_nerd_tree = 1
@@ -89,17 +89,9 @@ endif
 let g:NERDTreeOldSortOrder = []
 
 call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
-
-if has("conceal")
-    call s:initVariable("g:NERDTreeNodeDelimiter", "\x07")
-elseif (g:NERDTreeDirArrowExpandable == "\u00a0" || g:NERDTreeDirArrowCollapsible == "\u00a0")
-    call s:initVariable("g:NERDTreeNodeDelimiter", "\u00b7")
-else
-    call s:initVariable("g:NERDTreeNodeDelimiter", "\u00a0")
-endif
+call s:initVariable("g:NERDTreeNodeDelimiter", "\x07")
 
 if !exists('g:NERDTreeStatusline')
-
     "the exists() crap here is a hack to stop vim spazzing out when
     "loading a session that was created with an open nerd tree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)

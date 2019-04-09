@@ -186,9 +186,7 @@ function! s:Creator._createTreeWin()
 
     call self._setCommonBufOptions()
 
-    if has('patch-7.4.1925')
-        clearjumps
-    endif
+    clearjumps
 
     setlocal winfixwidth
 endfunction
@@ -285,11 +283,8 @@ function! s:Creator._setCommonBufOptions()
     setlocal nolist
     setlocal nospell
     setlocal nowrap
-
-    setlocal nonu
-    if v:version >= 703
-        setlocal nornu
-    endif
+    setlocal·nonu
+    setlocal nornu
 
     iabc <buffer>
 
