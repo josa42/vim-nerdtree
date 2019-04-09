@@ -137,8 +137,6 @@ call s:initVariable("g:NERDTreeMapCWD",              "CD")
 "
 call s:initVariable("g:nerdtree_tabs_open_on_new_tab", 1)                      " Open NERDTree on new tab creation if NERDTree was globally opened
                                                                                " by :NERDTreeTabsToggle
-call s:initVariable("g:nerdtree_tabs_meaningful_tab_names", 1)                 " unfocus NERDTree when leaving a tab so that you have descriptive tab names
-                                                                               " and not names like 'NERD_tree_1'
 call s:initVariable("g:nerdtree_tabs_autoclose", 1)                            " close current tab if there is only one window in it and it's NERDTree
 
 call s:initVariable("g:nerdtree_tabs_synchronize_view", 1)                     " synchronize view of all NERDTree windows (scroll and cursor position)

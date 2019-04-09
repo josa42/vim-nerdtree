@@ -433,10 +433,8 @@ endfun
 " s:TabLeaveHandler() {{{
 "
 fun! s:TabLeaveHandler()
-  if g:nerdtree_tabs_meaningful_tab_names
-    call s:SaveGlobalFocus()
-    call nerdtree#tabs#unfocus()
-  endif
+  call s:SaveGlobalFocus()
+  call nerdtree#tabs#unfocus()
 endfun
 
 " }}}
