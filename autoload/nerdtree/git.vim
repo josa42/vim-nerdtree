@@ -135,17 +135,6 @@ function! s:statusPrefix(path)
     return s:indicator(l:statusKey)
 endfunction
 
-" FUNCTION: s:getCWDGitStatus() {{{2
-" return the indicator of cwd
-function! g:NERDTreeGetCWDGitStatus()
-    if b:NOT_A_GIT_REPOSITORY
-        return ''
-    elseif b:NERDTreeCachedGitDirtyDir == {} && b:NERDTreeCachedGitFileStatus == {}
-        return s:indicator('Clean')
-    endif
-    return s:indicator('Dirty')
-endfunction
-
 function! s:indicator(statusKey)
     if exists('g:NERDTreeIndicatorMapCustom')
         let l:indicator = get(g:NERDTreeIndicatorMapCustom, a:statusKey, '')
