@@ -364,10 +364,6 @@ endfunction
 "  2. If the parent is a symlink, you end up with unparsable
 "     text, and NERDTree cannot get the path of any child node.
 function! s:TreeDirNode.isCascadable()
-    if g:NERDTreeCascadeSingleChildDir == 0
-        return 0
-    endif
-
     if self.path.isSymLink
         return 0
     endif
@@ -638,11 +634,7 @@ function! s:TreeDirNode.toggleOpen(...)
     if self.isOpen ==# 1
         call self.close()
     else
-        if g:NERDTreeCascadeOpenSingleChildDir == 0
-            call self.open(opts)
-        else
-            call self.openAlong(opts)
-        endif
+        call self.openAlong(opts)
     endif
 endfunction
 

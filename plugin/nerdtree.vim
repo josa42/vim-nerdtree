@@ -55,8 +55,6 @@ call s:initVariable("g:NERDTreeQuitOnOpen", 0)
 call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
 call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
 call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
-call s:initVariable("g:NERDTreeCascadeOpenSingleChildDir", 1)
-call s:initVariable("g:NERDTreeCascadeSingleChildDir", 1)
 call s:initVariable('g:NERDTreeUpdateOnWrite', 1)                              " Update git status
 call s:initVariable('g:NERDTreeUpdateOnCursorHold', 1)
 call s:initVariable('g:NERDTreeShowIgnoredStatus', 0)
