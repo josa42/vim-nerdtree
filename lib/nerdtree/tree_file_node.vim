@@ -259,12 +259,7 @@ endfunction
 function! s:TreeFileNode._renderToString(depth, drawText, reg)
     let output = ""
     if a:drawText ==# 1
-
         let treeParts = repeat("\u00A0", (a:depth - 1) * 2)
-
-        " if !self.path.isDirectory
-        "     let treeParts = treeParts . ''
-        " endif
 
         let self.idx = a:reg.idx
         let idx = a:reg.idx

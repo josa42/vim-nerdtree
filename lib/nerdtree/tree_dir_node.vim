@@ -89,14 +89,6 @@ function! s:TreeDirNode.createChild(path, inOrder)
     return newTreeNode
 endfunction
 
-" function! s:TreeFileNode.displayString(width)
-"     let flags = self.path.flagSet.renderToString()
-"     let flen = nerdtree#string#len(flags)
-"
-"     return s:truncate(self.path.displayString(), a:width - flen) . flags
-" endfunction
-
-
 " FUNCTION: TreeDirNode.displayString() {{{1
 " Assemble and return a string that can represent this TreeDirNode object in
 " the NERDTree window.
