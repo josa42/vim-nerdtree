@@ -63,6 +63,27 @@ call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
 call s:initVariable("g:NERDTreeCascadeOpenSingleChildDir", 1)
 call s:initVariable("g:NERDTreeCascadeSingleChildDir", 1)
 
+" Git options
+call s:initVariable('g:NERDTreeUpdateOnWrite', 1)
+call s:initVariable('g:NERDTreeUpdateOnCursorHold', 1)
+call s:initVariable('g:NERDTreeShowIgnoredStatus', 0)
+
+if !exists('g:NERDTreeIndicatorMap')
+    let g:NERDTreeIndicatorMap = {
+                \ 'Modified'  : '✹',
+                \ 'Staged'    : '✚',
+                \ 'Untracked' : '✭',
+                \ 'Renamed'   : '➜',
+                \ 'Unmerged'  : '═',
+                \ 'Deleted'   : '✖',
+                \ 'Dirty'     : '✗',
+                \ 'Clean'     : '✔︎',
+                \ 'Ignored'   : '☒',
+                \ 'Unknown'   : '?'
+                \ }
+endif
+
+
 if !exists("g:NERDTreeSortOrder")
     let g:NERDTreeSortOrder = ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
 endif
@@ -139,6 +160,22 @@ augroup NERDTree
     "disallow insert mode in the NERDTree
     exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
 augroup END
+
+" SECTION: Init git status {{{1
+"============================================================
+
+if executable('git')
+    call g:NERDTreePathNotifier.AddListener('init',         'nerdtree#git#statusRefreshListener')
+    call g:NERDTreePathNotifier.AddListener('refresh',      'nerdtree#git#statusRefreshListener')
+    call g:NERDTreePathNotifier.AddListener('refreshFlags', 'nerdtree#git#statusRefreshListener')
+
+    augroup nerdtreegit
+        autocmd!
+        autocmd CursorHold   *        silent! call nerdtree#git#cursorHoldUpdate()
+        autocmd BufWritePost *                call nerdtree#git#fileUpdate(expand('%:p'))
+        autocmd FileType     nerdtree         call nerdtree#git#addHighlighting()
+    augroup END
+endif
 
 " SECTION: Public API {{{1
 "============================================================
