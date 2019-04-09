@@ -18,12 +18,6 @@ function! s:NERDTree.changeRoot(node)
     endif
 
     call self.root.open()
-
-    "change dir to the dir of the new root if instructed to
-    if g:NERDTreeChDirMode ==# 2
-        call self.root.path.changeToDir()
-    endif
-
     call self.render()
     call self.root.putCursorHere(0, 0)
 

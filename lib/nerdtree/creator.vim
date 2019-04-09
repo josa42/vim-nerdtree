@@ -46,11 +46,6 @@ function! s:Creator.createTabTree(name)
         return
     endif
 
-    " Obey the user's preferences for changing the working directory.
-    if g:NERDTreeChDirMode != 0
-        call l:path.changeToDir()
-    endif
-
     if g:NERDTree.ExistsForTab()
         call g:NERDTree.Close()
         call self._removeTreeBufForTab()

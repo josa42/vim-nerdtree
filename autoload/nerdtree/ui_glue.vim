@@ -25,15 +25,7 @@ function! nerdtree#ui_glue#createDefaultBindings()
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenRecursively,  'scope': "DirNode",   'callback': s."openNodeRecursively" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdir,            'scope': 'all',       'callback': s . 'upDirCurrentRootClosed' })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapUpdirKeepOpen,    'scope': 'all',       'callback': s . 'upDirCurrentRootOpen' })
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChangeRoot,       'scope': 'Node',      'callback': s . 'chRoot' })
-
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapChdir,            'scope': "Node",      'callback': s."chCwd" })
-
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapQuit,             'scope': "all",       'callback': s."closeTreeWindow" })
-
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapCWD,              'scope': "all",       'callback': "nerdtree#ui_glue#chRootCwd" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot,      'scope': "all",       'callback': s."refreshRoot" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefresh,          'scope': "Node",      'callback': s."refreshCurrent" })
@@ -64,9 +56,6 @@ endfunction
 "FUNCTION: s:activateAll() {{{1
 "handle the user activating the updir line
 function! s:activateAll()
-    if getline(".") ==# g:NERDTreeUI.UpDirLine()
-        return nerdtree#ui_glue#upDir(0)
-    endif
 endfunction
 
 " FUNCTION: s:activateDirNode(directoryNode) {{{1
@@ -86,20 +75,12 @@ function! s:activateFileNode(node)
     call a:node.activate({'reuse': 'all', 'where': 'p'})
 endfunction
 
-" FUNCTION: s:chCwd(node) {{{1
-function! s:chCwd(node)
-    try
-        call a:node.path.changeToDir()
-    catch /^NERDTree.PathChangeError/
-        call nerdtree#echoWarning("could not change cwd")
-    endtry
-endfunction
-
-" FUNCTION: s:chRoot(node) {{{1
-" changes the current root to the selected one
-function! s:chRoot(node)
-    call b:NERDTree.changeRoot(a:node)
-endfunction
+"
+" " FUNCTION: s:chRoot(node) {{{1
+" " changes the current root to the selected one
+" function! s:chRoot(node)
+"     call b:NERDTree.changeRoot(a:node)
+" endfunction
 
 " FUNCTION: s:nerdtree#ui_glue#chRootCwd() {{{1
 " Change the NERDTree root to match the current working directory.
@@ -186,9 +167,9 @@ function! s:findAndRevealPath(pathStr)
         endif
     else
         NERDTreeFocus
-
         if !l:pathObj.isUnder(b:NERDTree.root.path)
-            call s:chRoot(g:NERDTreeDirNode.New(l:pathObj.getParent(), b:NERDTree))
+            call nerdtree#echoWarning('path not in current root directory')
+            return
         endif
     endif
 
@@ -436,45 +417,6 @@ endfunction
 " toggles the display of hidden files
 function! s:toggleShowHidden()
     call b:NERDTree.ui.toggleShowHidden()
-endfunction
-
-" FUNCTION: nerdtree#ui_glue#upDir(preserveState) {{{1
-" Move the NERDTree up one level.
-"
-" Args:
-" preserveState: if 1, the current root is left open when the new tree is
-" rendered; if 0, the current root node is closed
-function! nerdtree#ui_glue#upDir(preserveState)
-
-    try
-        call b:NERDTree.root.cacheParent()
-    catch /^NERDTree.CannotCacheParentError/
-        call nerdtree#echo('already at root directory')
-        return
-    endtry
-
-    let l:oldRoot = b:NERDTree.root
-    let l:newRoot = b:NERDTree.root.parent
-
-    call l:newRoot.open()
-    call l:newRoot.transplantChild(l:oldRoot)
-
-    if !a:preserveState
-        call l:oldRoot.close()
-    endif
-
-    call b:NERDTree.changeRoot(l:newRoot)
-    call l:oldRoot.putCursorHere(0, 0)
-endfunction
-
-" FUNCTION: s:upDirCurrentRootOpen() {{{1
-function! s:upDirCurrentRootOpen()
-    call nerdtree#ui_glue#upDir(1)
-endfunction
-
-" FUNCTION: s:upDirCurrentRootClosed() {{{1
-function! s:upDirCurrentRootClosed()
-    call nerdtree#ui_glue#upDir(0)
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

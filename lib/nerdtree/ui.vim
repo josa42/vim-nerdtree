@@ -30,10 +30,6 @@ function! s:UI.getPath(ln)
         return self.nerdtree.root.path
     endif
 
-    if line ==# s:UI.UpDirLine()
-        return self.nerdtree.root.path.getParent()
-    endif
-
     if a:ln < rootLine
         return {}
     endif
@@ -275,11 +271,6 @@ endfunction
 function! s:UI.toggleShowHidden()
     let self._showHidden = !self._showHidden
     call self.renderViewSavingPosition()
-endfunction
-
-" FUNCTION: s:UI.UpDirLine() {{{1
-function! s:UI.UpDirLine()
-    return '.. (up a dir)'
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:

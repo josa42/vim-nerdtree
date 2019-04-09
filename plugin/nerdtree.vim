@@ -45,7 +45,6 @@ endfunction
 "SECTION: Init variable calls and other random constants {{{2
 call s:initVariable("g:NERDTreeNaturalSort", 0)
 call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
-call s:initVariable("g:NERDTreeChDirMode", 0)
 call s:initVariable("g:NERDTreeCreatePrefix", "silent")
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
@@ -105,7 +104,6 @@ call s:initVariable("g:NERDTreeWinSize", 31)
 
 call s:initVariable("g:NERDTreeMapActivateNode",     "o")
 call s:initVariable("g:NERDTreeMapChangeRoot",       "C")
-call s:initVariable("g:NERDTreeMapChdir",            "cd")
 call s:initVariable("g:NERDTreeMapCloseChildren",    "X")
 call s:initVariable("g:NERDTreeMapCloseDir",         "x")
 call s:initVariable("g:NERDTreeMapJumpFirstChild",   "K")
@@ -131,7 +129,6 @@ call s:initVariable("g:NERDTreeMapToggleFilters",    "f")
 call s:initVariable("g:NERDTreeMapToggleHidden",     "I")
 call s:initVariable("g:NERDTreeMapUpdir",            "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen",    "U")
-call s:initVariable("g:NERDTreeMapCWD",              "CD")
 call s:initVariable("g:NERDtreeTabsFocusOnFiles",    0)                        " when switching into a tab, make sure that focus will always be in file
                                                                                " editing window, not in NERDTree window (off by default)
 call s:initVariable("g:NERDtreeTabsAutofind",        0)                        " automatically find and select currently opened file
@@ -182,7 +179,9 @@ function! NERDTreeFocus()
     endif
 endfunction
 
-" TODO Remove this?
+" TODO remove this from public API
+" TODO call this if vim root directory changed
+" Sync tree with cwd
 function! NERDTreeCWD()
 
     if empty(getcwd())

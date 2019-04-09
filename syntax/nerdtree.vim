@@ -1,9 +1,5 @@
-let s:tree_up_dir_line = '.. (up a dir)'
 syn match NERDTreeIgnore #\~#
 exec 'syn match NERDTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
-
-"highlighting for the .. (up dir) line at the top of the tree
-execute "syn match NERDTreeUp #\\V". s:tree_up_dir_line ."#"
 
 "highlighting for sym links
 syn match NERDTreeLinkTarget #->.*# containedin=NERDTreeDir,NERDTreeFile

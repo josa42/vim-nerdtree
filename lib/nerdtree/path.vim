@@ -55,21 +55,6 @@ function! s:Path.addDelimiter(line)
     endif
 endfunction
 
-" FUNCTION: Path.changeToDir() {{{1
-function! s:Path.changeToDir()
-    let dir = self.str({'format': 'Cd'})
-    if self.isDirectory ==# 0
-        let dir = self.getParent().str({'format': 'Cd'})
-    endif
-
-    try
-        execute "cd " . dir
-        call nerdtree#echo("CWD is now: " . getcwd())
-    catch
-        throw "NERDTree.PathChangeError: cannot change CWD to " . dir
-    endtry
-endfunction
-
 " FUNCTION: Path.compareTo() {{{1
 "
 " Compares this Path to the given path and returns 0 if they are equal, -1 if
@@ -497,7 +482,6 @@ endfunction
 "  'truncateTo'
 "
 " The 'format' key may have a value of:
-"  'Cd' - a string to be used with ":cd" and similar commands
 "  'Edit' - a string to be used with ":edit" and similar commands
 "  'UI' - a string to be displayed in the NERDTree user interface
 "
@@ -549,13 +533,6 @@ function! s:Path._strForUI()
         let toReturn  = toReturn . '/'
     endif
     return toReturn
-endfunction
-
-" FUNCTION: Path._strForCd() {{{1
-" Return a string representation of this Path that is suitable for use as an
-" argument to Vim's internal ":cd" command.
-function! s:Path._strForCd()
-    return fnameescape(self.str())
 endfunction
 
 " FUNCTION: Path._strForEdit() {{{1
