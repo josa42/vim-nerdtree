@@ -443,9 +443,7 @@ fun! s:WinEnterHandler()
   " But we shouldn't nest redefined autocmds
   let s:ei = &eventignore
   let &eventignore = 'VimEnter,TabEnter,TabLeave,WinEnter,WinLeave,BufWinEnter,BufRead'
-  if g:nerdtree_tabs_autoclose
-    call s:CloseIfOnlyNerdTreeLeft()
-  endif
+  call s:CloseIfOnlyNerdTreeLeft()
   let &eventignore = s:ei
 endfun
 

@@ -137,8 +137,6 @@ call s:initVariable("g:NERDTreeMapCWD",              "CD")
 "
 call s:initVariable("g:nerdtree_tabs_open_on_new_tab", 1)                      " Open NERDTree on new tab creation if NERDTree was globally opened
                                                                                " by :NERDTreeTabsToggle
-call s:initVariable("g:nerdtree_tabs_autoclose", 1)                            " close current tab if there is only one window in it and it's NERDTree
-
 call s:initVariable("g:nerdtree_tabs_focus_on_files", 0)                       " when switching into a tab, make sure that focus will always be in file
                                                                                " editing window, not in NERDTree window (off by default)
 call s:initVariable("g:nerdtree_tabs_autofind", 0)                             " automatically find and select currently opened file
