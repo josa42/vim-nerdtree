@@ -8,9 +8,9 @@ function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."handleLeftClick" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "DirNode",   'callback': s."activateDirNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "FileNode",  'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "all",       'callback': s."activateAll" })
+    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "DirNode",   'callback': s."activateDirNode" })
+    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "FileNode",  'callback': s."activateFileNode" })
+    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."activateAll" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "DirNode",   'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "FileNode",  'callback': s."activateFileNode" })
@@ -72,12 +72,6 @@ endfunction
 function! s:activateFileNode(node)
     call a:node.activate({'reuse': 'all', 'where': 'p'})
 endfunction
-
-" " FUNCTION: s:chRoot(node) {{{1
-" " changes the current root to the selected one
-" function! s:chRoot(node)
-"     call b:NERDTree.changeRoot(a:node)
-" endfunction
 
 " FUNCTION: s:nerdtree#ui_glue#chRootCwd() {{{1
 " Change the NERDTree root to match the current working directory.
