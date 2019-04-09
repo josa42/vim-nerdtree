@@ -101,7 +101,6 @@ call s:initVariable("g:NERDTreeWinSize", 31)
 " TODO remove as much of the configuration options as possible!
 
 call s:initVariable("g:NERDTreeMapActivateNode",     "o")
-call s:initVariable("g:NERDTreeMapChangeRoot",       "C")
 call s:initVariable("g:NERDTreeMapCloseChildren",    "X")
 call s:initVariable("g:NERDTreeMapCloseDir",         "x")
 call s:initVariable("g:NERDTreeMapJumpFirstChild",   "K")
@@ -122,11 +121,8 @@ call s:initVariable("g:NERDTreeMapPreviewVSplit",    "g" . NERDTreeMapOpenVSplit
 call s:initVariable("g:NERDTreeMapQuit",             "q")
 call s:initVariable("g:NERDTreeMapRefresh",          "r")
 call s:initVariable("g:NERDTreeMapRefreshRoot",      "R")
-call s:initVariable("g:NERDTreeMapToggleFiles",      "F")
 call s:initVariable("g:NERDTreeMapToggleFilters",    "f")
 call s:initVariable("g:NERDTreeMapToggleHidden",     "I")
-call s:initVariable("g:NERDTreeMapUpdir",            "u")
-call s:initVariable("g:NERDTreeMapUpdirKeepOpen",    "U")
 call s:initVariable("g:NERDtreeTabsFocusOnFiles",    0)                        " when switching into a tab, make sure that focus will always be in file
                                                                                " editing window, not in NERDTree window (off by default)
 call s:initVariable("g:NERDtreeTabsAutofind",        0)                        " automatically find and select currently opened file
