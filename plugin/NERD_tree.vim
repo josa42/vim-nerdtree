@@ -144,6 +144,57 @@ call s:initVariable("g:NERDTreeMapUpdir", "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen", "U")
 call s:initVariable("g:NERDTreeMapCWD", "CD")
 
+" === plugin configuration variables === {{{
+"
+" Open NERDTree on gvim/macvim startup. When set to `2`,
+" open only if directory was given as startup argument.
+call s:initVariable("g:nerdtree_tabs_open_on_gui_startup", 1)
+
+" Open NERDTree on console vim startup (off by default). When set to `2`,
+" open only if directory was given as startup argument.
+call s:initVariable("g:nerdtree_tabs_open_on_console_startup", 0)
+
+" do not open NERDTree if vim starts in diff mode
+if !exists('g:nerdtree_tabs_no_startup_for_diff')
+    let g:nerdtree_tabs_no_startup_for_diff = 1
+endif
+
+" On startup - focus NERDTree when opening a directory, focus the file if
+" editing a specified file. When set to `2`, always focus file after startup.
+call s:initVariable("g:nerdtree_tabs_smart_startup_focus", 1)
+
+" Open NERDTree on new tab creation if NERDTree was globally opened
+" by :NERDTreeTabsToggle
+call s:initVariable("g:nerdtree_tabs_open_on_new_tab", 1)
+
+" unfocus NERDTree when leaving a tab so that you have descriptive tab names
+" and not names like 'NERD_tree_1'
+call s:initVariable("g:nerdtree_tabs_meaningful_tab_names", 1)
+
+" close current tab if there is only one window in it and it's NERDTree
+call s:initVariable("g:nerdtree_tabs_autoclose", 1)
+
+" synchronize view of all NERDTree windows (scroll and cursor position)
+call s:initVariable("g:nerdtree_tabs_synchronize_view", 1)
+
+" synchronize focus when switching tabs (focus NERDTree after tab switch
+" if and only if it was focused before tab switch)
+call s:initVariable("g:nerdtree_tabs_synchronize_focus", 1)
+
+" when switching into a tab, make sure that focus will always be in file
+" editing window, not in NERDTree window (off by default)
+call s:initVariable("g:nerdtree_tabs_focus_on_files", 0)
+
+" when starting up with a directory name as a parameter, cd into it
+call s:initVariable("g:nerdtree_tabs_startup_cd", 1)
+
+" automatically find and select currently opened file
+call s:initVariable("g:nerdtree_tabs_autofind", 0)
+
+" }}}
+
+
+
 "SECTION: Load class files{{{2
 call nerdtree#loadClassFiles()
 
@@ -229,5 +280,35 @@ call nerdtree#postSourceActions()
 
 "reset &cpo back to users setting
 let &cpo = s:old_cpo
+
+
+" === plugin mappings === {{{
+"
+noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call nerdtree#tabs#openAllTabs()
+noremap <silent> <script> <Plug>NERDTreeTabsClose    :call nerdtree#tabs#closeAllTabs()
+noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call nerdtree#tabs#toggleAllTabs()
+noremap <silent> <script> <Plug>NERDTreeTabsFind     :call nerdtree#tabs#findFile()
+noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call nerdtree#tabs#mirrorOrCreate()
+noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call nerdtree#tabs#mirrorToggle()
+noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call nerdtree#tabs#steppedOpen()
+noremap <silent> <script> <Plug>NERDTreeSteppedClose :call nerdtree#tabs#steppedClose()
+noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call nerdtree#tabs#focusToggle()
+"
+" }}}
+" === plugin commands === {{{
+"
+command! NERDTreeTabsOpen     call nerdtree#tabs#openAllTabs()
+command! NERDTreeTabsClose    call nerdtree#tabs#closeAllTabs()
+command! NERDTreeTabsToggle   call nerdtree#tabs#toggleAllTabs()
+command! NERDTreeTabsFind     call nerdtree#tabs#findFile()
+command! NERDTreeMirrorOpen   call nerdtree#tabs#mirrorOrCreate()
+command! NERDTreeMirrorToggle call nerdtree#tabs#mirrorToggle()
+command! NERDTreeSteppedOpen  call nerdtree#tabs#steppedOpen()
+command! NERDTreeSteppedClose call nerdtree#tabs#steppedClose()
+command! NERDTreeFocusToggle  call nerdtree#tabs#focusToggle()
+"
+" }}}
+
+call nerdtree#tabs#load()
 
 " vim: set sw=4 sts=4 et fdm=marker:

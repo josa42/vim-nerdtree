@@ -1,107 +1,11 @@
-" === plugin configuration variables === {{{
-"
-" Open NERDTree on gvim/macvim startup. When set to `2`,
-" open only if directory was given as startup argument.
-if !exists('g:nerdtree_tabs_open_on_gui_startup')
-  let g:nerdtree_tabs_open_on_gui_startup = 1
-endif
-
-" Open NERDTree on console vim startup (off by default). When set to `2`,
-" open only if directory was given as startup argument.
-if !exists('g:nerdtree_tabs_open_on_console_startup')
-  let g:nerdtree_tabs_open_on_console_startup = 0
-endif
-
-" do not open NERDTree if vim starts in diff mode
-if !exists('g:nerdtree_tabs_no_startup_for_diff')
-    let g:nerdtree_tabs_no_startup_for_diff = 1
-endif
-
-" On startup - focus NERDTree when opening a directory, focus the file if
-" editing a specified file. When set to `2`, always focus file after startup.
-if !exists('g:nerdtree_tabs_smart_startup_focus')
-  let g:nerdtree_tabs_smart_startup_focus = 1
-endif
-
-" Open NERDTree on new tab creation if NERDTree was globally opened
-" by :NERDTreeTabsToggle
-if !exists('g:nerdtree_tabs_open_on_new_tab')
-  let g:nerdtree_tabs_open_on_new_tab = 1
-endif
-
-" unfocus NERDTree when leaving a tab so that you have descriptive tab names
-" and not names like 'NERD_tree_1'
-if !exists('g:nerdtree_tabs_meaningful_tab_names')
-  let g:nerdtree_tabs_meaningful_tab_names = 1
-endif
-
-" close current tab if there is only one window in it and it's NERDTree
-if !exists('g:nerdtree_tabs_autoclose')
-  let g:nerdtree_tabs_autoclose = 1
-endif
-
-" synchronize view of all NERDTree windows (scroll and cursor position)
-if !exists('g:nerdtree_tabs_synchronize_view')
-  let g:nerdtree_tabs_synchronize_view = 1
-endif
-
-" synchronize focus when switching tabs (focus NERDTree after tab switch
-" if and only if it was focused before tab switch)
-if !exists('g:nerdtree_tabs_synchronize_focus')
-  let g:nerdtree_tabs_synchronize_focus = 1
-endif
-
-" when switching into a tab, make sure that focus will always be in file
-" editing window, not in NERDTree window (off by default)
-if !exists('g:nerdtree_tabs_focus_on_files')
-  let g:nerdtree_tabs_focus_on_files = 0
-endif
-
-" when starting up with a directory name as a parameter, cd into it
-if !exists('g:nerdtree_tabs_startup_cd')
-  let g:nerdtree_tabs_startup_cd = 1
-endif
-
-" automatically find and select currently opened file
-if !exists('g:nerdtree_tabs_autofind')
-  let g:nerdtree_tabs_autofind = 0
-endif
-"
-" }}}
-" === plugin mappings === {{{
-"
-noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call <SID>NERDTreeOpenAllTabs()
-noremap <silent> <script> <Plug>NERDTreeTabsClose    :call <SID>NERDTreeCloseAllTabs()
-noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call <SID>NERDTreeToggleAllTabs()
-noremap <silent> <script> <Plug>NERDTreeTabsFind     :call <SID>NERDTreeFindFile()
-noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call <SID>NERDTreeMirrorOrCreate()
-noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call <SID>NERDTreeMirrorToggle()
-noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call <SID>NERDTreeSteppedOpen()
-noremap <silent> <script> <Plug>NERDTreeSteppedClose :call <SID>NERDTreeSteppedClose()
-noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call <SID>NERDTreeFocusToggle()
-"
-" }}}
-" === plugin commands === {{{
-"
-command! NERDTreeTabsOpen     call <SID>NERDTreeOpenAllTabs()
-command! NERDTreeTabsClose    call <SID>NERDTreeCloseAllTabs()
-command! NERDTreeTabsToggle   call <SID>NERDTreeToggleAllTabs()
-command! NERDTreeTabsFind     call <SID>NERDTreeFindFile()
-command! NERDTreeMirrorOpen   call <SID>NERDTreeMirrorOrCreate()
-command! NERDTreeMirrorToggle call <SID>NERDTreeMirrorToggle()
-command! NERDTreeSteppedOpen  call <SID>NERDTreeSteppedOpen()
-command! NERDTreeSteppedClose call <SID>NERDTreeSteppedClose()
-command! NERDTreeFocusToggle  call <SID>NERDTreeFocusToggle()
-"
-" }}}
 " === plugin functions === {{{
 "
 " === NERDTree manipulation (opening, closing etc.) === {{{
 "
-" s:NERDTreeMirrorOrCreate() {{{
+" nerdtree#tabs#mirrorOrCreate() {{{
 "
 " switch NERDTree on for current tab -- mirror it if possible, otherwise create it
-fun! s:NERDTreeMirrorOrCreate()
+fun! nerdtree#tabs#mirrorOrCreate()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
 
   " if NERDTree is not active in the current tab, try to mirror it
@@ -119,41 +23,41 @@ fun! s:NERDTreeMirrorOrCreate()
 endfun
 
 " }}}
-" s:NERDTreeMirrorToggle() {{{
+" nerdtree#tabs#mirrorToggle() {{{
 "
 " toggle NERDTree in current tab, use mirror if possible
-fun! s:NERDTreeMirrorToggle()
+fun! nerdtree#tabs#mirrorToggle()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
 
   if l:nerdtree_open
     silent NERDTreeClose
   else
-    call s:NERDTreeMirrorOrCreate()
+    call nerdtree#tabs#mirrorOrCreate()
   endif
 endfun
 
 " }}}
-" s:NERDTreeOpenAllTabs() {{{
+" nerdtree#tabs#openAllTabs() {{{
 "
 " switch NERDTree on for all tabs while making sure there is only one NERDTree buffer
-fun! s:NERDTreeOpenAllTabs()
+fun! nerdtree#tabs#openAllTabs()
   let s:nerdtree_globally_active = 1
 
   " tabdo doesn't preserve current tab - save it and restore it afterwards
   let l:current_tab = tabpagenr()
-  tabdo call s:NERDTreeMirrorOrCreate()
+  tabdo call nerdtree#tabs#mirrorOrCreate()
   exe 'tabn ' . l:current_tab
   if g:nerdtree_tabs_autofind
-    call s:NERDTreeUnfocus()
-    call s:NERDTreeFindFile()
+    call nerdtree#tabs#unfocus()
+    call nerdtree#tabs#findFile()
   endif
 endfun
 
 " }}}
-" s:NERDTreeCloseAllTabs() {{{
+" nerdtree#tabs#closeAllTabs() {{{
 "
 " close NERDTree across all tabs
-fun! s:NERDTreeCloseAllTabs()
+fun! nerdtree#tabs#closeAllTabs()
   let s:nerdtree_globally_active = 0
 
   " tabdo doesn't preserve current tab - save it and restore it afterwards
@@ -163,17 +67,17 @@ fun! s:NERDTreeCloseAllTabs()
 endfun
 
 " }}}
-" s:NERDTreeToggleAllTabs() {{{
+" nerdtree#tabs#toggleAllTabs() {{{
 "
 " toggle NERDTree in current tab and match the state in all other tabs
-fun! s:NERDTreeToggleAllTabs()
+fun! nerdtree#tabs#toggleAllTabs()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
   let s:disable_handlers_for_tabdo = 1
 
   if l:nerdtree_open
-    call s:NERDTreeCloseAllTabs()
+    call nerdtree#tabs#closeAllTabs()
   else
-    call s:NERDTreeOpenAllTabs()
+    call nerdtree#tabs#openAllTabs()
     " force focus to NERDTree in current tab
     if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
       exe bufwinnr(t:NERDTreeBufName) . "wincmd w"
@@ -184,27 +88,27 @@ fun! s:NERDTreeToggleAllTabs()
 endfun
 
 " }}}
-" s:NERDTreeSteppedOpen() {{{
+" nerdtree#tabs#steppedOpen() {{{
 "
 " focus the NERDTree view, creating one first if none is present
-fun! s:NERDTreeSteppedOpen()
+fun! nerdtree#tabs#steppedOpen()
   if !s:IsCurrentWindowNERDTree()
     if s:IsNERDTreeOpenInCurrentTab()
-      call s:NERDTreeFocus()
+      call nerdtree#tabs#focus()
     else
-      call s:NERDTreeMirrorOrCreate()
+      call nerdtree#tabs#mirrorOrCreate()
     endif
   endif
 endfun
 
 " }}}
-" s:NERDTreeSteppedClose{() {{{
+" nerdtree#tabs#steppedClose{() {{{
 "
 " unfocus the NERDTree view or closes it if it hadn't had focus at the time of
 " the call
-fun! s:NERDTreeSteppedClose()
+fun! nerdtree#tabs#steppedClose()
   if s:IsCurrentWindowNERDTree()
-    call s:NERDTreeUnfocus()
+    call nerdtree#tabs#unfocus()
   else
     let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
 
@@ -215,19 +119,19 @@ fun! s:NERDTreeSteppedClose()
 endfun
 
 " }}}
-" s:NERDTreeFocusToggle() {{{
+" nerdtree#tabs#focusToggle() {{{
 "
 " focus the NERDTree view or creates it if in a file,
 " or unfocus NERDTree view if in NERDTree
-fun! s:NERDTreeFocusToggle()
+fun! nerdtree#tabs#focusToggle()
   let s:disable_handlers_for_tabdo = 1
   if s:IsCurrentWindowNERDTree()
-    call s:NERDTreeUnfocus()
+    call nerdtree#tabs#unfocus()
   else
     if !s:IsNERDTreeOpenInCurrentTab()
-      call s:NERDTreeOpenAllTabs()
+      call nerdtree#tabs#openAllTabs()
     endif
-    call s:NERDTreeFocus()
+    call nerdtree#tabs#focus()
   endif
   let s:disable_handlers_for_tabdo = 0
 endfun
@@ -236,20 +140,20 @@ endfun
 " === NERDTree manipulation (opening, closing etc.) === }}}
 " === focus functions === {{{
 "
-" s:NERDTreeFocus() {{{
+" nerdtree#tabs#focus() {{{
 "
 " if the current window is NERDTree, move focus to the next window
-fun! s:NERDTreeFocus()
+fun! nerdtree#tabs#focus()
   if !s:IsCurrentWindowNERDTree() && exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
     exe bufwinnr(t:NERDTreeBufName) . "wincmd w"
   endif
 endfun
 
 " }}}
-" s:NERDTreeUnfocus() {{{
+" nerdtree#tabs#unfocus() {{{
 "
 " if the current window is NERDTree, move focus to the next window
-fun! s:NERDTreeUnfocus()
+fun! nerdtree#tabs#unfocus()
   " save current window so that it's focus can be restored after switching
   " back to this tab
   let t:NERDTreeTabLastWindow = winnr()
@@ -264,13 +168,13 @@ fun! s:NERDTreeUnfocus()
 endfun
 
 " }}}
-" s:NERDTreeRestoreFocus() {{{
+" nerdtree#tabs#restoreFocus() {{{
 "
 " restore focus to the window that was focused before leaving current tab
-fun! s:NERDTreeRestoreFocus()
+fun! nerdtree#tabs#restoreFocus()
   if g:nerdtree_tabs_synchronize_focus
     if s:is_nerdtree_globally_focused
-      call s:NERDTreeFocus()
+      call nerdtree#tabs#focus()
     elseif exists("t:NERDTreeTabLastWindow") && exists("t:NERDTreeBufName") && t:NERDTreeTabLastWindow != bufwinnr(t:NERDTreeBufName)
       exe t:NERDTreeTabLastWindow . "wincmd w"
     endif
@@ -413,9 +317,9 @@ fun! s:RestoreNERDTreeViewIfPossible()
 endfun
 
 " }}}
-" s:NERDTreeFindFile() {{{
+" nerdtree#tabs#findFile() {{{
 "
-fun! s:NERDTreeFindFile()
+fun! nerdtree#tabs#findFile()
   if s:IsNERDTreeOpenInCurrentTab()
     silent NERDTreeFind
   endif
@@ -428,9 +332,9 @@ endfun
 " === plugin functions ===  }}}
 " === plugin event handlers === {{{
 "
-" s:LoadPlugin() {{{
+" nerdtree#tabs#load() {{{
 "
-fun! s:LoadPlugin()
+fun! nerdtree#tabs#load()
   if exists('g:nerdtree_tabs_loaded')
     return
   endif
@@ -496,7 +400,7 @@ fun! s:VimEnterHandler()
     let l:main_bufnr = bufnr('%')
 
     if !s:IsNERDTreePresentInCurrentTab()
-      call s:NERDTreeOpenAllTabs()
+      call nerdtree#tabs#openAllTabs()
     endif
 
     if (l:focus_file && g:nerdtree_tabs_smart_startup_focus == 1) ||
@@ -516,8 +420,8 @@ fun! s:VimEnterHandler()
       endif
     endif
     if g:nerdtree_tabs_autofind
-      call s:NERDTreeFindFile()
-      call s:NERDTreeUnfocus()
+      call nerdtree#tabs#findFile()
+      call nerdtree#tabs#unfocus()
     endif
   endif
 endfun
@@ -540,7 +444,7 @@ fun! s:TabEnterHandler()
   endif
 
   if g:nerdtree_tabs_open_on_new_tab && s:nerdtree_globally_active && !s:IsNERDTreeOpenInCurrentTab()
-    call s:NERDTreeMirrorOrCreate()
+    call nerdtree#tabs#mirrorOrCreate()
 
     " move focus to the previous window
     wincmd p
@@ -554,10 +458,10 @@ fun! s:TabEnterHandler()
   endif
 
   if g:nerdtree_tabs_focus_on_files
-    call s:NERDTreeUnfocus()
+    call nerdtree#tabs#unfocus()
   " Do not restore focus on newly created tab here
   elseif !s:NewTabCreated
-    call s:NERDTreeRestoreFocus()
+    call nerdtree#tabs#restoreFocus()
   endif
 endfun
 
@@ -567,7 +471,7 @@ endfun
 fun! s:TabLeaveHandler()
   if g:nerdtree_tabs_meaningful_tab_names
     call s:SaveGlobalFocus()
-    call s:NERDTreeUnfocus()
+    call nerdtree#tabs#unfocus()
   endif
 endfun
 
@@ -616,7 +520,7 @@ fun! s:BufWinEnterHandler()
 
     " Restore focus to NERDTree if necessary
     if !g:nerdtree_tabs_focus_on_files
-      call s:NERDTreeRestoreFocus()
+      call nerdtree#tabs#restoreFocus()
     endif
   endif
 endfun
@@ -630,8 +534,8 @@ endfun
 fun! s:BufReadHandler()
   " Refresh NERDTree to show currently opened file
   if g:nerdtree_tabs_autofind
-    call s:NERDTreeFindFile()
-    call s:NERDTreeUnfocus()
+    call nerdtree#tabs#findFile()
+    call nerdtree#tabs#unfocus()
   endif
 endfun
 
@@ -639,5 +543,13 @@ endfun
 "
 " === plugin event handlers === }}}
 
-call s:LoadPlugin()
 
+" noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call nerdtree#tabs#openAllTabs()
+" noremap <silent> <script> <Plug>NERDTreeTabsClose    :call nerdtree#tabs#closeAllTabs()
+" noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call nerdtree#tabs#toggleAllTabs()
+" noremap <silent> <script> <Plug>NERDTreeTabsFind     :call nerdtree#tabs#findFile()
+" noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call nerdtree#tabs#mirrorOrCreate()
+" noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call nerdtree#tabs#mirrorToggle()
+" noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call nerdtree#tabs#steppedOpen()
+" noremap <silent> <script> <Plug>NERDTreeSteppedClose :call nerdtree#tabs#steppedClose()
+" noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call nerdtree#tabs#focusToggle()
