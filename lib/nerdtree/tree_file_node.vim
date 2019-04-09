@@ -50,7 +50,7 @@ function! s:TreeFileNode.displayString(width)
     let flags = self.path.flagSet.renderToString()
     let flen = nerdtree#string#len(flags)
 
-    return nerdtree#string#trunc(self.path.displayString(), a:width - flen) . flags
+    return ' ' . nerdtree#string#trunc(self.path.displayString(), a:width - 1 - flen) . flags
 endfunction
 
 " FUNCTION: TreeFileNode.equals(treenode) {{{1
@@ -270,7 +270,7 @@ function! s:TreeFileNode._renderToString(depth, drawText, reg)
         let idx = a:reg.idx
         let a:reg.items[idx] = self
 
-        let line = treeParts . self.displayString(winwidth(0) - ((a:depth) * 2) + 1)
+        let line = treeParts . self.displayString(winwidth(0) - ((a:depth - 1) * 2))
         let a:reg.idx += 1
 
         let output = output . line . "\n"
