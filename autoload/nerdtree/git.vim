@@ -17,9 +17,9 @@ function! nerdtree#git#load()
 
       augroup nerdtreegit
           autocmd!
-          autocmd CursorHold   *        silent! call nerdtree#git#cursorHoldUpdate()
-          autocmd BufWritePost *                call nerdtree#git#fileUpdate(expand('%:p'))
-          autocmd FileType     nerdtree         call nerdtree#git#addHighlighting()
+          autocmd CursorHold   *        silent! call s:cursorHoldUpdate()
+          autocmd BufWritePost *                call s:fileUpdate(expand('%:p'))
+          autocmd FileType     nerdtree         call s:addHighlighting()
       augroup END
 
       return 1
@@ -188,8 +188,8 @@ function s:sID()
 endfun
 
 
-" FUNCTION: nerdtree#git#cursorHoldUpdate() {{{2
-function! nerdtree#git#cursorHoldUpdate()
+" FUNCTION: s:cursorHoldUpdate() {{{2
+function! s:cursorHoldUpdate()
     if g:NERDTreeUpdateOnCursorHold != 1
         return
     endif
@@ -214,8 +214,8 @@ function! nerdtree#git#cursorHoldUpdate()
     exec l:winnr . 'wincmd w'
 endfunction
 
-" FUNCTION: nerdtree#git#fileUpdate(fname) {{{2
-function! nerdtree#git#fileUpdate(fname)
+" FUNCTION: s:fileUpdate(fname) {{{2
+function! s:fileUpdate(fname)
     if g:NERDTreeUpdateOnWrite != 1
         return
     endif
@@ -245,28 +245,28 @@ function! nerdtree#git#fileUpdate(fname)
     exec l:winnr . 'wincmd w'
 endfunction
 
-function! nerdtree#git#addHighlighting()
+function! s:addHighlighting()
     let l:synmap = {
-                \ 'NERDTreeGitStatusModified' : s:indicator('Modified'),
-                \ 'NERDTreeGitStatusStaged'   : s:indicator('Staged'),
-                \ 'NERDTreeGitStatusUntracked': s:indicator('Untracked'),
-                \ 'NERDTreeGitStatusRenamed'  : s:indicator('Renamed'),
-                \ 'NERDTreeGitStatusIgnored'  : s:indicator('Ignored'),
-                \ 'NERDTreeGitStatusDirDirty' : s:indicator('Dirty'),
-                \ 'NERDTreeGitStatusDirClean' : s:indicator('Clean')
-                \ }
+      \   'NERDTreeGitStatusModified' : s:indicator('Modified'),
+      \   'NERDTreeGitStatusStaged'   : s:indicator('Staged'),
+      \   'NERDTreeGitStatusUntracked': s:indicator('Untracked'),
+      \   'NERDTreeGitStatusRenamed'  : s:indicator('Renamed'),
+      \   'NERDTreeGitStatusIgnored'  : s:indicator('Ignored'),
+      \   'NERDTreeGitStatusDirDirty' : s:indicator('Dirty'),
+      \   'NERDTreeGitStatusDirClean' : s:indicator('Clean')
+      \ }
 
     for l:name in keys(l:synmap)
         exec 'syn match ' . l:name . ' #' . escape(l:synmap[l:name], '~') . '# containedin=NERDTreeFlags'
     endfor
 
-    hi def link NERDTreeGitStatusModified Special
-    hi def link NERDTreeGitStatusStaged Function
-    hi def link NERDTreeGitStatusRenamed Title
-    hi def link NERDTreeGitStatusUnmerged Label
+    " TODO review defaults
+    hi def link NERDTreeGitStatusModified  Special
+    hi def link NERDTreeGitStatusStaged    Function
+    hi def link NERDTreeGitStatusRenamed   Title
+    hi def link NERDTreeGitStatusUnmerged  Label
     hi def link NERDTreeGitStatusUntracked Comment
-    hi def link NERDTreeGitStatusDirDirty Tag
-    hi def link NERDTreeGitStatusDirClean DiffAdd
-    " TODO: use diff color
-    hi def link NERDTreeGitStatusIgnored DiffAdd
+    hi def link NERDTreeGitStatusDirDirty  Tag
+    hi def link NERDTreeGitStatusDirClean  DiffAdd
+    hi def link NERDTreeGitStatusIgnored   DiffAdd
 endfunction
