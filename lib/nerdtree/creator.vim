@@ -283,7 +283,7 @@ function! s:Creator._setCommonBufOptions()
     setlocal nolist
     setlocal nospell
     setlocal nowrap
-    setlocal·nonu
+    setlocal nonu
     setlocal nornu
 
     iabc <buffer>

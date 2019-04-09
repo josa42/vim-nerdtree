@@ -38,7 +38,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefreshRoot, 'scope': "all", 'callback': s."refreshRoot" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapRefresh, 'scope': "Node", 'callback': s."refreshCurrent" })
 
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleZoom, 'scope': "all", 'callback': s."toggleZoom" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleHidden, 'scope': "all", 'callback': s."toggleShowHidden" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapToggleFilters, 'scope': "all", 'callback': s."toggleIgnoreFilter" })
 
@@ -437,11 +436,6 @@ endfunction
 " toggles the display of hidden files
 function! s:toggleShowHidden()
     call b:NERDTree.ui.toggleShowHidden()
-endfunction
-
-" FUNCTION: s:toggleZoom() {{{1
-function! s:toggleZoom()
-    call b:NERDTree.ui.toggleZoom()
 endfunction
 
 " FUNCTION: nerdtree#ui_glue#upDir(preserveState) {{{1

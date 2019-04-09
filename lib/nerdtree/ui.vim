@@ -277,19 +277,6 @@ function! s:UI.toggleShowHidden()
     call self.renderViewSavingPosition()
 endfunction
 
-" FUNCTION: s:UI.toggleZoom() {{{1
-" zoom (maximize/minimize) the NERDTree window
-function! s:UI.toggleZoom()
-    if exists("b:NERDTreeZoomed") && b:NERDTreeZoomed
-        let size = g:NERDTreeWinSize
-        exec "silent vertical resize ". size
-        let b:NERDTreeZoomed = 0
-    else
-        exec "vertical resize ". get(g:, 'NERDTreeWinSizeMax', '')
-        let b:NERDTreeZoomed = 1
-    endif
-endfunction
-
 " FUNCTION: s:UI.UpDirLine() {{{1
 function! s:UI.UpDirLine()
     return '.. (up a dir)'
