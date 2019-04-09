@@ -112,7 +112,7 @@ function! s:TreeDirNode.displayString(width)
 
     let l:flags = l:cascade[-1].path.flagSet.renderToString()
 
-    let l:result = l:symbol . ' ' . l:label
+    let l:result = nerdtree#string#trunc(l:symbol, 1) . ' ' . l:label
     let l:result = nerdtree#string#trunc(l:result, a:width - 1 - nerdtree#string#len(l:flags)) . l:flags
 
     return ' ' . l:result

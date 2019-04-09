@@ -49,8 +49,9 @@ endfunction
 function! s:TreeFileNode.displayString(width)
     let flags = self.path.flagSet.renderToString()
     let flen = nerdtree#string#len(flags)
+    let str = nerdtree#string#trunc(g:NERDTreeFile, 2) . self.path.displayString()
 
-    return ' ' . nerdtree#string#trunc(self.path.displayString(), a:width - 1 - flen) . flags
+    return ' ' . nerdtree#string#trunc(str, a:width - 1 - flen) . flags
 endfunction
 
 " FUNCTION: TreeFileNode.equals(treenode) {{{1
