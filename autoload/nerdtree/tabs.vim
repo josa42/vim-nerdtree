@@ -403,7 +403,7 @@ fun! s:TabEnterHandler()
     return
   endif
 
-  if g:nerdtree_tabs_open_on_new_tab && s:nerdtree_globally_active && !s:IsNERDTreeOpenInCurrentTab()
+  if s:nerdtree_globally_active && !s:IsNERDTreeOpenInCurrentTab()
     call nerdtree#tabs#mirrorOrCreate()
 
     " move focus to the previous window
