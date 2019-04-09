@@ -135,14 +135,6 @@ call s:initVariable("g:NERDTreeMapUpdir",            "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen",    "U")
 call s:initVariable("g:NERDTreeMapCWD",              "CD")
 "
-call s:initVariable("g:nerdtree_tabs_open_on_gui_startup", 1)                  " Open NERDTree on gvim/macvim startup. When set to `2`,
-                                                                               " open only if directory was given as startup argument.
-call s:initVariable("g:nerdtree_tabs_open_on_console_startup", 0)              " Open NERDTree on console vim startup (off by default). When set to `2`,
-                                                                               " open only if directory was given as startup argument.
-call s:initVariable('g:nerdtree_tabs_no_startup_for_diff', 1)                  " do not open NERDTree if vim starts in diff mode
-
-call s:initVariable("g:nerdtree_tabs_smart_startup_focus", 1)                  " On startup - focus NERDTree when opening a directory, focus the file if
-                                                                               " editing a specified file. When set to `2`, always focus file after startup.
 call s:initVariable("g:nerdtree_tabs_open_on_new_tab", 1)                      " Open NERDTree on new tab creation if NERDTree was globally opened
                                                                                " by :NERDTreeTabsToggle
 call s:initVariable("g:nerdtree_tabs_meaningful_tab_names", 1)                 " unfocus NERDTree when leaving a tab so that you have descriptive tab names
@@ -155,8 +147,6 @@ call s:initVariable("g:nerdtree_tabs_synchronize_focus", 1)                    "
                                                                                " if and only if it was focused before tab switch)
 call s:initVariable("g:nerdtree_tabs_focus_on_files", 0)                       " when switching into a tab, make sure that focus will always be in file
                                                                                " editing window, not in NERDTree window (off by default)
-call s:initVariable("g:nerdtree_tabs_startup_cd", 1)                           " when starting up with a directory name as a parameter, cd into it
-
 call s:initVariable("g:nerdtree_tabs_autofind", 0)                             " automatically find and select currently opened file
 
 
