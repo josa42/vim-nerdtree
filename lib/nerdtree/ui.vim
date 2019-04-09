@@ -11,7 +11,7 @@ function! s:UI.New(nerdtree)
     let newObj = copy(self)
     let newObj.nerdtree = a:nerdtree
     let newObj._ignoreEnabled = 1
-    let newObj._showHidden = g:NERDTreeShowHidden
+    let newObj._showHidden = 1
 
     return newObj
 endfunction
