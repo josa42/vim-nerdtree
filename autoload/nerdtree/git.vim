@@ -52,12 +52,6 @@ function! s:statusRefresh()
     if g:NERDTreeShowIgnoredStatus
         let l:gitcmd = l:gitcmd . ' --ignored'
     endif
-    if exists('g:NERDTreeGitStatusIgnoreSubmodules')
-        let l:gitcmd = l:gitcmd . ' --ignore-submodules'
-        if g:NERDTreeGitStatusIgnoreSubmodules ==# 'all' || g:NERDTreeGitStatusIgnoreSubmodules ==# 'dirty' || g:NERDTreeGitStatusIgnoreSubmodules ==# 'untracked'
-            let l:gitcmd = l:gitcmd . '=' . g:NERDTreeGitStatusIgnoreSubmodules
-        endif
-    endif
     let l:statusesStr = system(l:gitcmd . ' ' . l:root)
     let l:statusesSplit = split(l:statusesStr, '\n')
     if l:statusesSplit != [] && l:statusesSplit[0] =~# 'fatal:.*'
