@@ -45,8 +45,6 @@ function! nerdtree#ui_glue#createDefaultBindings()
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTab,        'scope': 'Node',      'callback': s . 'openInNewTab' })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenInTabSilent,  'scope': 'Node',      'callback': s . 'openInNewTabSilent' })
-
-    call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapOpenExpl,         'scope': "DirNode",   'callback': s."openExplorer" })
 endfunction
 
 
@@ -75,7 +73,6 @@ function! s:activateFileNode(node)
     call a:node.activate({'reuse': 'all', 'where': 'p'})
 endfunction
 
-"
 " " FUNCTION: s:chRoot(node) {{{1
 " " changes the current root to the selected one
 " function! s:chRoot(node)
@@ -315,11 +312,6 @@ endfunction
 " FUNCTION: s:openVSplit(target) {{{1
 function! s:openVSplit(target)
     call a:target.activate({'where': 'v'})
-endfunction
-
-" FUNCTION: s:openExplorer(node) {{{1
-function! s:openExplorer(node)
-    call a:node.openExplorer()
 endfunction
 
 " FUNCTION: s:openInNewTab(target) {{{1

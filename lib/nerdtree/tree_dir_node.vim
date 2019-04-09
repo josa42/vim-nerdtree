@@ -490,13 +490,6 @@ function! s:TreeDirNode.openAlong(...)
     return level
 endfunction
 
-" FUNCTION: TreeDirNode.openExplorer() {{{1
-" Open an explorer window for this node in the previous window. The explorer
-" can be a NERDTree window or a netrw window.
-function! s:TreeDirNode.openExplorer()
-    call self.open({'where': 'p'})
-endfunction
-
 " FUNCTION: TreeDirNode._openInNewTab() {{{1
 function! s:TreeDirNode._openInNewTab()
     tabnew
