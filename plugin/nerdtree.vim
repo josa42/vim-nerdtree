@@ -102,7 +102,6 @@ call s:initVariable("g:NERDTreeWinSize", 31)
 "SECTION: Init variable calls for key mappings {{{2
 "
 " TODO remove as much of the configuration options as possible!
-" TODO cammel cases or snake case?
 
 call s:initVariable("g:NERDTreeMapActivateNode",     "o")
 call s:initVariable("g:NERDTreeMapChangeRoot",       "C")
@@ -134,10 +133,9 @@ call s:initVariable("g:NERDTreeMapToggleZoom",       "A")
 call s:initVariable("g:NERDTreeMapUpdir",            "u")
 call s:initVariable("g:NERDTreeMapUpdirKeepOpen",    "U")
 call s:initVariable("g:NERDTreeMapCWD",              "CD")
-"
-call s:initVariable("g:nerdtree_tabs_focus_on_files", 0)                       " when switching into a tab, make sure that focus will always be in file
+call s:initVariable("g:NERDtreeTabsFocusOnFiles",    0)                        " when switching into a tab, make sure that focus will always be in file
                                                                                " editing window, not in NERDTree window (off by default)
-call s:initVariable("g:nerdtree_tabs_autofind", 0)                             " automatically find and select currently opened file
+call s:initVariable("g:NERDtreeTabsAutofind",        0)                        " automatically find and select currently opened file
 
 
 " }}}

@@ -47,7 +47,7 @@ fun! nerdtree#tabs#openAllTabs()
   let l:current_tab = tabpagenr()
   tabdo call nerdtree#tabs#mirrorOrCreate()
   exe 'tabn ' . l:current_tab
-  if g:nerdtree_tabs_autofind
+  if g:NERDtreeTabsAutofind
     call nerdtree#tabs#unfocus()
     call nerdtree#tabs#findFile()
   endif
@@ -415,7 +415,7 @@ fun! s:TabEnterHandler()
 
   call s:RestoreNERDTreeViewIfPossible()
 
-  if g:nerdtree_tabs_focus_on_files
+  if g:NERDtreeTabsFocusOnFiles
     call nerdtree#tabs#unfocus()
   " Do not restore focus on newly created tab here
   elseif !s:NewTabCreated
@@ -471,7 +471,7 @@ fun! s:BufWinEnterHandler()
     let s:NewTabCreated = 0
 
     " Restore focus to NERDTree if necessary
-    if !g:nerdtree_tabs_focus_on_files
+    if !g:NERDtreeTabsFocusOnFiles
       call nerdtree#tabs#restoreFocus()
     endif
   endif
@@ -485,7 +485,7 @@ endfun
 "
 fun! s:BufReadHandler()
   " Refresh NERDTree to show currently opened file
-  if g:nerdtree_tabs_autofind
+  if g:NERDtreeTabsAutofind
     call nerdtree#tabs#findFile()
     call nerdtree#tabs#unfocus()
   endif
