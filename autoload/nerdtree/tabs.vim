@@ -417,9 +417,7 @@ fun! s:TabEnterHandler()
     let s:NewTabCreated = 1
   endif
 
-  if g:nerdtree_tabs_synchronize_view
-    call s:RestoreNERDTreeViewIfPossible()
-  endif
+  call s:RestoreNERDTreeViewIfPossible()
 
   if g:nerdtree_tabs_focus_on_files
     call nerdtree#tabs#unfocus()
@@ -463,9 +461,7 @@ fun! s:WinLeaveHandler()
     return
   endif
 
-  if g:nerdtree_tabs_synchronize_view
-    call s:SaveNERDTreeViewIfPossible()
-  endif
+  call s:SaveNERDTreeViewIfPossible()
 endfun
 
 " }}}

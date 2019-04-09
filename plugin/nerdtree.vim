@@ -139,8 +139,6 @@ call s:initVariable("g:nerdtree_tabs_open_on_new_tab", 1)                      "
                                                                                " by :NERDTreeTabsToggle
 call s:initVariable("g:nerdtree_tabs_autoclose", 1)                            " close current tab if there is only one window in it and it's NERDTree
 
-call s:initVariable("g:nerdtree_tabs_synchronize_view", 1)                     " synchronize view of all NERDTree windows (scroll and cursor position)
-
 call s:initVariable("g:nerdtree_tabs_synchronize_focus", 1)                    " synchronize focus when switching tabs (focus NERDTree after tab switch
                                                                                " if and only if it was focused before tab switch)
 call s:initVariable("g:nerdtree_tabs_focus_on_files", 0)                       " when switching into a tab, make sure that focus will always be in file
