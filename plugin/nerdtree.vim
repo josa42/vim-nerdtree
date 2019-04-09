@@ -1,5 +1,5 @@
 " ============================================================================
-" File:        NERD_tree.vim
+" File:        nerdtree.vim
 " Maintainer:  Martin Grenfell <martin.grenfell at gmail dot com>
 " License:     This program is free software. It comes without any warranty,
 "              to the extent permitted by applicable law. You can redistribute
