@@ -260,17 +260,17 @@ function! s:TreeFileNode._renderToString(depth, drawText, reg)
     let output = ""
     if a:drawText ==# 1
 
-        let treeParts = repeat('  ', a:depth - 1)
+        let treeParts = repeat("\u00A0", (a:depth - 1) * 2)
 
-        if !self.path.isDirectory
-            let treeParts = treeParts . '  '
-        endif
+        " if !self.path.isDirectory
+        "     let treeParts = treeParts . ''
+        " endif
 
         let self.idx = a:reg.idx
         let idx = a:reg.idx
         let a:reg.items[idx] = self
 
-        let line = treeParts . self.displayString(winwidth(0) - ((a:depth) * 2))
+        let line = treeParts . self.displayString(winwidth(0) - ((a:depth) * 2) + 1)
         let a:reg.idx += 1
 
         let output = output . line . "\n"

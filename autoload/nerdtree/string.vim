@@ -13,7 +13,7 @@ function! nerdtree#string#trunc(s, l)
         return s . repeat('.', a:l - nerdtree#string#len(s))
 
     elseif strlen < a:l
-        return a:s . repeat(' ', a:l - strlen)
+        return a:s . repeat("\u00A0", a:l - strlen)
     endif
 
     return a:s
