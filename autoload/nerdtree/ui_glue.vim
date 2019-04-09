@@ -7,6 +7,8 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
+    call NERDTreeAddKeyMap({ 'key': '<Esc>',                       'scope': "all",       'callback': "nerdtree#tabs#unfocus" })
+
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."handleLeftClick" })
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "DirNode",   'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "FileNode",  'callback': s."activateFileNode" })
