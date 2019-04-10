@@ -464,7 +464,6 @@ endfunction
 "
 " The 'format' key may have a value of:
 "  'Edit' - a string to be used with ":edit" and similar commands
-"  'UI' - a string to be displayed in the NERDTree user interface
 "
 " The 'escape' key, if specified, will cause the output to be escaped with
 " Vim's internal "shellescape()" function.

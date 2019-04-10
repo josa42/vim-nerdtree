@@ -143,12 +143,6 @@ function! s:UI.render()
 
     call cursor(1 + s:lineOffset, col("."))
 
-
-    " draw the header line
-    " let header = self.nerdtree.root.path.str({'format': 'UI', 'truncateTo': winwidth(0)})
-    " call setline(line(".")+1, header)
-    " call cursor(line(".")+1, col("."))
-
     " draw the tree
     silent put =self.nerdtree.root.renderToString()
 
