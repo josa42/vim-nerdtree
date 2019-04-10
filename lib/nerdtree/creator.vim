@@ -277,7 +277,7 @@ function! s:Creator._setCommonBufOptions()
     setlocal nofoldenable
     setlocal nolist
     setlocal nospell
-    setlocal wrap
+    setlocal nowrap
     setlocal nonu
     setlocal nornu
     setlocal signcolumn=no

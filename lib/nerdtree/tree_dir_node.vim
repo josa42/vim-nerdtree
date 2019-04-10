@@ -55,6 +55,10 @@ endfunction
 " Mark this TreeDirNode as closed.
 function! s:TreeDirNode.close()
 
+    if index(self.parent.getCascade(), self) != -1
+        return self.parent.close()
+    endif
+
     " Close all directories in this directory node's cascade. This is
     " necessary to ensure consistency when cascades are rendered.
     for l:dirNode in self.getCascade()
@@ -98,10 +102,16 @@ function! s:TreeDirNode.displayString(width)
     " Build a label that identifies this TreeDirNode.
     let l:label = ''
     let l:cascade = self.getCascade()
-    for l:dirNode in l:cascade
-        let l:next = l:dirNode.path.displayString()
-        let l:label .= l:label == '' ? l:next : substitute(l:next,'^.','','')
-    endfor
+
+    if self.isOpen
+        let dirs = []
+        for l:dirNode in l:cascade
+            let dirs += [substitute(l:dirNode.path.displayString(),'^.','','')]
+        endfor
+        let l:label = join(dirs, '')
+    else
+        let l:label = self.path.displayString()
+    endif
 
     " Select the appropriate open/closed status indicator symbol.
     if l:cascade[-1].isOpen
@@ -111,11 +121,15 @@ function! s:TreeDirNode.displayString(width)
     endif
 
     let l:flags = l:cascade[-1].path.flagSet.renderToString()
+    let l:flags = l:flags != '' ? ' ' .  l:flags : ''
 
-    let l:result = nerdtree#string#trunc(l:symbol, 1) . ' ' . l:label
-    let l:result = nerdtree#string#trunc(l:result, a:width - 1 - nerdtree#string#len(l:flags)) . l:flags
+    let l:symbol .= ' '
 
-    return ' ' . l:result
+    let l:lw = a:width - 3 - nerdtree#string#len(l:flags)
+
+    let l:result = nerdtree#string#truncDir(l:label, l:lw)
+
+    return ' ' . l:symbol . l:result . l:flags
 endfunction
 
 " FUNCTION: TreeDirNode.findNode(path) {{{1

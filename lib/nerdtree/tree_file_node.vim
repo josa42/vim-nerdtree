@@ -47,11 +47,17 @@ endfunction
 " Return:
 " a string that can be used in the view to represent this node
 function! s:TreeFileNode.displayString(width)
-    let flags = self.path.flagSet.renderToString()
-    let flen = nerdtree#string#len(flags)
-    let str = nerdtree#string#trunc(g:NERDTreeFile, 2) . self.path.displayString()
 
-    return ' ' . nerdtree#string#trunc(str, a:width - 1 - flen) . flags
+    let l:flags = self.path.flagSet.renderToString()
+    let l:flags = l:flags != '' ? ' ' .  l:flags : ''
+
+    let l:symbol = g:NERDTreeFile
+    let l:symbol .= ' '
+
+    let l:lw = a:width - 3 - nerdtree#string#len(l:flags)
+
+    let l:result = nerdtree#string#trunc(self.path.displayString(), l:lw)
+    return ' ' . l:symbol . l:result . l:flags
 endfunction
 
 " FUNCTION: TreeFileNode.equals(treenode) {{{1
@@ -266,7 +272,10 @@ function! s:TreeFileNode._renderToString(depth, drawText, reg)
         let idx = a:reg.idx
         let a:reg.items[idx] = self
 
-        let line = treeParts . self.displayString(winwidth(0) - ((a:depth - 1) * 2))
+        " .... but why?
+        let diff = self.path.isDirectory ==# 1 && self.isOpen ==# 1 ? 1 : 0
+
+        let line = treeParts . self.displayString(winwidth(0) - ((a:depth - 1) * 2) - diff)
         let a:reg.idx += 1
 
         let output = output . line . "\n"
