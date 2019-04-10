@@ -279,7 +279,7 @@ function! s:TreeFileNode._renderToString(depth, drawText, reg)
 
         if self.isCascadable() && a:depth > 0
             let childNodesToDraw[0].idx = self.idx
-            let a:reg.items[idx] = childNodesToDraw[0]
+            let a:reg.items[self.idx] = childNodesToDraw[0]
             let output = output . childNodesToDraw[0]._renderToString(a:depth, 0, a:reg)
 
         elseif len(childNodesToDraw) > 0
