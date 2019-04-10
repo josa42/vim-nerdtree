@@ -1,12 +1,10 @@
-The NERDTree
-=============
+# The NERDTree
 
-Introduction
-------------
+## Introduction
 
 The NERDTree is a file system explorer for the Vim editor. Using this plugin,
 users can visually browse complex directory hierarchies, quickly open files for
-reading or editing, and perform basic file system operations.
+reading or editing.
 
 This plugin can also be extended with custom mappings using a special API. The
 details of this API and of other NERDTree features are described in the
@@ -14,36 +12,23 @@ included documentation.
 
 ![NERDTree Screenshot](https://github.com/scrooloose/nerdtree/raw/master/screenshot.png)
 
-Installation
-------------
+## Installation
 
-#### [pathogen.vim](https://github.com/tpope/vim-pathogen)
+```viml
+Plug 'josa42/vim-nerdtree'
+```
 
-    git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
-
-Then reload Vim, run `:helptags ~/.vim/bundle/nerdtree/doc/` or `:Helptags`, and check out `:help NERDTree.txt`.
-
-
-#### [apt-vim](https://github.com/egalpin/apt-vim)
-
-    apt-vim install -y https://github.com/scrooloose/nerdtree.git
-
-F.A.Q.
-------
+## FAQ
 
 > Is there any support for `git` flags?
 
-Yes, install [nerdtree-git-plugin](https://github.com/Xuyuanp/nerdtree-git-plugin).
+Yes.
 
 ---
 
 > Can I have the nerdtree on every tab automatically?
 
-Nope. If this is something you want then chances are you aren't using tabs and
-buffers as they were intended to be used. Read this
-http://stackoverflow.com/questions/102384/using-vims-tabs-like-buffers
-
-If you are interested in this behaviour then consider [vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
+Yes.
 
 ---
 > How can I open a NERDTree automatically when vim starts up?
