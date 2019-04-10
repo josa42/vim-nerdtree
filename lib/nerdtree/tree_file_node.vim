@@ -256,10 +256,7 @@ function! s:TreeFileNode._renderToString(depth, drawText, reg)
         let idx = a:reg.idx
         let a:reg.items[idx] = self
 
-        " .... but why?
-        let diff = self.path.isDirectory ==# 1 && self.isOpen ==# 1 ? 1 : 0
-
-        let line = treeParts . self.displayString(winwidth(0) - ((a:depth - 1) * 2) - diff)
+        let line = treeParts . self.displayString(winwidth(0) - ((a:depth - 1) * 2))
         let a:reg.idx += 1
 
         let output = output . line . "\n"

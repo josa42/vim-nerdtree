@@ -23,10 +23,6 @@ exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains
 syn match NERDTreeFlags #^ *\zs\[[^\]]*\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[[^\]]*\]# containedin=NERDTreeDir
 
-"highlighing to conceal the delimiter around the file/dir name
-exec 'syn match NERDTreeNodeDelimiters #\%d' . char2nr(g:NERDTreeNodeDelimiter) . '# conceal containedin=ALL'
-setlocal conceallevel=3 concealcursor=nvic
-
 syn match NERDTreeCWD #^[</].*$#
 
 hi def link NERDTreePart Special

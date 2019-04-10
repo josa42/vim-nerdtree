@@ -31,27 +31,18 @@ endfunction
 
 " FUNCTION: Path.cacheDisplayString() {{{1
 function! s:Path.cacheDisplayString() abort
-    let self.cachedDisplayString = g:NERDTreeNodeDelimiter . self.getLastPathComponent(1)
+    let self.cachedDisplayString = self.getLastPathComponent(1)
 
     if self.isExecutable
-        let self.cachedDisplayString = self.addDelimiter(self.cachedDisplayString) . '*'
+        let self.cachedDisplayString = self.cachedDisplayString . '*'
     endif
 
     if self.isSymLink
-        let self.cachedDisplayString = self.addDelimiter(self.cachedDisplayString) . ' -> ' . self.symLinkDest
+        let self.cachedDisplayString = self.cachedDisplayString . ' -> ' . self.symLinkDest
     endif
 
     if self.isReadOnly
-        let self.cachedDisplayString = self.addDelimiter(self.cachedDisplayString) . ' ['.g:NERDTreeGlyphReadOnly.']'
-    endif
-endfunction
-
-" FUNCTION: Path.addDelimiter() {{{1
-function! s:Path.addDelimiter(line)
-    if a:line =~# '\(.*' . g:NERDTreeNodeDelimiter . '\)\{2}'
-        return a:line
-    else
-        return a:line . g:NERDTreeNodeDelimiter
+        let self.cachedDisplayString = self.cachedDisplayString . ' ['.g:NERDTreeGlyphReadOnly.']'
     endif
 endfunction
 

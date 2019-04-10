@@ -471,10 +471,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 |NERDTreeDirArrowCollapsible| These characters indicate when a directory is
 |NERDTreeDirArrowExpandable|  either collapsible or expandable.
 
-|NERDTreeNodeDelimiter|       A single character that is used to separate the
-                            file or directory name from the rest of the
-                            characters on the line of text.
-
 ------------------------------------------------------------------------------
 3.2. Customisation details                             *NERDTreeSettingsDetails*
 
@@ -740,43 +736,6 @@ need to change the node delimiter. See |NERDTreeNodeDelimiter|. You cannot use
 the same character for both the arrows and the delimiter. Example: >
     let NERDTreeDirArrowExpandable=">"
     let NERDTreeDirArrowCollapsible="v"
-<
-------------------------------------------------------------------------------
-                                                         *NERDTreeNodeDelimiter*
-Values: Any single character.
-Default: varies (see below)
-
-This character is used to separate the file or directory name from the rest of
-the characters in the line of text. It allows filenames to contain special
-characters that are otherwise used in the NERDTree, such as square brackets,
-braces, trailing asterisk, and leading space. For more details, see the
-responsible pull request: https://github.com/scrooloose/nerdtree/pull/868.
-
-The default value of this variable depends on the features compiled into your
-vim and the values of |NERDTreeDirArrowCollapsible| and
-|NERDTreeDirArrowExpandable|.
-  * If your vim is compiled with the +conceal feature, it is the "\x07" (BELL)
-    character, and it is hidden by setting 'conceallevel' to 3. If you use
-    autocommands, make sure none of them change that setting in the NERDTree_*
-    buffers.
-  * If your vim does NOT have the +conceal feature and you're using "\u00a0"
-    (non-breaking space) to hide the directory arrows, "\u00b7" (middle dot)
-    is used as the default delimiter.
-  * If neither condition above applies, NERDTree uses "\u00a0" (non-breaking
-    space) as the default delimiter.
-
-In the 2nd and 3rd cases, NERDTree will use the Ignore highlight group to
-"hide" the delimiter. It should appear as an empty space.
-
-Other plugins can interfere with these defaults, so if you need to change the
-delimiter, be sure to choose a character that won't appear in your filenames
-or any of the flags set by your installed NERDTree plugins. The suggestions
-below are but a few of the many possibilities. Remember to use double quotes
-when specifying by hex or Unicode. >
-    let NERDTreeNodeDelimiter="\x07"     "bell
-    let NERDTreeNodeDelimiter="\u00b7"   "middle dot
-    let NERDTreeNodeDelimiter="\u00a0"   "non-breaking space
-    let NERDTreeNodeDelimiter="😀"       "smiley face
 <
 ==============================================================================
 4. The NERDTree API                                                *NERDTreeAPI*

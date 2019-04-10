@@ -81,7 +81,6 @@ endif
 let g:NERDTreeOldSortOrder = []
 
 call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
-call s:initVariable("g:NERDTreeNodeDelimiter", "\x07")
 
 if !exists('g:NERDTreeStatusline')
     "the exists() crap here is a hack to stop vim spazzing out when

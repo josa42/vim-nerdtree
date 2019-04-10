@@ -106,7 +106,7 @@ function! s:TreeDirNode.displayString(width)
     if self.isOpen
         let dirs = []
         for l:dirNode in l:cascade
-            let dirs += [substitute(l:dirNode.path.displayString(),'^.','','')]
+            let dirs += [l:dirNode.path.displayString()]
         endfor
         let l:label = join(dirs, '')
     else
