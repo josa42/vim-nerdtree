@@ -43,37 +43,15 @@ endfunction
 " Return the line number where the given node is rendered.  Return -1 if the
 " given node is not visible.
 function! s:UI.getLineNum(node)
-    " if a:node.isRoot()
-    "     return self.getRootLineNum()
-    " endif
-
-    return a:node.idx + s:lineOffset + 1
+    if a:node.idx >= 0
+        return a:node.idx + s:lineOffset + 1
+    endif
+    return -1
 endfunction
-
-" " FUNCTION: s:UI.getRootLineNum(){{{1
-" " gets the line number of the root node
-" function! s:UI.getRootLineNum()
-"     return s:lineOffset
-" endfunction
 
 " FUNCTION: s:UI.getShowHidden() {{{1
 function! s:UI.getShowHidden()
     return self._showHidden
-endfunction
-
-" FUNCTION: s:UI._indentLevelFor(line) {{{1
-function! s:UI._indentLevelFor(line)
-    " have to do this work around because match() returns bytes, not chars
-    let numLeadBytes = match(a:line, '\M\[^ '.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.']')
-    " The next line is a backward-compatible workaround for strchars(a:line(0:numLeadBytes-1]). strchars() is in 7.3+
-    let leadChars = len(split(a:line[0:numLeadBytes-1], '\zs'))
-
-    return leadChars / s:UI.IndentWid()
-endfunction
-
-" FUNCTION: s:UI.IndentWid() {{{1
-function! s:UI.IndentWid()
-    return 2
 endfunction
 
 " FUNCTION: s:UI.isIgnoreFilterEnabled() {{{1
