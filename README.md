@@ -10,7 +10,7 @@ This plugin can also be extended with custom mappings using a special API. The
 details of this API and of other NERDTree features are described in the
 included documentation.
 
-![NERDTree Screenshot](https://github.com/scrooloose/nerdtree/raw/master/screenshot.png)
+![NERDTree Screenshot](https://github.com/josa42/vim-nerdtree/raw/master/screenshot.png)
 
 ## Installation
 
