@@ -9,6 +9,9 @@ endfunction
 
 " SECTION: General Functions {{{1
 "============================================================
+"
+function! nerdtree#noop()
+endfunction
 
 "FUNCTION: nerdtree#checkForBrowse(dir) {{{2
 "inits a window tree in the current buffer if appropriate

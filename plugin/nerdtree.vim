@@ -219,5 +219,6 @@ let &cpo = s:old_cpo
 "============================================================
 call nerdtree#git#load()
 call nerdtree#tabs#load()
+call nerdtree#gitignore#registerFilter()
 
 " vim: set sw=4 sts=4 et fdm=marker:
