@@ -17,9 +17,9 @@ function! nerdtree#ui_glue#createDefaultBindings()
     call NERDTreeAddKeyMap({ 'key': '<Esc>',                       'scope': "all",       'callback': "nerdtree#tabs#unfocus" })
 
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."handleLeftClick" })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "DirNode",   'callback': s."activateDirNode" })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "FileNode",  'callback': s."activateFileNode" })
-    call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."activateAll" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "DirNode",   'callback': s."activateDirNode" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "FileNode",  'callback': s."activateFileNode" })
+    call NERDTreeAddKeyMap({ 'key': '<2-LeftMouse>',               'scope': "all",       'callback': s."activateAll" })
 
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "DirNode",   'callback': s."activateDirNode" })
     call NERDTreeAddKeyMap({ 'key': g:NERDTreeMapActivateNode,     'scope': "FileNode",  'callback': s."activateFileNode" })
@@ -185,6 +185,8 @@ endfunction
 "FUNCTION: s:handleLeftClick() {{{1
 "Checks if the click should open the current node
 function! s:handleLeftClick()
+    call cursor(line('.'), 1)
+
     let currentNode = g:NERDTreeFileNode.GetSelected()
     if currentNode != {}
 
