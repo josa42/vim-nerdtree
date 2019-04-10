@@ -7,6 +7,13 @@ let g:loaded_nerdtree_ui_glue_autoload = 1
 function! nerdtree#ui_glue#createDefaultBindings()
     let s = '<SNR>' . s:SID() . '_'
 
+    call NERDTreeAddKeyMap({ 'key': 'v',                           'scope': "all",       'callback': "nerdtree#noop" })
+    call NERDTreeAddKeyMap({ 'key': 'V',                           'scope': "all",       'callback': "nerdtree#noop" })
+    call NERDTreeAddKeyMap({ 'key': 'a',                           'scope': "all",       'callback': "nerdtree#noop" })
+    call NERDTreeAddKeyMap({ 'key': 'A',                           'scope': "all",       'callback': "nerdtree#noop" })
+    call NERDTreeAddKeyMap({ 'key': 'c',                           'scope': "all",       'callback': "nerdtree#noop" })
+    call NERDTreeAddKeyMap({ 'key': 'C',                           'scope': "all",       'callback': "nerdtree#noop" })
+
     call NERDTreeAddKeyMap({ 'key': '<Esc>',                       'scope': "all",       'callback': "nerdtree#tabs#unfocus" })
 
     call NERDTreeAddKeyMap({ 'key': '<LeftRelease>',               'scope': "all",       'callback': s."handleLeftClick" })
