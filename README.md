@@ -12,6 +12,12 @@ included documentation.
 
 ![NERDTree Screenshot](https://github.com/josa42/vim-nerdtree/raw/master/screenshot.png)
 
+## Features
+
+- Git status build in
+- Git ignore filter build in
+- Optional mirror tree in all tabs
+
 ## Installation
 
 ```viml
@@ -81,3 +87,13 @@ Use these variables in your vimrc. Note that below are default arrow symbols
 
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
+
+## Credit
+
+- [`scrooloose/nerdtree`](https://github.com/scrooloose/nerdtree)
+- [`Xuyuanp/nerdtree-git-plugin`](https://github.com/Xuyuanp/nerdtree-git-plugin)
+- [`jistr/vim-nerdtree-tabs`](https://github.com/jistr/vim-nerdtree-tabs)
+
+## LICENSE
+
+[WTFPL](LICENSE)
