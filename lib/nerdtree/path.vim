@@ -452,23 +452,6 @@ function! s:Path.refreshFlags(nerdtree)
     call self.cacheDisplayString()
 endfunction
 
-" FUNCTION: Path.rename() {{{1
-"
-" Renames this node on the filesystem
-function! s:Path.rename(newPath)
-    if a:newPath ==# ''
-        throw "NERDTree.InvalidArgumentsError: Invalid newPath for renaming = ". a:newPath
-    endif
-
-    call s:Path.createParentDirectories(a:newPath)
-
-    let success =  rename(self.str(), a:newPath)
-    if success != 0
-        throw "NERDTree.PathRenameError: Could not rename: '" . self.str() . "'" . 'to:' . a:newPath
-    endif
-    call self.readInfoFromDisk(a:newPath)
-endfunction
-
 " FUNCTION: Path.str() {{{1
 " Return a string representation of this Path object.
 "

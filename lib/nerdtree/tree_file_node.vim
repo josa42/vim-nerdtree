@@ -234,22 +234,6 @@ function! s:TreeFileNode.refreshFlags()
     call self.path.refreshFlags(self.getNerdtree())
 endfunction
 
-" FUNCTION: TreeFileNode.rename() {{{1
-" Calls the rename method for this nodes path obj
-function! s:TreeFileNode.rename(newName)
-    let newName = substitute(a:newName, '\(\\\|\/\)$', '', '')
-    call self.path.rename(newName)
-    call self.parent.removeChild(self)
-
-    let parentPath = self.path.getParent()
-    let newParent = self.getNerdtree().root.findNode(parentPath)
-
-    if newParent != {}
-        call newParent.createChild(self.path, 1)
-        call newParent.refresh()
-    endif
-endfunction
-
 " FUNCTION: TreeFileNode.renderToString {{{1
 " returns a string representation for this tree to be rendered in the view
 function! s:TreeFileNode.renderToString()
