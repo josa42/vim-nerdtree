@@ -50,7 +50,6 @@ The following features and functionality are provided by the NERDTree:
         * files
         * directories
         * sym-links
-        * windows .lnk files
         * read-only files
         * executable files
     * Many (customisable) mappings are provided to manipulate the tree:
@@ -80,10 +79,6 @@ The following features and functionality are provided by the NERDTree:
     * By default the script overrides the default file browser (netrw), so if
       you :edit a directory a (slightly modified) NERDTree will appear in the
       current window
-    * A programmable menu system is provided (simulates right clicking on a
-      node)
-        * one default menu plugin is provided to perform basic filesystem
-          operations (create/delete/move/copy files/directories)
     * There's an API for adding your own keymappings
 
 

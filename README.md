@@ -76,11 +76,6 @@ Stick this in your vimrc:
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 ---
-> Can I have different highlighting for different file extensions?
-
-See here: https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
-
----
 > How can I change default arrows?
 
 Use these variables in your vimrc. Note that below are default arrow symbols
