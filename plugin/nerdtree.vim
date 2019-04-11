@@ -30,6 +30,7 @@ call nerdtree#defaultSetting('g:NERDTreeShowIgnoredStatus',     1)             "
 call nerdtree#defaultSetting("g:NERDTreeWinPos",                "left")
 call nerdtree#defaultSetting("g:NERDTreeWinSize",               31)
 call nerdtree#defaultSetting("g:NERDTreeTabsAutofind",          0)             " automatically find and select currently opened file
+call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)
 call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \   'Modified'  : '✹',
                             \   'Staged'    : '✚',
@@ -44,7 +45,6 @@ call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \ })
 
 " TODO Remove these:
-call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)             " Deprecated: use nerdtree#api#addPathFilter()
 call nerdtree#defaultSetting('g:NERDTreeIgnore',            ['\~$', '\.swp$']) " Deprecated: use nerdtree#api#addPathFilter()
 call nerdtree#defaultSetting("g:NERDTreeGlyphReadOnly",         "RO")          " Deprecated: TODO: find better default glyph
 call nerdtree#defaultSetting('g:NERDTreeSortOrder', ['\/$', '*'])              " Deprecated: TODO Add Sort API
