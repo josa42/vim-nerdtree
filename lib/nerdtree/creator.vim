@@ -16,10 +16,6 @@ function! s:Creator._broadcastInitEvent()
     silent doautocmd User NERDTreeInit
 endfunction
 
-" FUNCTION: s:Creator.BufNamePrefix() {{{1
-function! s:Creator.BufNamePrefix()
-    return 'NERDTree_'
-endfunction
 
 " FUNCTION: s:Creator.CreateTabTree(a:name) {{{1
 function! s:Creator.CreateTabTree(name)
@@ -196,20 +192,7 @@ endfunction
 " FUNCTION: s:Creator._nextBufferName() {{{2
 " returns the buffer name for the next NERDTree
 function! s:Creator._nextBufferName()
-    let name = s:Creator.BufNamePrefix() . self._nextBufferNumber()
-    return name
-endfunction
-
-" FUNCTION: s:Creator._nextBufferNumber() {{{2
-" the number to add to the NERDTree buffer name to make the buf name unique
-function! s:Creator._nextBufferNumber()
-    if !exists("s:Creator._NextBufNum")
-        let s:Creator._NextBufNum = 1
-    else
-        let s:Creator._NextBufNum += 1
-    endif
-
-    return s:Creator._NextBufNum
+    return 'NERDTree'
 endfunction
 
 " FUNCTION: s:Creator._pathForString(str) {{{1

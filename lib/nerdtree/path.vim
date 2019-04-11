@@ -231,7 +231,6 @@ function! s:Path.isHiddenUnder(path)
     let l:segments = self.pathSegments[l:startIndex : ]
 
     for l:segment in l:segments
-
         if l:segment =~# '^\.'
             return 1
         endif

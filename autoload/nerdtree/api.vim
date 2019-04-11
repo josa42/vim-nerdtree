@@ -29,11 +29,9 @@ function! nerdtree#api#close()
     " endif
 endfunction
 
-
 function! nerdtree#api#openAllTabs()
   call nerdtree#tabs#openAllTabs()
 endfunction
-
 
 function! nerdtree#api#render()
     call nerdtree#renderView()
@@ -129,7 +127,6 @@ function! nerdtree#api#revealPath(pathStr)
     call l:node.putCursorHere(1, 0)
 endfunction
 
-
 function! nerdtree#api#create(...)
   call g:NERDTreeCreator.CreateTabTree(a:0 ? a:1 : '')
 endfunction
@@ -145,5 +142,4 @@ endfunction
 function! nerdtree#api#ceateMirror()
   call g:NERDTreeCreator.CreateMirror()
 endfunction
-
 
