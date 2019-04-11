@@ -173,10 +173,6 @@ endfun
 
 " FUNCTION: s:cursorHoldUpdate() {{{2
 function! s:cursorHoldUpdate()
-    if g:NERDTreeUpdateOnCursorHold != 1
-        return
-    endif
-
     if !g:NERDTree.IsOpen()
         return
     endif
