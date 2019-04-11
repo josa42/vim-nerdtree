@@ -2,9 +2,9 @@ syn match NERDTreeIgnore #\~#
 exec 'syn match NERDTreeIgnore #\['.g:NERDTreeGlyphReadOnly.'\]#'
 
 "highlighting for sym links
-syn match NERDTreeLinkTarget #->.*# containedin=NERDTreeDir,NERDTreeFile
-syn match NERDTreeLinkFile #.* ->#me=e-3 containedin=NERDTreeFile
-syn match NERDTreeLinkDir #.*/ ->#me=e-3 containedin=NERDTreeDir
+syn match NERDTreeLinkTarget #->.*#         containedin=NERDTreeDir,NERDTreeFile
+syn match NERDTreeLinkFile   #.* ->#me=e-3  containedin=NERDTreeFile
+syn match NERDTreeLinkDir    #.*/ ->#me=e-3 containedin=NERDTreeDir
 
 "highlighing for directory nodes and file nodes
 syn match NERDTreeDirSlash #/# containedin=NERDTreeDir
@@ -23,28 +23,22 @@ exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains
 syn match NERDTreeFlags #^ *\zs\[[^\]]*\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[[^\]]*\]# containedin=NERDTreeDir
 
-syn match NERDTreeCWD #^[</].*$#
-
-hi def link NERDTreePart Special
+hi def link NERDTreePart     Special
 hi def link NERDTreePartFile Type
 hi def link NERDTreeExecFile Title
-hi def link NERDTreeDirSlash Identifier
-
-hi def link NERDTreeToggleOn Question
-hi def link NERDTreeToggleOff WarningMsg
+hi def link NERDTreeDirSlash Comment
 
 hi def link NERDTreeLinkTarget Type
-hi def link NERDTreeLinkFile Macro
-hi def link NERDTreeLinkDir Macro
+hi def link NERDTreeLinkFile   NERDTreeFile
+hi def link NERDTreeLinkDir    NERDTreeDir
 
-hi def link NERDTreeDir Directory
-hi def link NERDTreeUp Directory
-hi def link NERDTreeFile Normal
-hi def link NERDTreeCWD Statement
-hi def link NERDTreeOpenable Directory
-hi def link NERDTreeClosable Directory
-hi def link NERDTreeIgnore ignore
-hi def link NERDTreeRO WarningMsg
-hi def link NERDTreeFlags Number
+hi def link NERDTreeDir      Directory
+hi def link NERDTreeFile     Normal
+hi def link NERDTreeOpenable NERDTreeDir
+hi def link NERDTreeClosable NERDTreeDir
+hi def link NERDTreeIgnore   ignore
+hi def link NERDTreeRO       WarningMsg
+hi def link NERDTreeFlags    Number
 
-hi def link NERDTreeCurrentNode Search
+" hi def link NERDTreeCurrentNode Search
+
