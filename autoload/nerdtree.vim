@@ -156,4 +156,13 @@ function! nerdtree#renderView()
     call b:NERDTree.render()
 endfunction
 
+
+function! nerdtree#defaultSetting(var, value)
+    if !exists(a:var)
+        exec 'let ' . a:var . ' = a:value'
+    endif
+endfunction
+
+
 " vim: set sw=4 sts=4 et fdm=marker:
+
