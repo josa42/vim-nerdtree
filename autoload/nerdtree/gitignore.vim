@@ -3,7 +3,7 @@ let s:ignored = []
 
 function! nerdtree#gitignore#registerFilter()
   call nerdtree#gitignore#updateIgnored()
-  call NERDTreeAddPathFilter('nerdtree#gitignore#filter')
+  call nerdtree#api#addPathFilter('nerdtree#gitignore#filter')
 
   augroup NERDTreeGitignore
     autocmd!

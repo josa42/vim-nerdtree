@@ -8,6 +8,9 @@ function! nerdtree#action#defaultMappings()
   nnoremap <buffer> c <nop>
   nnoremap <buffer> C <nop>
   nnoremap <buffer> P <nop>
+  nnoremap <buffer> > <nop>
+  nnoremap <buffer> < <nop>
+  nnoremap <buffer> q <nop>
 
   " Close
   nnoremap <silent><buffer> <Esc>         :call nerdtree#tabs#unfocus()<cr>

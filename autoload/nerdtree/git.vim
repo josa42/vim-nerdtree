@@ -191,7 +191,7 @@ function! s:cursorHoldUpdate()
 
     call g:NERDTree.CursorToTreeWin()
     call b:NERDTree.root.refreshFlags()
-    call NERDTreeRender()
+    call nerdtree#api#render()
 
     exec l:altwinnr . 'wincmd w'
     exec l:winnr . 'wincmd w'
@@ -222,7 +222,7 @@ function! s:fileUpdate(fname)
         let l:node = l:node.parent
     endwhile
 
-    call NERDTreeRender()
+    call nerdtree#api#render()
 
     exec l:altwinnr . 'wincmd w'
     exec l:winnr . 'wincmd w'

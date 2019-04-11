@@ -27,8 +27,10 @@ CONTENTS                                                     *NERDTree-contents*
         3.1.Settings summary..................|NERDTreeSettingsSummary|
         3.2.Settings details..................|NERDTreeSettingsDetails|
     4.The NERDTree API........................|NERDTreeAPI|
-        4.1.Key map API.......................|NERDTreeKeymapAPI|
-        4.2.Path Listener API.................|NERDTreePathListenerAPI|
+        4.1.Key Map API.......................|NERDTreeAPIKeymap|
+        4.2 Path Filter API...................|NERDTreeAPIaddPathFilter|
+        4.3.Event Listener API................|NERDTreeAPIEventListener|
+        4.4 Render                            |NERDTreeAPIRender|
     5.About...................................|NERDTreeAbout|
     6.License.................................|NERDTreeLicense|
 
@@ -615,41 +617,38 @@ the same character for both the arrows and the delimiter. Example: >
     let NERDTreeDirArrowExpandable=">"
     let NERDTreeDirArrowCollapsible="v"
 <
+------------------------------------------------------------------------------
+                                                                  *NERDTreeFile*
+Values: Any single character.
+Defaults: ∙
+
+This character indicate a file node.
+
+Example: >
+    let NERDTreeFile="∙"
+<
+
 ==============================================================================
 4. The NERDTree API                                                *NERDTreeAPI*
 
-The NERDTree script allows you to add custom key mappings and menu items via
-a set of API calls. Any scripts that use this API should be placed in
-~/.vim/nerdtree_plugin/ (*nix) or ~/vimfiles/nerdtree_plugin (windows).
+------------------------------------------------------------------------------
+4.1. Key Map API                                             *NERDTreeAPIKeymap*
 
-The script exposes some prototype objects that can be used to manipulate the
-tree and/or get information from it: >
-    g:NERDTreePath
-    g:NERDTreeDirNode
-    g:NERDTreeFileNode
-    g:NERDTreeBookmark
+>
+    TODO
 <
-See the code/comments in NERDTree.vim to find how to use these objects. The
-following code conventions are used:
-    * class members start with a capital letter
-    * instance members start with a lower case letter
-    * private members start with an underscore
-
-See this blog post for more details:
- http://got-ravings.blogspot.com/2008/09/vim-pr0n-prototype-based-objects.html
 
 ------------------------------------------------------------------------------
-4.1. Key map API                                             *NERDTreeKeymapAPI*
-
-------------------------------------------------------------------------------
-4.3 NERDTreeAddPathFilter(callback)                    *NERDTreeAddPathFilter()*
+4.2 Path Filter API                                   *NERDTreeAPIaddPathFilter*
 
 Path filters are essentially a more powerful version of  |NERDTreeIgnore|.
 If the simple regex matching in |NERDTreeIgnore| is not enough then use
-|NERDTreeAddPathFilter()| to add a callback function that paths will be
-checked against when the decision to ignore them is made. Example >
+|nerdtree#api#addPathFilter()| to add a callback function that paths will be
+checked against when the decision to ignore them is made.
 
-    call NERDTreeAddPathFilter('MyFilter')
+Example >
+
+    call nerdtree#api#addPathFilter('MyFilter')
 
     function! MyFilter(params)
         "params is a dict containing keys: 'nerdtree' and 'path' which are
@@ -659,11 +658,13 @@ checked against when the decision to ignore them is made. Example >
     endfunction
 <
 ------------------------------------------------------------------------------
-4.4 Path Listener API                                  *NERDTreePathListenerAPI*
+4.3 Event Listener API                                 NERDTreeAPIEventListener*
 
-Use this API if you want to run a callback for events on Path objects. E.G >
+Use this API if you want to run a callback for events.
 
-    call g:NERDTreePathNotifier.AddListener("init", "MyListener")
+Example >
+
+    call nerdtree#api#addListener("init", "MyListener")
 
     "....
 
@@ -674,13 +675,14 @@ Use this API if you want to run a callback for events on Path objects. E.G >
         "including the affected path. See lib/nerdtree/event.vim for details.
     endfunction
 <
+
 Current events supported:
   init ~
   refresh ~
   refreshFlags ~
 
 ------------------------------------------------------------------------------
-NERDTreeRender()                                              *NERDTreeRender()*
+4.5 Render                                                   *NERDTreeAPIRender*
     Re-renders the NERDTree buffer. Useful if you change the state of the
     tree and you want to it to be reflected in the UI.
 

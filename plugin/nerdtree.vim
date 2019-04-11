@@ -21,8 +21,6 @@ endif
 let loaded_nerdtree = 1
 
 "for line continuation - i.e dont want C in &cpo
-let s:old_cpo = &cpo
-set cpo&vim
 
 "Function: s:initVariable() function {{{2
 "This function is used to initialise a given variable to a given value. The
@@ -118,58 +116,8 @@ augroup NERDTree
     autocmd BufEnter,VimEnter * call nerdtree#checkForBrowse(expand("<amatch>"))
 augroup END
 
-" SECTION: Public API {{{1
-"============================================================
-
-" TODO Remove this?
-
-function! NERDTreeRender()
-    call nerdtree#renderView()
-endfunction
-
-function! NERDTreeFocus()
-    " TODO make NERDTree private
-    if g:NERDTree.IsOpen()
-        call g:NERDTree.CursorToTreeWin()
-    else
-        call g:NERDTreeCreator.ToggleTabTree("")
-    endif
-endfunction
-
-" TODO remove this from public API
-" TODO call this if vim root directory changed
-" Sync tree with cwd
-function! NERDTreeCWD()
-
-    if empty(getcwd())
-        call nerdtree#echoWarning('current directory does not exist')
-        return
-    endif
-
-    try
-        let l:cwdPath = g:NERDTreePath.New(getcwd())
-    catch /^NERDTree.InvalidArgumentsError/
-        call nerdtree#echoWarning('current directory does not exist')
-        return
-    endtry
-
-    call NERDTreeFocus()
-
-    if b:NERDTree.root.path.equals(l:cwdPath)
-        return
-    endif
-
-    let l:newRoot = g:NERDTreeFileNode.New(l:cwdPath, b:NERDTree)
-    call b:NERDTree.changeRoot(l:newRoot)
-    normal! ^
-endfunction
-
-function! NERDTreeAddPathFilter(callback)
-    call g:NERDTree.AddPathFilter(a:callback)
-endfunction
-
 "reset &cpo back to users setting
-let &cpo = s:old_cpo
+" let &cpo = s:old_cpo
 
 
 " SECTION: Load extensions {{{1
