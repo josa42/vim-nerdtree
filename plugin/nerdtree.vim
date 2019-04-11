@@ -69,11 +69,8 @@ call nerdtree#defaultSetting('g:NERDTreeStatusline', "%{exists('b:NERDTree')?b:N
 
 
 "SECTION: Load class files{{{2
-call nerdtree#loadClassFiles()
 
-" SECTION: Commands {{{1
-"============================================================
-call nerdtree#ui_glue#setupCommands()
+call nerdtree#loadClassFiles()
 
 " SECTION: Auto commands {{{1
 "============================================================
@@ -97,6 +94,8 @@ augroup END
 
 " SECTION: Load extensions {{{1
 "============================================================
+
+call nerdtree#commands#setup()
 call nerdtree#git#load()
 call nerdtree#tabs#load()
 call nerdtree#gitignore#registerFilter()

@@ -8,7 +8,7 @@ function! nerdtree#gitignore#registerFilter()
   augroup NERDTreeGitignore
     autocmd!
     autocmd BufWrite .gitignore call nerdtree#gitignore#updateIgnored()
-    NERDTreeRefreshRoot
+    call nerdtree#api#refresh()
   augroup END
 endfunction
 

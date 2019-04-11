@@ -65,7 +65,7 @@ function! nerdtree#api#cwd()
         return
     endtry
 
-    call NERDTreeFocus()
+    call nerdtree#api#focus()
 
     if b:NERDTree.root.path.equals(l:cwdPath)
         return
@@ -83,3 +83,68 @@ endfunction
 function! nerdtree#api#addListener(event, funcname)
   call g:NERDTreePathNotifier.AddListener(a:event, a:funcname)
 endfunction
+
+function! nerdtree#api#revealPath(pathStr)
+    let l:pathStr = !empty(a:pathStr) ? a:pathStr : expand('%:p')
+
+    if empty(l:pathStr)
+        call nerdtree#echoWarning('no file for the current buffer')
+        return
+    endif
+
+    try
+        let l:pathStr = g:NERDTreePath.Resolve(l:pathStr)
+        let l:pathObj = g:NERDTreePath.New(l:pathStr)
+    catch /^NERDTree.InvalidArgumentsError/
+        call nerdtree#echoWarning('invalid path')
+        return
+    endtry
+
+    if !g:NERDTree.ExistsForTab()
+        try
+            let l:cwd = g:NERDTreePath.New(getcwd())
+        catch /^NERDTree.InvalidArgumentsError/
+            call nerdtree#echo('current directory does not exist.')
+            let l:cwd = l:pathObj.getParent()
+        endtry
+
+        if l:pathObj.isUnder(l:cwd)
+            call g:NERDTreeCreator.CreateTabTree(l:cwd.str())
+        else
+            call g:NERDTreeCreator.CreateTabTree(l:pathObj.getParent().str())
+        endif
+    else
+        call nerdtree#api#focus()
+        if !l:pathObj.isUnder(b:NERDTree.root.path)
+            call nerdtree#echoWarning('path not in current root directory')
+            return
+        endif
+    endif
+
+    if l:pathObj.isHiddenUnder(b:NERDTree.root.path)
+        call b:NERDTree.ui.setShowHidden(1)
+    endif
+
+    let l:node = b:NERDTree.root.reveal(l:pathObj)
+    call b:NERDTree.render()
+    call l:node.putCursorHere(1, 0)
+endfunction
+
+
+function! nerdtree#api#create(...)
+  call g:NERDTreeCreator.CreateTabTree(a:0 ? a:1 : '')
+endfunction
+
+function! nerdtree#api#toggle(...)
+   call g:NERDTreeCreator.ToggleTabTree(a:0 ? a:1 : '')
+endfunction
+
+function! nerdtree#api#close()
+  call g:NERDTree.Close()
+endfunction
+
+function! nerdtree#api#ceateMirror()
+  call g:NERDTreeCreator.CreateMirror()
+endfunction
+
+

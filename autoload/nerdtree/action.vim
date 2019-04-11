@@ -13,40 +13,40 @@ function! nerdtree#action#defaultMappings()
   nnoremap <buffer> q <nop>
 
   " Close
-  nnoremap <silent><buffer> <Esc>         :call nerdtree#tabs#unfocus()<cr>
-  nnoremap <silent><buffer> q             :call nerdtree#api#close()<cr>
+  nnoremap <silent><buffer> <Esc> :call nerdtree#tabs#unfocus()<cr>
+  nnoremap <silent><buffer> q     :call nerdtree#api#close()<cr>
 
   " Navigate
-  nnoremap <silent><buffer> <cr>          :call nerdtree#action#open()<cr>
-  nnoremap <silent><buffer> o             :call nerdtree#action#open()<cr>
+  nnoremap <silent><buffer> <cr>  :call nerdtree#action#open()<cr>
+  nnoremap <silent><buffer> o     :call nerdtree#action#open()<cr>
   noremap  <buffer> <2-LeftMouse> :call nerdtree#action#open()<cr>
-  nnoremap <silent><buffer> go            :call nerdtree#action#openFile({'stay': 1, 'where': 'p', 'keepopen': 1})<cr>
+  nnoremap <silent><buffer> go    :call nerdtree#action#openFile({'stay': 1, 'where': 'p', 'keepopen': 1})<cr>
 
-  nnoremap <silent><buffer> O             :call nerdtree#action#openDirectoryRecursively()<cr>
-  nnoremap <silent><buffer> x             :call nerdtree#action#closeCurrentDir()<cr>
-  nnoremap <silent><buffer> X             :call nerdtree#action#closeChildren()<cr>
+  nnoremap <silent><buffer> O     :call nerdtree#action#openDirectoryRecursively()<cr>
+  nnoremap <silent><buffer> x     :call nerdtree#action#closeCurrentDir()<cr>
+  nnoremap <silent><buffer> X     :call nerdtree#action#closeChildren()<cr>
 
-  nnoremap <silent><buffer> t             :call nerdtree#action#openFile({'where': 't', 'stay': 0})<cr>
-  nnoremap <silent><buffer> T             :call nerdtree#action#openFile({'where': 't', 'stay': 1})<cr>
+  nnoremap <silent><buffer> t     :call nerdtree#action#openFile({'where': 't', 'stay': 0})<cr>
+  nnoremap <silent><buffer> T     :call nerdtree#action#openFile({'where': 't', 'stay': 1})<cr>
 
-  nnoremap <silent><buffer> i             :call nerdtree#action#openFile({'where': 'h'})<cr>
-  nnoremap <silent><buffer> gi            :call nerdtree#action#openFile({'where': 'h', 'stay': 1, 'keepopen': 1})<cr>
-  nnoremap <silent><buffer> s             :call nerdtree#action#openFile({'where': 'v'})<cr>
-  nnoremap <silent><buffer> gs            :call nerdtree#action#openFile({'where': 'v', 'stay': 1, 'keepopen': 1})<cr>
+  nnoremap <silent><buffer> i     :call nerdtree#action#openFile({'where': 'h'})<cr>
+  nnoremap <silent><buffer> gi    :call nerdtree#action#openFile({'where': 'h', 'stay': 1, 'keepopen': 1})<cr>
+  nnoremap <silent><buffer> s     :call nerdtree#action#openFile({'where': 'v'})<cr>
+  nnoremap <silent><buffer> gs    :call nerdtree#action#openFile({'where': 'v', 'stay': 1, 'keepopen': 1})<cr>
 
   " state
-  nnoremap <silent><buffer> r             :call nerdtree#api#refresh()<cr>
+  nnoremap <silent><buffer> r     :call nerdtree#api#refresh()<cr>
 
   " Navigation
-  nnoremap <silent><buffer> P             :call nerdtree#action#jumpToParent()<cr>
-  nnoremap <silent><buffer> K             :call nerdtree#action#jumpToFirstChild()<cr>
-  nnoremap <silent><buffer> J             :call nerdtree#action#jumpToLastChild()<cr>
-  nnoremap <silent><buffer> <C-k>         :call nerdtree#action#jumpToPrevSibling()<cr>
-  nnoremap <silent><buffer> <C-j>         :call nerdtree#action#jumpToNextSibling()<cr>
+  nnoremap <silent><buffer> P     :call nerdtree#action#jumpToParent()<cr>
+  nnoremap <silent><buffer> K     :call nerdtree#action#jumpToFirstChild()<cr>
+  nnoremap <silent><buffer> J     :call nerdtree#action#jumpToLastChild()<cr>
+  nnoremap <silent><buffer> <C-k> :call nerdtree#action#jumpToPrevSibling()<cr>
+  nnoremap <silent><buffer> <C-j> :call nerdtree#action#jumpToNextSibling()<cr>
 
   " Filter
-  nnoremap <silent><buffer> I             :call nerdtree#action#toggleIgnoreFilter()<cr>
-  nnoremap <silent><buffer> f             :call nerdtree#action#toggleShowHidden()<cr>
+  nnoremap <silent><buffer> I     :call nerdtree#action#toggleIgnoreFilter()<cr>
+  nnoremap <silent><buffer> f     :call nerdtree#action#toggleShowHidden()<cr>
 endfunction
 
 function! nerdtree#action#open()

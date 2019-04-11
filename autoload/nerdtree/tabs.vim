@@ -12,12 +12,12 @@ fun! nerdtree#tabs#mirrorOrCreate()
   if !l:nerdtree_open
     let l:previous_winnr = winnr("$")
 
-    silent NERDTreeMirror
+    silent call nerdtree#api#ceateMirror()
 
     " if the window count of current tab didn't increase after NERDTreeMirror,
     " it means NERDTreeMirror was unsuccessful and a new NERDTree has to be created
     if l:previous_winnr == winnr("$")
-      silent NERDTreeToggle
+      silent call nerdtree#api#toggle()
     endif
   endif
 endfun
@@ -300,8 +300,8 @@ fun! s:RestoreNERDTreeViewIfPossible()
     exe l:nerdtree_winnr . "wincmd w"
     " load the correct NERDTree buffer if not already loaded
     if exists('s:nerdtree_buffer') && t:NERDTreeBufName != s:nerdtree_buffer
-      silent NERDTreeClose
-      silent NERDTreeMirror
+      silent call nerdtree#api#close()
+      silent call nerdtree#api#ceateMirror()
     endif
     " restore cursor, scroll and window width
     call winrestview(s:nerdtree_view)
@@ -360,27 +360,6 @@ fun! nerdtree#tabs#load()
     autocmd BufWinEnter * call <SID>BufWinEnterHandler()
     autocmd BufRead * call <SID>BufReadHandler()
   augroup END
-
-  " noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call nerdtree#tabs#openAllTabs()
-  " noremap <silent> <script> <Plug>NERDTreeTabsClose    :call nerdtree#tabs#closeAllTabs()
-  " noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call nerdtree#tabs#toggleAllTabs()
-  " noremap <silent> <script> <Plug>NERDTreeTabsFind     :call nerdtree#tabs#findFile()
-  " noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call nerdtree#tabs#mirrorOrCreate()
-  " noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call nerdtree#tabs#mirrorToggle()
-  " noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call nerdtree#tabs#steppedOpen()
-  " noremap <silent> <script> <Plug>NERDTreeSteppedClose :call nerdtree#tabs#steppedClose()
-  " noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call nerdtree#tabs#focusToggle()
-
-  command! NERDTreeTabsOpen     call nerdtree#tabs#openAllTabs()
-  command! NERDTreeTabsClose    call nerdtree#tabs#closeAllTabs()
-  command! NERDTreeTabsToggle   call nerdtree#tabs#toggleAllTabs()
-  command! NERDTreeTabsFind     call nerdtree#tabs#findFile()
-  command! NERDTreeMirrorOpen   call nerdtree#tabs#mirrorOrCreate()
-  command! NERDTreeMirrorToggle call nerdtree#tabs#mirrorToggle()
-  command! NERDTreeSteppedOpen  call nerdtree#tabs#steppedOpen()
-  command! NERDTreeSteppedClose call nerdtree#tabs#steppedClose()
-  command! NERDTreeFocusToggle  call nerdtree#tabs#focusToggle()
-"
 
   let g:nerdtree_tabs_loaded = 1
 endfun
@@ -493,15 +472,4 @@ endfun
 
 " }}}
 "
-" === plugin event handlers === }}}
 
-
-" noremap <silent> <script> <Plug>NERDTreeTabsOpen     :call nerdtree#tabs#openAllTabs()
-" noremap <silent> <script> <Plug>NERDTreeTabsClose    :call nerdtree#tabs#closeAllTabs()
-" noremap <silent> <script> <Plug>NERDTreeTabsToggle   :call nerdtree#tabs#toggleAllTabs()
-" noremap <silent> <script> <Plug>NERDTreeTabsFind     :call nerdtree#tabs#findFile()
-" noremap <silent> <script> <Plug>NERDTreeMirrorOpen   :call nerdtree#tabs#mirrorOrCreate()
-" noremap <silent> <script> <Plug>NERDTreeMirrorToggle :call nerdtree#tabs#mirrorToggle()
-" noremap <silent> <script> <Plug>NERDTreeSteppedOpen  :call nerdtree#tabs#steppedOpen()
-" noremap <silent> <script> <Plug>NERDTreeSteppedClose :call nerdtree#tabs#steppedClose()
-" noremap <silent> <script> <Plug>NERDTreeFocusToggle  :call nerdtree#tabs#focusToggle()
