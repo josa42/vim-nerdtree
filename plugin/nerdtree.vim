@@ -48,10 +48,6 @@ call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)             "
 call nerdtree#defaultSetting("g:NERDTreeHighlightCursorline",   1)             " Deprecated
 call nerdtree#defaultSetting("g:NERDTreeNaturalSort",           0)             " Deprecated
 call nerdtree#defaultSetting("g:NERDTreeSortHiddenFirst",       1)             " Deprecated
-call nerdtree#defaultSetting("g:NERDtreeTabsFocusOnFiles",      0)             " Deprecated
-                                                                               " when switching into a tab, make sure that focus will always be in file
-                                                                               " editing window, not in NERDTree window (off by default)
-
 call nerdtree#defaultSetting('g:NERDTreeIgnore',            ['\~$', '\.swp$']) " Deprecated: use nerdtree#api#addPathFilter()
 call nerdtree#defaultSetting("g:NERDTreeGlyphReadOnly",         "RO")          " Deprecated: TODO: find better default glyph
 call nerdtree#defaultSetting('g:NERDTreeSortOrder', ['\/$', '*'])              " Deprecated: TODO Add Sort API

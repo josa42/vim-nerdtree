@@ -394,10 +394,7 @@ fun! s:TabEnterHandler()
 
   call s:RestoreNERDTreeViewIfPossible()
 
-  if g:NERDtreeTabsFocusOnFiles
-    call nerdtree#tabs#unfocus()
-  " Do not restore focus on newly created tab here
-  elseif !s:NewTabCreated
+  if !s:NewTabCreated
     call nerdtree#tabs#restoreFocus()
   endif
 endfun
@@ -450,9 +447,7 @@ fun! s:BufWinEnterHandler()
     let s:NewTabCreated = 0
 
     " Restore focus to NERDTree if necessary
-    if !g:NERDtreeTabsFocusOnFiles
-      call nerdtree#tabs#restoreFocus()
-    endif
+    call nerdtree#tabs#restoreFocus()
   endif
 endfun
 
