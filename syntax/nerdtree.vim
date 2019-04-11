@@ -23,22 +23,31 @@ exec 'syn match NERDTreeRO # *\zs.*\ze \['.g:NERDTreeGlyphReadOnly.'\]# contains
 syn match NERDTreeFlags #^ *\zs\[[^\]]*\]# containedin=NERDTreeFile,NERDTreeExecFile
 syn match NERDTreeFlags #\[[^\]]*\]# containedin=NERDTreeDir
 
-hi def link NERDTreePart     Special
-hi def link NERDTreePartFile Type
-hi def link NERDTreeExecFile Title
-hi def link NERDTreeDirSlash Comment
+highlight default link NERDTreePart       Special
+highlight default link NERDTreePartFile   Type
+highlight default link NERDTreeExecFile   Title
+highlight default link NERDTreeDirSlash   Comment
 
-hi def link NERDTreeLinkTarget Type
-hi def link NERDTreeLinkFile   NERDTreeFile
-hi def link NERDTreeLinkDir    NERDTreeDir
+highlight default link NERDTreeLinkTarget Type
+highlight default link NERDTreeLinkFile   NERDTreeFile
+highlight default link NERDTreeLinkDir    NERDTreeDir
 
-hi def link NERDTreeDir      Directory
-hi def link NERDTreeFile     Normal
-hi def link NERDTreeOpenable NERDTreeDir
-hi def link NERDTreeClosable NERDTreeDir
-hi def link NERDTreeIgnore   ignore
-hi def link NERDTreeRO       WarningMsg
-hi def link NERDTreeFlags    Number
+highlight default link NERDTreeDir        Directory
+highlight default link NERDTreeFile       Normal
+highlight default link NERDTreeOpenable   NERDTreeDir
+highlight default link NERDTreeClosable   NERDTreeDir
+highlight default link NERDTreeIgnore     ignore
+highlight default link NERDTreeRO         WarningMsg
+highlight default link NERDTreeFlags      Number
 
-" hi def link NERDTreeCurrentNode Search
+" highlight default link NERDTreeCurrentNode Search
 
+" TODO review defaults
+highlight default link NERDTreeGitStatusModified  Special
+highlight default link NERDTreeGitStatusStaged    Function
+highlight default link NERDTreeGitStatusRenamed   Title
+highlight default link NERDTreeGitStatusUnmerged  Label
+highlight default link NERDTreeGitStatusUntracked Comment
+highlight default link NERDTreeGitStatusDirDirty  Tag
+highlight default link NERDTreeGitStatusDirClean  DiffAdd
+highlight default link NERDTreeGitStatusIgnored   DiffAdd

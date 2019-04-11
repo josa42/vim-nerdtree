@@ -233,13 +233,5 @@ function! s:addHighlighting()
         exec 'syn match ' . l:name . ' #' . escape(l:synmap[l:name], '~') . '# containedin=NERDTreeFlags'
     endfor
 
-    " TODO review defaults
-    highlight default link NERDTreeGitStatusModified  Special
-    highlight default link NERDTreeGitStatusStaged    Function
-    highlight default link NERDTreeGitStatusRenamed   Title
-    highlight default link NERDTreeGitStatusUnmerged  Label
-    highlight default link NERDTreeGitStatusUntracked Comment
-    highlight default link NERDTreeGitStatusDirDirty  Tag
-    highlight default link NERDTreeGitStatusDirClean  DiffAdd
-    highlight default link NERDTreeGitStatusIgnored   DiffAdd
+
 endfunction
