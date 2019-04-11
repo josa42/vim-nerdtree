@@ -48,10 +48,7 @@ function! s:statusRefresh()
     let b:NOT_A_GIT_REPOSITORY        = 1
 
     let l:root = fnamemodify(b:NERDTree.root.path.str(), ":p:S")
-    let l:gitcmd = 'git -c color.status=false status -s'
-    if g:NERDTreeShowIgnoredStatus
-        let l:gitcmd = l:gitcmd . ' --ignored'
-    endif
+    let l:gitcmd = 'git -c color.status=false status -s --ignored'
     let l:statusesStr = system(l:gitcmd . ' ' . l:root)
     let l:statusesSplit = split(l:statusesStr, '\n')
     if l:statusesSplit != [] && l:statusesSplit[0] =~# 'fatal:.*'
