@@ -11,14 +11,6 @@
 let s:Creator = {}
 let g:NERDTreeCreator = s:Creator
 
-" FUNCTION: s:Creator._bindMappings() {{{1
-function! s:Creator._bindMappings()
-    "make <cr> do the same as the activate node mapping
-    nnoremap <silent> <buffer> <cr> :call nerdtree#ui_glue#invokeKeyMap(g:NERDTreeMapActivateNode)<cr>
-
-    call g:NERDTreeKeyMap.BindAll()
-endfunction
-
 " FUNCTION: s:Creator._broadcastInitEvent() {{{1
 function! s:Creator._broadcastInitEvent()
     silent doautocmd User NERDTreeInit
@@ -289,7 +281,6 @@ function! s:Creator._setCommonBufOptions()
     endif
 
     call self._setupStatusline()
-    call self._bindMappings()
 
     setlocal filetype=nerdtree
 endfunction

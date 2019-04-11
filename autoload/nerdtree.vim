@@ -107,7 +107,6 @@ endfunction
 " FUNCTION: nerdtree#loadClassFiles() {{{2
 function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/path.vim
-    runtime lib/nerdtree/key_map.vim
     runtime lib/nerdtree/tree_file_node.vim
     runtime lib/nerdtree/tree_dir_node.vim
     runtime lib/nerdtree/opener.vim
@@ -118,11 +117,6 @@ function! nerdtree#loadClassFiles()
     runtime lib/nerdtree/event.vim
     runtime lib/nerdtree/notifier.vim
 endfunction
-
-" FUNCTION: nerdtree#postSourceActions() {{{2
-function! nerdtree#postSourceActions()
-    call nerdtree#ui_glue#createDefaultBindings()
-endfunctio:
 
 " SECTION: View Functions {{{1
 "============================================================

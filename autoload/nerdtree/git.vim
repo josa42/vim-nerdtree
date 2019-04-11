@@ -244,12 +244,12 @@ function! s:addHighlighting()
     endfor
 
     " TODO review defaults
-    hi def link NERDTreeGitStatusModified  Special
-    hi def link NERDTreeGitStatusStaged    Function
-    hi def link NERDTreeGitStatusRenamed   Title
-    hi def link NERDTreeGitStatusUnmerged  Label
-    hi def link NERDTreeGitStatusUntracked Comment
-    hi def link NERDTreeGitStatusDirDirty  Tag
-    hi def link NERDTreeGitStatusDirClean  DiffAdd
-    hi def link NERDTreeGitStatusIgnored   DiffAdd
+    highlight default link NERDTreeGitStatusModified  Special
+    highlight default link NERDTreeGitStatusStaged    Function
+    highlight default link NERDTreeGitStatusRenamed   Title
+    highlight default link NERDTreeGitStatusUnmerged  Label
+    highlight default link NERDTreeGitStatusUntracked Comment
+    highlight default link NERDTreeGitStatusDirDirty  Tag
+    highlight default link NERDTreeGitStatusDirClean  DiffAdd
+    highlight default link NERDTreeGitStatusIgnored   DiffAdd
 endfunction

@@ -150,35 +150,23 @@ gs.......Same as s, but leave the cursor on the NERDTree...........|NERDTree-gs|
 O........Recursively open the selected directory....................|NERDTree-O|
 x........Close the current nodes parent.............................|NERDTree-x|
 X........Recursively close all children of the current node.........|NERDTree-X|
-e........Edit the current dir.......................................|NERDTree-e|
 
 <CR>............same as |NERDTree-o|.
 double-click....same as |NERDTree-o|.
-middle-click....same as |NERDTree-i| for files, and |NERDTree-e| for dirs.
 
-P........Jump to the root node......................................|NERDTree-P|
 p........Jump to current nodes parent...............................|NERDTree-p|
 K........Jump up inside directories at the current tree depth.......|NERDTree-K|
 J........Jump down inside directories at the current tree depth.....|NERDTree-J|
 <C-J>....Jump down to next sibling of the current directory.......|NERDTree-C-J|
 <C-K>....Jump up to previous sibling of the current directory.....|NERDTree-C-K|
 
-C........Change the tree root to the selected dir...................|NERDTree-C|
-u........Move the tree root up one directory........................|NERDTree-u|
-U........Same as 'u' except the old root node is left open..........|NERDTree-U|
-r........Recursively refresh the current directory..................|NERDTree-r|
 R........Recursively refresh the current root.......................|NERDTree-R|
-m........Display the NERDTree menu..................................|NERDTree-m|
-cd.......Change the CWD to the dir of the selected node............|NERDTree-cd|
-CD.......Change tree root to the CWD...............................|NERDTree-CD|
 
 I........Toggle whether hidden files displayed......................|NERDTree-I|
 f........Toggle whether the file filters are used...................|NERDTree-f|
 F........Toggle whether files are displayed.........................|NERDTree-F|
 
 q........Close the NERDTree window..................................|NERDTree-q|
-A........Zoom (maximize/minimize) the NERDTree window...............|NERDTree-A|
-?........Toggle the display of the quick help.......................|NERDTree-?|
 
 ------------------------------------------------------------------------------
                                                                     *NERDTree-o*
@@ -296,22 +284,6 @@ Recursively closes all children of the selected directory.
 Tip: To quickly "reset" the tree, use |NERDTree-P| with this mapping.
 
 ------------------------------------------------------------------------------
-                                                                    *NERDTree-D*
-Default key: D
-Map setting: NERDTreeMapDeleteBookmark
-Applies to: lines in the bookmarks table
-
-Deletes the currently selected bookmark.
-
-------------------------------------------------------------------------------
-                                                                    *NERDTree-P*
-Default key: P
-Map setting: NERDTreeMapJumpRoot
-Applies to: no restrictions.
-
-Jump to the tree root.
-
-------------------------------------------------------------------------------
                                                                     *NERDTree-p*
 Default key: p
 Map setting: NERDTreeMapJumpParent
@@ -364,17 +336,6 @@ Jump to the previous sibling of the selected node.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-r*
 Default key: r
-Map setting: NERDTreeMapRefresh
-Applies to: files and directories.
-
-If a dir is selected, recursively refresh that dir, i.e. scan the filesystem
-for changes and represent them in the tree.
-
-If a file node is selected then the above is done on it's parent.
-
-------------------------------------------------------------------------------
-                                                                    *NERDTree-R*
-Default key: R
 Map setting: NERDTreeMapRefreshRoot
 Applies to: no restrictions.
 
@@ -397,28 +358,12 @@ Applies to: no restrictions.
 Toggles whether file filters are used. See |NERDTreeIgnore| for details.
 
 ------------------------------------------------------------------------------
-                                                                    *NERDTree-F*
-Default key: F
-Map setting: NERDTreeMapToggleFiles
-Applies to: no restrictions.
-
-Toggles whether file nodes are displayed.
-
-------------------------------------------------------------------------------
                                                                     *NERDTree-q*
 Default key: q
 Map setting: NERDTreeMapQuit
 Applies to: no restrictions.
 
 Closes the NERDTree window.
-
-------------------------------------------------------------------------------
-                                                                    *NERDTree-A*
-Default key: A
-Map setting: NERDTreeMapToggleZoom
-Applies to: no restrictions.
-
-Maximize (zoom) and minimize the NERDTree window.
 
 ==============================================================================
 3. Customisation                                              *NERDTreeSettings*
@@ -762,42 +707,6 @@ See this blog post for more details:
 
 ------------------------------------------------------------------------------
 4.1. Key map API                                             *NERDTreeKeymapAPI*
-
-NERDTreeAddKeyMap({options})                               *NERDTreeAddKeyMap()*
-    Adds a new keymapping for all NERDTree buffers.
-    {options} must be a dictionary, and must contain the following keys:
-    "key" - the trigger key for the new mapping
-    "callback" - the function the new mapping will be bound to
-    "quickhelpText" - the text that will appear in the quickhelp (see
-    |NERDTree-?|)
-    "override" - if 1 then this new mapping will override whatever previous
-    mapping was defined for the key/scope combo. Useful for overriding the
-    default mappings.
-
-    Additionally, a "scope" argument may be supplied. This constrains the
-    mapping so that it is only activated if the cursor is on a certain object.
-    That object is then passed into the handling method. Possible values are:
-
-      "FileNode" .... a file node
-      "DirNode" ..... a directory node
-      "Node" ........ a file node OR a directory node
-      "all" ......... global scope; handler receives no arguments (default)
-
-    Example: >
-        call NERDTreeAddKeyMap({
-               \ 'key': 'foo',
-               \ 'callback': 'NERDTreeCDHandler',
-               \ 'quickhelpText': 'echo full path of current node',
-               \ 'scope': 'DirNode' })
-
-        function! NERDTreeCDHandler(dirnode)
-            call a:dirnode.changeToDir()
-        endfunction
-<
-    This code should sit in a file like ~/.vim/nerdtree_plugin/mymapping.vim.
-    It adds a (redundant) mapping on 'foo' which changes vim's CWD to that of
-    the current dir node. Note this mapping will only fire when the cursor is
-    on a directory node.
 
 ------------------------------------------------------------------------------
 4.3 NERDTreeAddPathFilter(callback)                    *NERDTreeAddPathFilter()*

@@ -154,10 +154,6 @@ augroup END
 
 " SECTION: Public API {{{1
 "============================================================
-function! NERDTreeAddKeyMap(options)
-    " TODO make NERDTreeKeyMap private
-    call g:NERDTreeKeyMap.Create(a:options)
-endfunction
 
 " TODO Remove this?
 
@@ -206,9 +202,6 @@ function! NERDTreeAddPathFilter(callback)
     call g:NERDTree.AddPathFilter(a:callback)
 endfunction
 
-" SECTION: Post Source Actions {{{1
-call nerdtree#postSourceActions()
-
 "reset &cpo back to users setting
 let &cpo = s:old_cpo
 
@@ -219,4 +212,8 @@ call nerdtree#git#load()
 call nerdtree#tabs#load()
 call nerdtree#gitignore#registerFilter()
 
+augroup NERDTreeKeyMaps
+    autocmd!
+    autocmd FileType nerdtree call nerdtree#action#defaultMappings()
+augroup END
 " vim: set sw=4 sts=4 et fdm=marker:
