@@ -358,7 +358,7 @@ Closes the NERDTree window.
 The plugin provides the following settings that can customise the behaviour
 the NERDTree. These settings should be set in your vimrc, using `:let`.
 
-|loaded_nerdtree|            Turns off the script.
+|loaded_nerdtree|             Turns off the script.
 
 |NERDTreeNaturalSort|         Tells the NERDTree whether to use natural sort
                             order or not when sorting nodes.
@@ -465,10 +465,9 @@ highlighted. This is done using the `'cursorline'` Vim option.
 Values: a list of regular expressions.
 Default: ['\~$'].
 
-This setting is used to specify which files the NERDTree should ignore.  It
+This setting is used to specify which files the NERDTree should ignore. It
 must be a list of regular expressions. When the NERDTree is rendered, any
-files/dirs that match any of the regex's in NERDTreeIgnore won't be
-displayed.
+files/dirs that match any of the regex's in NERDTreeIgnore won't be displayed.
 
 For example if you put the following line in your vimrc: >
     let NERDTreeIgnore=['\.vim$', '\~$']
@@ -477,7 +476,9 @@ then all files ending in .vim or ~ will be ignored.
 
 There are 2 magic flags that can be appended to the end of each regular
 expression to specify that the regex should match only files or only dirs.
-These flags are "[[dir]]" and "[[file]]". Example: >
+These flags are "[[dir]]" and "[[file]]".
+
+Example: >
     let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]']
 <
 This will cause all dirs ending in ".d" to be ignored and all files ending in
@@ -613,7 +614,9 @@ These characters indicate whether a directory is collapsible or expandable.
 
 They can be set to "\u00a0" to hide the arrows, but if you do this you may
 need to change the node delimiter. See |NERDTreeNodeDelimiter|. You cannot use
-the same character for both the arrows and the delimiter. Example: >
+the same character for both the arrows and the delimiter.
+
+Example: >
     let NERDTreeDirArrowExpandable=">"
     let NERDTreeDirArrowCollapsible="v"
 <
