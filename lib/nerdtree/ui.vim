@@ -2,11 +2,8 @@
 " CLASS: UI
 " ============================================================================
 
-
 let s:UI = {}
 let g:NERDTreeUI = s:UI
-
-let s:lineOffset = 0
 
 " FUNCTION: s:UI.new(nerdtree) {{{1
 function! s:UI.New(nerdtree)
@@ -18,25 +15,19 @@ function! s:UI.New(nerdtree)
     return newObj
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SECTION: Path, IDx and LineNum
+"
+" TODO: Move this else where!
+
 " FUNCTION: s:UI.getPath(ln) {{{1
 " Return the "Path" object for the node that is rendered on the given line
 " number.  If the "up a dir" line is selected, return the "Path" object for
 " the parent of the root.  Return the empty dictionary if the given line
 " does not reference a tree node.
 function! s:UI.getPath(ln)
-    let line = getline(a:ln)
-
-    if a:ln == s:lineOffset
-        return self.nerdtree.root.path
-    endif
-
-    if a:ln < s:lineOffset
-        return {}
-    endif
-
-    let idx = (a:ln - s:lineOffset - 1)
-
-    return self.nerdtree.root.registry.items[idx].path
+    if a:ln <  1 | return {} | endif
+    return self.nerdtree.root.registry.items[a:ln - 1].path
 endfunction
 
 " FUNCTION: s:UI.getLineNum(node) {{{1
@@ -44,14 +35,29 @@ endfunction
 " given node is not visible.
 function! s:UI.getLineNum(node)
     if a:node.idx >= 0
-        return a:node.idx + s:lineOffset + 1
+        return a:node.idx + 1
     endif
     return -1
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SECTION: Filter
+
 " FUNCTION: s:UI.getShowHidden() {{{1
 function! s:UI.getShowHidden()
     return self._showHidden
+endfunction
+
+" FUNCTION: s:UI.setShowHidden(val) {{{1
+function! s:UI.setShowHidden(val)
+    let self._showHidden = a:val
+endfunction
+
+" FUNCTION: s:UI.toggleShowHidden() {{{1
+" toggles the display of hidden files
+function! s:UI.toggleShowHidden()
+    let self._showHidden = !self._showHidden
+    call self.renderViewSavingPosition()
 endfunction
 
 " FUNCTION: s:UI.isIgnoreFilterEnabled() {{{1
@@ -59,10 +65,15 @@ function! s:UI.isIgnoreFilterEnabled()
     return self._ignoreEnabled == 1
 endfunction
 
-" FUNCTION: s:UI.MarkupReg() {{{1
-function! s:UI.MarkupReg()
-    return '^ *['.g:NERDTreeDirArrowExpandable.g:NERDTreeDirArrowCollapsible.']\? '
+" FUNCTION: s:UI.toggleIgnoreFilter() {{{1
+" toggles the use of the NERDTreeIgnore option
+function! s:UI.toggleIgnoreFilter()
+    let self._ignoreEnabled = !self._ignoreEnabled
+    call self.renderViewSavingPosition()
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SECTION: State
 
 " FUNCTION: s:UI.restoreScreenState() {{{1
 "
@@ -97,10 +108,28 @@ function! s:UI.saveScreenState()
     call nerdtree#exec(win . "wincmd w")
 endfunction
 
-" FUNCTION: s:UI.setShowHidden(val) {{{1
-function! s:UI.setShowHidden(val)
-    let self._showHidden = a:val
+" FUNCTION: UI.renderViewSavingPosition {{{1
+" Renders the tree and ensures the cursor stays on the current node or the
+" current nodes parent if it is no longer available upon re-rendering
+function! s:UI.renderViewSavingPosition()
+    let currentNode = g:NERDTreeFileNode.GetSelected()
+
+    " go up the tree till we find a node that will be visible or till we run
+    " out of nodes
+    while currentNode != {} && !currentNode.isVisible() && !currentNode.isRoot()
+        let currentNode = currentNode.parent
+    endwhile
+
+    call self.render()
+
+    if currentNode != {}
+        call currentNode.putCursorHere(0, 0)
+    endif
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SECTION: Render
+
 
 " FUNCTION: s:UI.render() {{{1
 function! s:UI.render()
@@ -136,41 +165,6 @@ function! s:UI.render()
     let &scrolloff = old_scrolloff
 
     setlocal readonly nomodifiable
-endfunction
-
-
-" FUNCTION: UI.renderViewSavingPosition {{{1
-" Renders the tree and ensures the cursor stays on the current node or the
-" current nodes parent if it is no longer available upon re-rendering
-function! s:UI.renderViewSavingPosition()
-    let currentNode = g:NERDTreeFileNode.GetSelected()
-
-    " go up the tree till we find a node that will be visible or till we run
-    " out of nodes
-    while currentNode != {} && !currentNode.isVisible() && !currentNode.isRoot()
-        let currentNode = currentNode.parent
-    endwhile
-
-    call self.render()
-
-    if currentNode != {}
-        call currentNode.putCursorHere(0, 0)
-    endif
-endfunction
-
-" FUNCTION: s:UI.toggleIgnoreFilter() {{{1
-" toggles the use of the NERDTreeIgnore option
-function! s:UI.toggleIgnoreFilter()
-    let self._ignoreEnabled = !self._ignoreEnabled
-    call self.renderViewSavingPosition()
-endfunction
-
-
-" FUNCTION: s:UI.toggleShowHidden() {{{1
-" toggles the display of hidden files
-function! s:UI.toggleShowHidden()
-    let self._showHidden = !self._showHidden
-    call self.renderViewSavingPosition()
 endfunction
 
 " vim: set sw=4 sts=4 et fdm=marker:
