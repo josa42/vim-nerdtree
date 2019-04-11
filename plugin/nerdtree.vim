@@ -72,19 +72,17 @@ call nerdtree#loadClassFiles()
 
 augroup NERDTree
     autocmd!
-    "Save the cursor position whenever we close the NERDTree
-    exec "autocmd BufLeave ". g:NERDTreeCreator.BufNamePrefix() ."* if g:NERDTree.IsOpen() | call b:NERDTree.ui.saveScreenState() | endif"
+    autocmd BufEnter   * if &filetype == 'nerdtree' | call nerdtree#handler#bufferLeave() | endif
+    autocmd BufEnter   * if &filetype == 'nerdtree' | call nerdtree#handler#bufferEnter() | endif
+    autocmd DirChanged * if &filetype == 'nerdtree' | call nerdtree#handler#dirChanged()  | endif
 
-    "disallow insert mode in the NERDTree
-    exec "autocmd BufEnter ". g:NERDTreeCreator.BufNamePrefix() ."* stopinsert"
+    " Set key mappings
+    autocmd FileType nerdtree call nerdtree#action#defaultMappings()
 
     " Hijack Netrw
     autocmd VimEnter * silent! autocmd! FileExplorer
     autocmd BufEnter,VimEnter * call nerdtree#checkForBrowse(expand("<amatch>"))
 augroup END
-
-"reset &cpo back to users setting
-" let &cpo = s:old_cpo
 
 
 " SECTION: Load extensions {{{1
@@ -95,8 +93,4 @@ call nerdtree#git#load()
 call nerdtree#tabs#load()
 call nerdtree#gitignore#registerFilter()
 
-augroup NERDTreeKeyMaps
-    autocmd!
-    autocmd FileType nerdtree call nerdtree#action#defaultMappings()
-augroup END
 " vim: set sw=4 sts=4 et fdm=marker:

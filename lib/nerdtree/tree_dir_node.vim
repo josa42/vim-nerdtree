@@ -6,9 +6,6 @@
 " The 'composite' part of the file/dir composite.
 " ============================================================================
 
-" TODO Can I remove this?
-let s:notificationThreshold = 100
-
 let s:TreeDirNode = copy(g:NERDTreeFileNode)
 let g:NERDTreeDirNode = s:TreeDirNode
 
@@ -401,14 +398,9 @@ endfunction
 function! s:TreeDirNode._initChildren(silent)
     "remove all the current child nodes
     let self.children = []
-
     let files = self._glob('*', 1) + self._glob('.*', 0)
-
-    if !a:silent && len(files) > s:notificationThreshold
-        call nerdtree#echo("Please wait, caching a large dir ...")
-    endif
-
     let invalidFilesFound = 0
+
     for i in files
         try
             let path = g:NERDTreePath.New(i)
