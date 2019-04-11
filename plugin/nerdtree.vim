@@ -24,7 +24,6 @@ call nerdtree#defaultSetting("g:NERDTreeQuitOnOpen",            0)
 call nerdtree#defaultSetting("g:NERDTreeDirArrowExpandable",    "▸")
 call nerdtree#defaultSetting("g:NERDTreeDirArrowCollapsible",   "▾")
 call nerdtree#defaultSetting("g:NERDTreeFile",                  "∙")
-call nerdtree#defaultSetting('g:NERDTreeUpdateOnWrite',         1)             " Update git status TODO: Find better name!
 call nerdtree#defaultSetting('g:NERDTreeUpdateOnCursorHold',    1)             " Update git status TODO: Find better name!
 call nerdtree#defaultSetting('g:NERDTreeShowIgnoredStatus',     1)             " TODO Why should this be optional? Is it slow?
 call nerdtree#defaultSetting("g:NERDTreeWinPos",                "left")

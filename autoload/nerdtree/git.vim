@@ -199,10 +199,6 @@ endfunction
 
 " FUNCTION: s:fileUpdate(fname) {{{2
 function! s:fileUpdate(fname)
-    if g:NERDTreeUpdateOnWrite != 1
-        return
-    endif
-
     if !g:NERDTree.IsOpen()
         return
     endif
@@ -213,6 +209,7 @@ function! s:fileUpdate(fname)
     call g:NERDTree.CursorToTreeWin()
     let l:node = b:NERDTree.root.findNode(g:NERDTreePath.New(a:fname))
     if l:node == {}
+        " TODO refresh?
         return
     endif
     call l:node.refreshFlags()
