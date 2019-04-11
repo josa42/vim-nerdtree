@@ -348,9 +348,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 
 |loaded_nerdtree|             Turns off the script.
 
-|NERDTreeNaturalSort|         Tells the NERDTree whether to use natural sort
-                            order or not when sorting nodes.
-
 |NERDTreeIgnore|              Tells the NERDTree which files to ignore.
 
 |NERDTreeRespectWildIgnore|   Tells the NERDTree to respect `'wildignore'`.
@@ -406,33 +403,6 @@ into account. The above nodes would then be sorted like this: >
     bar.c
     blarg.c
     boner.c
-<
-------------------------------------------------------------------------------
-                                                           *NERDTreeNaturalSort*
-Values: 0 or 1.
-Default: 0.
-
-By default the NERDTree does not sort nodes in natural sort order, i.e. nodes
-could appear like this: >
-    z1.txt
-    z10.txt
-    z100.txt
-    z11.txt
-    z110.txt
-    z2.txt
-    z20.txt
-    z3.txt
-<
-But if you set this setting to 1 then the natural sort order will be used. The
-above nodes would then be sorted like this: >
-    z1.txt
-    z2.txt
-    z3.txt
-    z10.txt
-    z11.txt
-    z20.txt
-    z100.txt
-    z110.txt
 <
 ------------------------------------------------------------------------------
                                                                 *NERDTreeIgnore*

@@ -208,7 +208,8 @@ function! s:Path.getSortKey()
         let path = self.getLastPathComponent(1)
         let path = tolower(path)
 
-        call extend(self._sortKey, (g:NERDTreeNaturalSort ? self._splitChunks(path) : [path]))
+        " Natural sort!
+        call extend(self._sortKey, self._splitChunks(path))
     endif
     return self._sortKey
 endfunction
