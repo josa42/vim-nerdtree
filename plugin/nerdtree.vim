@@ -45,7 +45,6 @@ call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
 
 " TODO Remove these:
 call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)             " Deprecated: use nerdtree#api#addPathFilter()
-call nerdtree#defaultSetting("g:NERDTreeHighlightCursorline",   1)             " Deprecated
 call nerdtree#defaultSetting("g:NERDTreeNaturalSort",           0)             " Deprecated
 call nerdtree#defaultSetting("g:NERDTreeSortHiddenFirst",       1)             " Deprecated
 call nerdtree#defaultSetting('g:NERDTreeIgnore',            ['\~$', '\.swp$']) " Deprecated: use nerdtree#api#addPathFilter()

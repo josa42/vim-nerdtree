@@ -439,14 +439,6 @@ above nodes would then be sorted like this: >
     z110.txt
 <
 ------------------------------------------------------------------------------
-                                                   *NERDTreeHighlightCursorline*
-Values: 0 or 1.
-Default: 1.
-
-If set to 1, the current cursor line in the NERDTree buffer will be
-highlighted. This is done using the `'cursorline'` Vim option.
-
-------------------------------------------------------------------------------
                                                                 *NERDTreeIgnore*
 Values: a list of regular expressions.
 Default: ['\~$'].

@@ -259,10 +259,7 @@ function! s:Creator._setCommonBufOptions()
 
     iabc <buffer>
 
-    if g:NERDTreeHighlightCursorline
-        setlocal cursorline
-    endif
-
+    setlocal cursorline
     setlocal filetype=nerdtree
 endfunction
 
