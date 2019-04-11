@@ -263,16 +263,7 @@ function! s:Creator._setCommonBufOptions()
         setlocal cursorline
     endif
 
-    call self._setupStatusline()
-
     setlocal filetype=nerdtree
-endfunction
-
-" FUNCTION: s:Creator._setupStatusline() {{{1
-function! s:Creator._setupStatusline()
-    if g:NERDTreeStatusline != -1
-        let &l:statusline = g:NERDTreeStatusline
-    endif
 endfunction
 
 " FUNCTION: s:Creator._tabpagevar(tabnr, var) {{{1

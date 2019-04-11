@@ -57,12 +57,6 @@ call nerdtree#defaultSetting("g:NERDTreeGlyphReadOnly",         "RO")          "
 call nerdtree#defaultSetting('g:NERDTreeSortOrder', ['\/$', '*'])              " Deprecated: TODO Add Sort API
 let g:NERDTreeOldSortOrder = []
 
-"the exists() crap here is a hack to stop vim spazzing out when
-"loading a session that was created with an open NERDTree. It spazzes
-"because it doesnt store b:NERDTree(its a b: var, and its a hash)
-call nerdtree#defaultSetting('g:NERDTreeStatusline', "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}")
-                                                                               " Deprecated TODO refactor statusline support!
-
 " SECTION: Load class files{{{2
 
 call nerdtree#loadClassFiles()

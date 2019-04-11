@@ -49,7 +49,6 @@ endfunction
 " TODO call this if vim root directory changed
 " Sync tree with cwd
 function! nerdtree#api#cwd()
-
     if empty(getcwd())
         call nerdtree#echoWarning('current directory does not exist')
         return

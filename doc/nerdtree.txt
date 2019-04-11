@@ -88,14 +88,14 @@ The following features and functionality are provided by the NERDTree:
 ------------------------------------------------------------------------------
 2.1. Global Commands                                    *NERDTreeGlobalCommands*
 
-:NERDTree [<start-directory>]                                        *:NERDTree*
+:NERDTree                                                            *:NERDTree*
     Opens a fresh NERDTree. The root of the tree depends on the argument
     given. There are 3 cases: If no argument is given, the current directory
     will be used.  If a directory is given, that will be used. If a bookmark
     name is given, the corresponding directory will be used.  For example: >
         :NERDTree /home/marty/vim7/src
 <
-:NERDTreeToggle [<start-directory>]               *:NERDTreeToggle*
+:NERDTreeToggle                                                *:NERDTreeToggle*
     If a NERDTree already exists for this tab, it is reopened and rendered
     again.  If no NERDTree exists for this tab then this command acts the
     same as the |:NERDTree| command.
@@ -123,13 +123,6 @@ The following features and functionality are provided by the NERDTree:
     Focus will be shifted to the NERDTree window, and the cursor will be
     placed on the tree node for the determined path.  If a NERDTree for the
     current tab does not exist, a new one will be initialized.
-
-:NERDTreeCWD                                                      *:NERDTreeCWD*
-    Change the NERDTree root to the current working directory.  If no
-    NERDTree exists for this tab, a new one is opened.
-
-:NERDTreeRefreshRoot                                      *:NERDTreeRefreshRoot*
-    Refreshes the NERDTree root node.
 
 ------------------------------------------------------------------------------
 2.2. NERDTree Mappings                                        *NERDTreeMappings*
@@ -375,8 +368,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 |NERDTreeSortOrder|           Tell the NERDTree how to sort the nodes in the
                             tree.
 
-|NERDTreeStatusline|          Set a statusline for NERDTree windows.
-
 |NERDTreeWinPos|              Tells the script where to put the NERDTree
                             window.
 
@@ -567,19 +558,6 @@ Examples: >
    oldest.
 6. Markdown files first, followed by C source files, then everything else.
    Each group is shown newest to oldest.
-
-------------------------------------------------------------------------------
-                                                            *NERDTreeStatusline*
-Values: Any valid `'statusline'` setting.
-Default: %{exists('b:NERDTree')?b:NERDTree.root.path.str():''}
-
-Defines the value for the `'statusline'` setting in NERDTree windows.
-
-Note: The setting is actually applied using |:let-&|, not |:set|, so
-escaping spaces is not necessary.
-
-Setting this to -1 will deactivate it so that your global `'statusline'`
-setting is used.
 
 ------------------------------------------------------------------------------
                                                                 *NERDTreeWinPos*

@@ -144,11 +144,11 @@ function! s:UI.render()
     " delete all lines in the buffer (being careful not to clobber a register)
     silent 1,$delete _
 
-    for i in range(1,s:lineOffset+1)
+    for i in range(1, 1)
         call setline(i, "")
     endfor
 
-    call cursor(1 + s:lineOffset, col("."))
+    call cursor(1, col("."))
 
     " draw the tree
     silent put =self.nerdtree.root.renderToString()
