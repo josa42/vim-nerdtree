@@ -6,7 +6,6 @@ function! nerdtree#api#refresh()
     if !g:NERDTree.IsOpen()
         return
     endif
-    call nerdtree#echo("Refreshing the root node. This could take a while...")
 
     let l:curWin = winnr()
     call nerdtree#exec(g:NERDTree.GetWinNum() . "wincmd w")
