@@ -167,11 +167,11 @@ f........Toggle whether the file filters are used...................|NERDTree-f|
 F........Toggle whether files are displayed.........................|NERDTree-F|
 
 q........Close the NERDTree window..................................|NERDTree-q|
+<ESC>....Unfocus NERDTree window..................................|NERDTree-esc|
 
 ------------------------------------------------------------------------------
                                                                     *NERDTree-o*
 Default key: o
-Map setting: NERDTreeMapActivateNode
 Applies to: files and directories.
 
 If a file node is selected, it is opened in the previous window.
@@ -182,7 +182,6 @@ state.
 ------------------------------------------------------------------------------
                                                                    *NERDTree-go*
 Default key: go
-Map setting: NERDTreeMapPreview
 Applies to: files.
 
 If a file node that links to a file is selected, it is opened in the previous
@@ -194,7 +193,6 @@ The default key combo for this mapping is "g" + NERDTreeMapActivateNode (see
 ------------------------------------------------------------------------------
                                                                     *NERDTree-t*
 Default key: t
-Map setting: NERDTreeMapOpenInTab
 Applies to: files and directories.
 
 Opens the selected file in a new tab. If a directory is selected, a fresh
@@ -207,7 +205,6 @@ in a new tab.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-T*
 Default key: T
-Map setting: NERDTreeMapOpenInTabSilent
 Applies to: files and directories.
 
 The same as |NERDTree-t| except that the focus is kept in the current tab.
@@ -215,7 +212,6 @@ The same as |NERDTree-t| except that the focus is kept in the current tab.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-i*
 Default key: i
-Map setting: NERDTreeMapOpenSplit
 Applies to: files.
 
 Opens the selected file in a new split window and puts the cursor in the new
@@ -224,7 +220,6 @@ window.
 ------------------------------------------------------------------------------
                                                                    *NERDTree-gi*
 Default key: gi
-Map setting: NERDTreeMapPreviewSplit
 Applies to: files.
 
 The same as |NERDTree-i| except that the cursor is not moved.
@@ -235,7 +230,6 @@ The default key combo for this mapping is "g" + NERDTreeMapOpenSplit (see
 ------------------------------------------------------------------------------
                                                                     *NERDTree-s*
 Default key: s
-Map setting: NERDTreeMapOpenVSplit
 Applies to: files.
 
 Opens the selected file in a new vertically split window and puts the cursor
@@ -244,7 +238,6 @@ in the new window.
 ------------------------------------------------------------------------------
                                                                    *NERDTree-gs*
 Default key: gs
-Map setting: NERDTreeMapPreviewVSplit
 Applies to: files.
 
 The same as |NERDTree-s| except that the cursor is not moved.
@@ -255,7 +248,6 @@ The default key combo for this mapping is "g" + NERDTreeMapOpenVSplit (see
 ------------------------------------------------------------------------------
                                                                     *NERDTree-O*
 Default key: O
-Map setting: NERDTreeMapOpenRecursively
 Applies to: directories.
 
 Recursively opens the selected directory.
@@ -268,7 +260,6 @@ cached. This is handy, especially if you have .svn directories.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-x*
 Default key: x
-Map setting: NERDTreeMapCloseDir
 Applies to: files and directories.
 
 Closes the parent of the selected node.
@@ -276,7 +267,6 @@ Closes the parent of the selected node.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-X*
 Default key: X
-Map setting: NERDTreeMapCloseChildren
 Applies to: directories.
 
 Recursively closes all children of the selected directory.
@@ -286,7 +276,6 @@ Tip: To quickly "reset" the tree, use |NERDTree-P| with this mapping.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-p*
 Default key: p
-Map setting: NERDTreeMapJumpParent
 Applies to: files and directories.
 
 Jump to the parent node of the selected node.
@@ -294,7 +283,6 @@ Jump to the parent node of the selected node.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-K*
 Default key: K
-Map setting: NERDTreeMapJumpFirstChild
 Applies to: files and directories.
 
 Jump to the first child of the current nodes parent.
@@ -307,7 +295,6 @@ If the cursor is already on the first node then do the following:
 ------------------------------------------------------------------------------
                                                                     *NERDTree-J*
 Default key: J
-Map setting: NERDTreeMapJumpLastChild
 Applies to: files and directories.
 
 Jump to the last child of the current nodes parent.
@@ -320,7 +307,6 @@ If the cursor is already on the last node then do the following:
 ------------------------------------------------------------------------------
                                                                   *NERDTree-C-J*
 Default key: <C-J>
-Map setting: NERDTreeMapJumpNextSibling
 Applies to: files and directories.
 
 Jump to the next sibling of the selected node.
@@ -328,7 +314,6 @@ Jump to the next sibling of the selected node.
 ------------------------------------------------------------------------------
                                                                   *NERDTree-C-K*
 Default key: <C-K>
-Map setting: NERDTreeMapJumpPrevSibling
 Applies to: files and directories.
 
 Jump to the previous sibling of the selected node.
@@ -336,7 +321,6 @@ Jump to the previous sibling of the selected node.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-r*
 Default key: r
-Map setting: NERDTreeMapRefreshRoot
 Applies to: no restrictions.
 
 Recursively refresh the tree root.
@@ -344,7 +328,6 @@ Recursively refresh the tree root.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-I*
 Default key: I
-Map setting: NERDTreeMapToggleHidden
 Applies to: no restrictions.
 
 Toggles whether hidden files (i.e. "dot files") are displayed.
@@ -352,7 +335,6 @@ Toggles whether hidden files (i.e. "dot files") are displayed.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-f*
 Default key: f
-Map setting: NERDTreeMapToggleFilters
 Applies to: no restrictions.
 
 Toggles whether file filters are used. See |NERDTreeIgnore| for details.
@@ -360,7 +342,6 @@ Toggles whether file filters are used. See |NERDTreeIgnore| for details.
 ------------------------------------------------------------------------------
                                                                     *NERDTree-q*
 Default key: q
-Map setting: NERDTreeMapQuit
 Applies to: no restrictions.
 
 Closes the NERDTree window.
@@ -377,9 +358,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 
 |loaded_nerdtree|            Turns off the script.
 
-|NERDTreeCaseSensitiveSort|   Tells the NERDTree whether to be case
-                            sensitive or not when sorting nodes.
-
 |NERDTreeNaturalSort|         Tells the NERDTree whether to use natural sort
                             order or not when sorting nodes.
 
@@ -390,8 +368,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 |NERDTreeIgnore|              Tells the NERDTree which files to ignore.
 
 |NERDTreeRespectWildIgnore|   Tells the NERDTree to respect `'wildignore'`.
-
-|NERDTreeMouseMode|           Manage the interpretation of mouse clicks.
 
 |NERDTreeQuitOnOpen|          Closes the tree window or bookmark table after
                             opening a file.
@@ -410,11 +386,9 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 |NERDTreeWinSize|             Sets the window size when the NERDTree is
                             opened.
 
-|NERDTreeWinSizeMax|          Sets the maximum window size when the NERDTree
-                            is zoomed.
-
 |NERDTreeDirArrowCollapsible| These characters indicate when a directory is
 |NERDTreeDirArrowExpandable|  either collapsible or expandable.
+|NERDTreeFile|                This character indicates a file node
 
 ------------------------------------------------------------------------------
 3.2. Customisation details                             *NERDTreeSettingsDetails*
@@ -520,24 +494,6 @@ Values: 0 or 1.
 Default: 0.
 
 If set to 1, the `'wildignore'` setting is respected.
-
-------------------------------------------------------------------------------
-                                                             *NERDTreeMouseMode*
-Values: 1, 2 or 3.
-Default: 1.
-
-If set to 1 then a double click on a node is required to open it.
-If set to 2 then a single click will open directory nodes, while a double
-click will still be required for file nodes.
-If set to 3 then a single click will open any node.
-
-Note: a double click anywhere on a line that a tree node is on will
-activate it, but all single-click activations must be done on name of the node
-itself. For example, if you have the following node: >
-    | | |-application.rb
-<
-then (to single click activate it) you must click somewhere in
-'application.rb'.
 
 ------------------------------------------------------------------------------
                                                             *NERDTreeQuitOnOpen*
@@ -647,32 +603,9 @@ Default: 31.
 This setting is used to change the size of the NERDTree when it is loaded.
 
 ------------------------------------------------------------------------------
-                                                 *NERDTreeCascadeSingleChildDir*
-Values: 0 or 1
-Default: 1.
-
-When displaying dir nodes, this setting tells NERDTree to collapse dirs that
-have only one child. Use one of the following lines for this setting: >
-    let NERDTreeCascadeSingleChildDir=0
-    let NERDTreeCascadeSingleChildDir=1
-<
-------------------------------------------------------------------------------
-                                             *NERDTreeCascadeOpenSingleChildDir*
-Values: 0 or 1
-Default: 1.
-
-When opening dir nodes, this setting tells NERDTree to recursively open dirs
-that have only one child which is also a dir. NERDTree will stop when it finds
-a dir that contains anything but another single dir. This setting also causes
-the |NERDTree-x| mapping to close dirs in the same manner. This setting may be
-useful for Java projects. Use one of the following lines for this setting: >
-    let NERDTreeCascadeOpenSingleChildDir=0
-    let NERDTreeCascadeOpenSingleChildDir=1
-<
-------------------------------------------------------------------------------
-                        *NERDTreeDirArrowCollapsible* *NERDTreeDirArrowExpandable*
+                      *NERDTreeDirArrowCollapsible* *NERDTreeDirArrowExpandable*
 Values: Any single character.
-Defaults:   Windows: ~ and +    Others: ▾ and ▸
+Defaults: ▾ and ▸
 
 These characters indicate whether a directory is collapsible or expandable.
 

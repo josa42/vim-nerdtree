@@ -43,22 +43,24 @@ function! s:initVariable(var, value)
 endfunction
 
 "SECTION: Init variable calls and other random constants {{{2
-call s:initVariable("g:NERDTreeNaturalSort", 0)
-call s:initVariable("g:NERDTreeSortHiddenFirst", 1)
-if !exists("g:NERDTreeIgnore")
-    let g:NERDTreeIgnore = ['\~$']
-endif
-call s:initVariable("g:NERDTreeHighlightCursorline", 1)
-call s:initVariable("g:NERDTreeMouseMode", 1)
-call s:initVariable("g:NERDTreeNotificationThreshold", 100)
-call s:initVariable("g:NERDTreeQuitOnOpen", 0)
-call s:initVariable("g:NERDTreeRespectWildIgnore", 0)
-call s:initVariable("g:NERDTreeDirArrowExpandable", "▸")
-call s:initVariable("g:NERDTreeDirArrowCollapsible", "▾")
-call s:initVariable("g:NERDTreeFile", "∙")
-call s:initVariable('g:NERDTreeUpdateOnWrite', 1)                              " Update git status
-call s:initVariable('g:NERDTreeUpdateOnCursorHold', 1)
-call s:initVariable('g:NERDTreeShowIgnoredStatus', 0)
+
+call s:initVariable("g:NERDTreeQuitOnOpen",            0)
+call s:initVariable("g:NERDTreeDirArrowExpandable",    "▸")
+call s:initVariable("g:NERDTreeDirArrowCollapsible",   "▾")
+call s:initVariable("g:NERDTreeFile",                  "∙")
+call s:initVariable('g:NERDTreeUpdateOnWrite',         1)                      " Update git status TODO: Find better name!
+call s:initVariable('g:NERDTreeUpdateOnCursorHold',    1)                      " Update git status TODO: Find better name!
+call s:initVariable('g:NERDTreeShowIgnoredStatus',     1)                      " TODO Why should this be optional? Is it slow?
+call s:initVariable("g:NERDTreeWinPos",                "left")
+call s:initVariable("g:NERDTreeWinSize",               31)
+call s:initVariable("g:NERDtreeTabsAutofind",          0)                      " automatically find and select currently opened file
+
+" TODO Remove these:
+call s:initVariable("g:NERDTreeRespectWildIgnore",     0)                      " Deprecated: use nerdtree#api#addPathFilter()
+call s:initVariable("g:NERDTreeHighlightCursorline",   1)                      " Deprecated
+call s:initVariable("g:NERDTreeNaturalSort",           0)                      " Deprecated
+call s:initVariable("g:NERDTreeSortHiddenFirst",       1)                      " Deprecated
+call s:initVariable("g:NERDtreeTabsFocusOnFiles",      0)                      " Deprecated
 
 if !exists('g:NERDTreeIndicatorMap')
     let g:NERDTreeIndicatorMap = {
@@ -74,60 +76,24 @@ if !exists('g:NERDTreeIndicatorMap')
                 \ 'Unknown'   : '?'
                 \ }
 endif
+                                                                               " when switching into a tab, make sure that focus will always be in file
+                                                                               " editing window, not in NERDTree window (off by default)
+if !exists("g:NERDTreeIgnore") | let g:NERDTreeIgnore = ['\~$'] | endif        " Deprecated: use nerdtree#api#addPathFilter()
+call s:initVariable("g:NERDTreeGlyphReadOnly",         "RO")                   " Deprecated TODO: find better default glyph
 
 if !exists("g:NERDTreeSortOrder")
     let g:NERDTreeSortOrder = ['\/$', '*', '\.swp$',  '\.bak$', '\~$']
-endif
+endif                                                                          " Deprecated: TODO Add Sort API
 let g:NERDTreeOldSortOrder = []
 
-call s:initVariable("g:NERDTreeGlyphReadOnly", "RO")
 
-if !exists('g:NERDTreeStatusline')
+if !exists('g:NERDTreeStatusline')                                             " Deprecated TODO refactor statusline support!
     "the exists() crap here is a hack to stop vim spazzing out when
     "loading a session that was created with an open NERDTree. It spazzes
     "because it doesnt store b:NERDTree(its a b: var, and its a hash)
     let g:NERDTreeStatusline = "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}"
 
 endif
-call s:initVariable("g:NERDTreeWinPos", "left")
-call s:initVariable("g:NERDTreeWinSize", 31)
-
-"init the shell commands that will be used to copy nodes, and remove dir trees
-
-"SECTION: Init variable calls for key mappings {{{2
-"
-" TODO remove as much of the configuration options as possible!
-
-call s:initVariable("g:NERDTreeMapActivateNode",     "o")
-call s:initVariable("g:NERDTreeMapCloseChildren",    "X")
-call s:initVariable("g:NERDTreeMapCloseDir",         "x")
-call s:initVariable("g:NERDTreeMapJumpFirstChild",   "K")
-call s:initVariable("g:NERDTreeMapJumpLastChild",    "J")
-call s:initVariable("g:NERDTreeMapJumpNextSibling",  "<C-j>")
-call s:initVariable("g:NERDTreeMapJumpParent",       "p")
-call s:initVariable("g:NERDTreeMapJumpPrevSibling",  "<C-k>")
-call s:initVariable("g:NERDTreeMapJumpRoot",         "P")
-call s:initVariable("g:NERDTreeMapOpenInTab",        "t")
-call s:initVariable("g:NERDTreeMapOpenInTabSilent",  "T")
-call s:initVariable("g:NERDTreeMapOpenRecursively",  "O")
-call s:initVariable("g:NERDTreeMapOpenSplit",        "i")
-call s:initVariable("g:NERDTreeMapOpenVSplit",       "s")
-call s:initVariable("g:NERDTreeMapPreview",          "g" . NERDTreeMapActivateNode)
-call s:initVariable("g:NERDTreeMapPreviewSplit",     "g" . NERDTreeMapOpenSplit)
-call s:initVariable("g:NERDTreeMapPreviewVSplit",    "g" . NERDTreeMapOpenVSplit)
-call s:initVariable("g:NERDTreeMapQuit",             "q")
-call s:initVariable("g:NERDTreeMapRefresh",          "r")
-call s:initVariable("g:NERDTreeMapRefreshRoot",      "R")
-call s:initVariable("g:NERDTreeMapToggleFilters",    "f")
-call s:initVariable("g:NERDTreeMapToggleHidden",     "I")
-call s:initVariable("g:NERDtreeTabsFocusOnFiles",    0)                        " when switching into a tab, make sure that focus will always be in file
-                                                                               " editing window, not in NERDTree window (off by default)
-call s:initVariable("g:NERDtreeTabsAutofind",        0)                        " automatically find and select currently opened file
-
-
-" }}}
-
-
 
 "SECTION: Load class files{{{2
 call nerdtree#loadClassFiles()
