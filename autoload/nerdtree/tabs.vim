@@ -47,7 +47,7 @@ fun! nerdtree#tabs#openAllTabs()
   let l:current_tab = tabpagenr()
   tabdo call nerdtree#tabs#mirrorOrCreate()
   exe 'tabn ' . l:current_tab
-  if g:NERDtreeTabsAutofind
+  if g:NERDTreeTabsAutofind
     call nerdtree#tabs#unfocus()
     call nerdtree#tabs#findFile()
   endif
@@ -459,7 +459,7 @@ endfun
 "
 fun! s:BufReadHandler()
   " Refresh NERDTree to show currently opened file
-  if g:NERDtreeTabsAutofind
+  if g:NERDTreeTabsAutofind
     call nerdtree#tabs#findFile()
     call nerdtree#tabs#unfocus()
   endif

@@ -29,7 +29,7 @@ call nerdtree#defaultSetting('g:NERDTreeUpdateOnCursorHold',    1)             "
 call nerdtree#defaultSetting('g:NERDTreeShowIgnoredStatus',     1)             " TODO Why should this be optional? Is it slow?
 call nerdtree#defaultSetting("g:NERDTreeWinPos",                "left")
 call nerdtree#defaultSetting("g:NERDTreeWinSize",               31)
-call nerdtree#defaultSetting("g:NERDtreeTabsAutofind",          0)             " automatically find and select currently opened file
+call nerdtree#defaultSetting("g:NERDTreeTabsAutofind",          0)             " automatically find and select currently opened file
 call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \   'Modified'  : '✹',
                             \   'Staged'    : '✚',
