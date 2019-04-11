@@ -30,16 +30,6 @@ call nerdtree#defaultSetting('g:NERDTreeShowIgnoredStatus',     1)             "
 call nerdtree#defaultSetting("g:NERDTreeWinPos",                "left")
 call nerdtree#defaultSetting("g:NERDTreeWinSize",               31)
 call nerdtree#defaultSetting("g:NERDtreeTabsAutofind",          0)             " automatically find and select currently opened file
-
-" TODO Remove these:
-call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)             " Deprecated: use nerdtree#api#addPathFilter()
-call nerdtree#defaultSetting("g:NERDTreeHighlightCursorline",   1)             " Deprecated
-call nerdtree#defaultSetting("g:NERDTreeNaturalSort",           0)             " Deprecated
-call nerdtree#defaultSetting("g:NERDTreeSortHiddenFirst",       1)             " Deprecated
-call nerdtree#defaultSetting("g:NERDtreeTabsFocusOnFiles",      0)             " Deprecated
-                                                                               " when switching into a tab, make sure that focus will always be in file
-                                                                               " editing window, not in NERDTree window (off by default)
-
 call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \   'Modified'  : '✹',
                             \   'Staged'    : '✚',
@@ -52,13 +42,19 @@ call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \   'Ignored'   : '☒',
                             \   'Unknown'   : '?'
                             \ })
-call nerdtree#defaultSetting('g:NERDTreeIgnore',                ['\~$'])       " Deprecated: use nerdtree#api#addPathFilter()
-call nerdtree#defaultSetting("g:NERDTreeGlyphReadOnly",         "RO")          " Deprecated: TODO: find better default glyph
 
-call nerdtree#defaultSetting('g:NERDTreeSortOrder', [
-                            \   '\/$', '*', '\.swp$',  '\.bak$', '\~$'
-                            \ ])
-                                                                               " Deprecated: TODO Add Sort API
+" TODO Remove these:
+call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)             " Deprecated: use nerdtree#api#addPathFilter()
+call nerdtree#defaultSetting("g:NERDTreeHighlightCursorline",   1)             " Deprecated
+call nerdtree#defaultSetting("g:NERDTreeNaturalSort",           0)             " Deprecated
+call nerdtree#defaultSetting("g:NERDTreeSortHiddenFirst",       1)             " Deprecated
+call nerdtree#defaultSetting("g:NERDtreeTabsFocusOnFiles",      0)             " Deprecated
+                                                                               " when switching into a tab, make sure that focus will always be in file
+                                                                               " editing window, not in NERDTree window (off by default)
+
+call nerdtree#defaultSetting('g:NERDTreeIgnore',            ['\~$', '\.swp$']) " Deprecated: use nerdtree#api#addPathFilter()
+call nerdtree#defaultSetting("g:NERDTreeGlyphReadOnly",         "RO")          " Deprecated: TODO: find better default glyph
+call nerdtree#defaultSetting('g:NERDTreeSortOrder', ['\/$', '*'])              " Deprecated: TODO Add Sort API
 let g:NERDTreeOldSortOrder = []
 
 "the exists() crap here is a hack to stop vim spazzing out when
@@ -67,8 +63,7 @@ let g:NERDTreeOldSortOrder = []
 call nerdtree#defaultSetting('g:NERDTreeStatusline', "%{exists('b:NERDTree')?b:NERDTree.root.path.str():''}")
                                                                                " Deprecated TODO refactor statusline support!
 
-
-"SECTION: Load class files{{{2
+" SECTION: Load class files{{{2
 
 call nerdtree#loadClassFiles()
 
