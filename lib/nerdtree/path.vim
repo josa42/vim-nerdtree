@@ -75,10 +75,6 @@ function! s:Path.compareTo(path)
     elseif thisSS > thatSS
         return 1
     else
-        if !g:NERDTreeSortHiddenFirst
-            let thisPath = substitute(thisPath, '^[._]', '', '')
-            let thatPath = substitute(thatPath, '^[._]', '', '')
-        endif
         "if the sort sequences are the same then compare the paths
         "alphabetically
         return thisPath <? thatPath ? -1 : 1
@@ -210,9 +206,6 @@ function! s:Path.getSortKey()
         endif
 
         let path = self.getLastPathComponent(1)
-        if !g:NERDTreeSortHiddenFirst
-            let path = substitute(path, '^[._]', '', '')
-        endif
         let path = tolower(path)
 
         call extend(self._sortKey, (g:NERDTreeNaturalSort ? self._splitChunks(path) : [path]))

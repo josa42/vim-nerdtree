@@ -351,10 +351,6 @@ the NERDTree. These settings should be set in your vimrc, using `:let`.
 |NERDTreeNaturalSort|         Tells the NERDTree whether to use natural sort
                             order or not when sorting nodes.
 
-|NERDTreeSortHiddenFirst|     Tells the NERDTree whether to take the dot at
-                            the beginning of the hidden file names into
-                            account when sorting nodes.
-
 |NERDTreeIgnore|              Tells the NERDTree which files to ignore.
 
 |NERDTreeRespectWildIgnore|   Tells the NERDTree to respect `'wildignore'`.
