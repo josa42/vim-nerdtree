@@ -17,7 +17,7 @@ function! nerdtree#gitignore#updateIgnored()
   let s:ignored = split(out, "\n")
 endfunction
 
-function nerdtree#gitignore#filter(params)
+function! nerdtree#gitignore#filter(params)
   let p = a:params['path']
   let r = substitute(p.str(), getcwd() . "/" , "", "")
   let r = p.isDirectory ? r . '/' : r

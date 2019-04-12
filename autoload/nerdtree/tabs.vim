@@ -5,7 +5,7 @@
 " nerdtree#tabs#mirrorOrCreate() {{{
 "
 " switch NERDTree on for current tab -- mirror it if possible, otherwise create it
-fun! nerdtree#tabs#mirrorOrCreate()
+function! nerdtree#tabs#mirrorOrCreate()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
 
   " if NERDTree is not active in the current tab, try to mirror it
@@ -20,13 +20,13 @@ fun! nerdtree#tabs#mirrorOrCreate()
       silent call nerdtree#api#toggle()
     endif
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#mirrorToggle() {{{
 "
 " toggle NERDTree in current tab, use mirror if possible
-fun! nerdtree#tabs#mirrorToggle()
+function! nerdtree#tabs#mirrorToggle()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
 
   if l:nerdtree_open
@@ -34,13 +34,13 @@ fun! nerdtree#tabs#mirrorToggle()
   else
     call nerdtree#tabs#mirrorOrCreate()
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#openAllTabs() {{{
 "
 " switch NERDTree on for all tabs while making sure there is only one NERDTree buffer
-fun! nerdtree#tabs#openAllTabs()
+function! nerdtree#tabs#openAllTabs()
   let s:nerdtree_globally_active = 1
 
   " tabdo doesn't preserve current tab - save it and restore it afterwards
@@ -51,26 +51,26 @@ fun! nerdtree#tabs#openAllTabs()
     call nerdtree#tabs#unfocus()
     call nerdtree#tabs#findFile()
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#closeAllTabs() {{{
 "
 " close NERDTree across all tabs
-fun! nerdtree#tabs#closeAllTabs()
+function! nerdtree#tabs#closeAllTabs()
   let s:nerdtree_globally_active = 0
 
   " tabdo doesn't preserve current tab - save it and restore it afterwards
   let l:current_tab = tabpagenr()
   tabdo silent NERDTreeClose
   exe 'tabn ' . l:current_tab
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#toggleAllTabs() {{{
 "
 " toggle NERDTree in current tab and match the state in all other tabs
-fun! nerdtree#tabs#toggleAllTabs()
+function! nerdtree#tabs#toggleAllTabs()
   let l:nerdtree_open = s:IsNERDTreeOpenInCurrentTab()
   let s:disable_handlers_for_tabdo = 1
 
@@ -85,13 +85,13 @@ fun! nerdtree#tabs#toggleAllTabs()
   endif
 
   let s:disable_handlers_for_tabdo = 0
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#steppedOpen() {{{
 "
 " focus the NERDTree view, creating one first if none is present
-fun! nerdtree#tabs#steppedOpen()
+function! nerdtree#tabs#steppedOpen()
   if !s:IsCurrentWindowNERDTree()
     if s:IsNERDTreeOpenInCurrentTab()
       call nerdtree#tabs#focus()
@@ -99,14 +99,14 @@ fun! nerdtree#tabs#steppedOpen()
       call nerdtree#tabs#mirrorOrCreate()
     endif
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#steppedClose{() {{{
 "
 " unfocus the NERDTree view or closes it if it hadn't had focus at the time of
 " the call
-fun! nerdtree#tabs#steppedClose()
+function! nerdtree#tabs#steppedClose()
   if s:IsCurrentWindowNERDTree()
     call nerdtree#tabs#unfocus()
   else
@@ -116,14 +116,14 @@ fun! nerdtree#tabs#steppedClose()
       silent NERDTreeClose
     endif
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#focusToggle() {{{
 "
 " focus the NERDTree view or creates it if in a file,
 " or unfocus NERDTree view if in NERDTree
-fun! nerdtree#tabs#focusToggle()
+function! nerdtree#tabs#focusToggle()
   let s:disable_handlers_for_tabdo = 1
   if s:IsCurrentWindowNERDTree()
     call nerdtree#tabs#unfocus()
@@ -134,7 +134,7 @@ fun! nerdtree#tabs#focusToggle()
     call nerdtree#tabs#focus()
   endif
   let s:disable_handlers_for_tabdo = 0
-endfun
+endfunction
 " }}}
 "
 " === NERDTree manipulation (opening, closing etc.) === }}}
@@ -143,17 +143,17 @@ endfun
 " nerdtree#tabs#focus() {{{
 "
 " if the current window is NERDTree, move focus to the next window
-fun! nerdtree#tabs#focus()
+function! nerdtree#tabs#focus()
   if !s:IsCurrentWindowNERDTree() && exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
     exe bufwinnr(t:NERDTreeBufName) . "wincmd w"
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#unfocus() {{{
 "
 " if the current window is NERDTree, move focus to the next window
-fun! nerdtree#tabs#unfocus()
+function! nerdtree#tabs#unfocus()
   " save current window so that it's focus can be restored after switching
   " back to this tab
   let t:NERDTreeTabLastWindow = winnr()
@@ -165,33 +165,33 @@ fun! nerdtree#tabs#unfocus()
       wincmd w
     endif
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#restoreFocus() {{{
 "
 " restore focus to the window that was focused before leaving current tab
-fun! nerdtree#tabs#restoreFocus()
+function! nerdtree#tabs#restoreFocus()
   if s:is_nerdtree_globally_focused
     call nerdtree#tabs#focus()
   elseif exists("t:NERDTreeTabLastWindow") && exists("t:NERDTreeBufName") && t:NERDTreeTabLastWindow != bufwinnr(t:NERDTreeBufName)
     exe t:NERDTreeTabLastWindow . "wincmd w"
   endif
-endfun
+endfunction
 
 " }}}
 " s:SaveGlobalFocus() {{{
 "
-fun! s:SaveGlobalFocus()
+function! s:SaveGlobalFocus()
   let s:is_nerdtree_globally_focused = s:IsCurrentWindowNERDTree()
-endfun
+endfunction
 
 " }}}
 " s:IfFocusOnStartup() {{{
 "
-fun! s:IfFocusOnStartup()
+function! s:IfFocusOnStartup()
   return strlen(bufname('$')) == 0 || !getbufvar('$', '&modifiable')
-endfun
+endfunction
 
 " }}}
 "
@@ -201,7 +201,7 @@ endfun
 " s:NextNormalWindow() {{{
 "
 " find next window with a normal buffer
-fun! s:NextNormalWindow()
+function! s:NextNormalWindow()
   let l:i = 1
   while(l:i <= winnr('$'))
     let l:buf = winbufnr(l:i)
@@ -227,42 +227,42 @@ fun! s:NextNormalWindow()
     return l:i
   endwhile
   return -1
-endfun
+endfunction
 
 " }}}
 " s:CloseIfOnlyNerdTreeLeft() {{{
 "
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
-fun! s:CloseIfOnlyNerdTreeLeft()
+function! s:CloseIfOnlyNerdTreeLeft()
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
     q
   endif
-endfun
+endfunction
 
 " }}}
 " s:IsCurrentWindowNERDTree() {{{
 "
 " returns 1 if current window is NERDTree, false otherwise
-fun! s:IsCurrentWindowNERDTree()
+function! s:IsCurrentWindowNERDTree()
   return exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) == winnr()
-endfun
+endfunction
 
 " }}}
 " s:IsNERDTreeOpenInCurrentTab() {{{
 "
 " check if NERDTree is open in current tab
-fun! s:IsNERDTreeOpenInCurrentTab()
+function! s:IsNERDTreeOpenInCurrentTab()
   return exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
-endfun
+endfunction
 
 " }}}
 " s:IsNERDTreePresentInCurrentTab() {{{
 "
 " check if NERDTree is present in current tab (not necessarily visible)
-fun! s:IsNERDTreePresentInCurrentTab()
+function! s:IsNERDTreePresentInCurrentTab()
   return exists("t:NERDTreeBufName")
-endfun
+endfunction
 
 " }}}
 "
@@ -271,7 +271,7 @@ endfun
 "
 " s:SaveNERDTreeViewIfPossible() {{{
 "
-fun! s:SaveNERDTreeViewIfPossible()
+function! s:SaveNERDTreeViewIfPossible()
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) == winnr()
     " save scroll and cursor etc.
     let s:nerdtree_view = winsaveview()
@@ -283,12 +283,12 @@ fun! s:SaveNERDTreeViewIfPossible()
     " a new NERDTree instance)
     let s:nerdtree_buffer = bufname("%")
   endif
-endfun
+endfunction
 
 " }}}
 " s:RestoreNERDTreeViewIfPossible() {{{
 "
-fun! s:RestoreNERDTreeViewIfPossible()
+function! s:RestoreNERDTreeViewIfPossible()
   " if nerdtree exists in current tab, it is the current window and if saved
   " state is available, restore it
   let l:view_state_saved = exists('s:nerdtree_view') && exists('s:nerdtree_width')
@@ -310,16 +310,16 @@ fun! s:RestoreNERDTreeViewIfPossible()
     " switch back to whatever window was focused before
     exe l:current_winnr . "wincmd w"
   endif
-endfun
+endfunction
 
 " }}}
 " nerdtree#tabs#findFile() {{{
 "
-fun! nerdtree#tabs#findFile()
+function! nerdtree#tabs#findFile()
   if s:IsNERDTreeOpenInCurrentTab()
     silent NERDTreeFind
   endif
-endfun
+endfunction
 
 " }}}
 "
@@ -330,7 +330,7 @@ endfun
 "
 " nerdtree#tabs#load() {{{
 "
-fun! nerdtree#tabs#load()
+function! nerdtree#tabs#load()
   if exists('g:nerdtree_tabs_loaded')
     return
   endif
@@ -362,7 +362,7 @@ fun! nerdtree#tabs#load()
   augroup END
 
   let g:nerdtree_tabs_loaded = 1
-endfun
+endfunction
 
 
 " }}} s:NewTabCreated {{{
@@ -377,7 +377,7 @@ let s:NewTabCreated = 0
 " }}}
 " s:TabEnterHandler() {{{
 "
-fun! s:TabEnterHandler()
+function! s:TabEnterHandler()
   if s:disable_handlers_for_tabdo
     return
   endif
@@ -397,20 +397,20 @@ fun! s:TabEnterHandler()
   if !s:NewTabCreated
     call nerdtree#tabs#restoreFocus()
   endif
-endfun
+endfunction
 
 " }}}
 " s:TabLeaveHandler() {{{
 "
-fun! s:TabLeaveHandler()
+function! s:TabLeaveHandler()
   call s:SaveGlobalFocus()
   call nerdtree#tabs#unfocus()
-endfun
+endfunction
 
 " }}}
 " s:WinEnterHandler() {{{
 "
-fun! s:WinEnterHandler()
+function! s:WinEnterHandler()
   if s:disable_handlers_for_tabdo
     return
   endif
@@ -421,18 +421,18 @@ fun! s:WinEnterHandler()
   let &eventignore = 'VimEnter,TabEnter,TabLeave,WinEnter,WinLeave,BufWinEnter,BufRead'
   call s:CloseIfOnlyNerdTreeLeft()
   let &eventignore = s:ei
-endfun
+endfunction
 
 " }}}
 " s:WinLeaveHandler() {{{
 "
-fun! s:WinLeaveHandler()
+function! s:WinLeaveHandler()
   if s:disable_handlers_for_tabdo
     return
   endif
 
   call s:SaveNERDTreeViewIfPossible()
-endfun
+endfunction
 
 " }}}
 " s:BufWinEnterHandler() {{{
@@ -441,7 +441,7 @@ endfun
 " successfully loaded, it is a proper time to finish the remaining
 " work for newly opened tab.
 "
-fun! s:BufWinEnterHandler()
+function! s:BufWinEnterHandler()
   if s:NewTabCreated
     " Turn off the 'NewTabCreated' flag
     let s:NewTabCreated = 0
@@ -449,7 +449,7 @@ fun! s:BufWinEnterHandler()
     " Restore focus to NERDTree if necessary
     call nerdtree#tabs#restoreFocus()
   endif
-endfun
+endfunction
 
 " }}}
 " s:BufReadHandler() {{{
@@ -457,13 +457,13 @@ endfun
 " BufRead event gets triggered after a new buffer has been
 " successfully read from file.
 "
-fun! s:BufReadHandler()
+function! s:BufReadHandler()
   " Refresh NERDTree to show currently opened file
   if g:NERDTreeTabsAutofind
     call nerdtree#tabs#findFile()
     call nerdtree#tabs#unfocus()
   endif
-endfun
+endfunction
 
 " }}}
 "

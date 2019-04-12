@@ -160,7 +160,7 @@ function! s:getFileGitStatusKey(us, them)
     endif
 endfunction
 " Function: s:sID()   {{{2
-function s:sID()
+function! s:sID()
     if !exists('s:sid')
         let s:sid = matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_SID$')
     endif
