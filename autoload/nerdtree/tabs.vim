@@ -1,6 +1,11 @@
 " === plugin functions === {{{
 "
 " === NERDTree manipulation (opening, closing etc.) === {{{
+
+function! nerdtree#tabs#mirrored()
+  return exists('s:nerdtree_globally_active') && s:nerdtree_globally_active
+endfunction
+
 "
 " nerdtree#tabs#mirrorOrCreate() {{{
 "
@@ -62,7 +67,7 @@ function! nerdtree#tabs#closeAllTabs()
 
   " tabdo doesn't preserve current tab - save it and restore it afterwards
   let l:current_tab = tabpagenr()
-  tabdo silent NERDTreeClose
+  tabdo silent call nerdtree#api#close()
   exe 'tabn ' . l:current_tab
 endfunction
 
