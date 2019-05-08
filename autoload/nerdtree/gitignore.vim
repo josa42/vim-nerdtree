@@ -13,7 +13,7 @@ function! nerdtree#gitignore#registerFilter()
 endfunction
 
 function! nerdtree#gitignore#updateIgnored()
-  let out = system("git clean -ndX | sed 's/^Would remove //'")
+  let out = system("git clean -ndX | sed 's/^Would remove //' | sed 's/^Would skip repository //'")
   let s:ignored = split(out, "\n")
 endfunction
 

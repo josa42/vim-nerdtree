@@ -27,7 +27,7 @@ call nerdtree#defaultSetting("g:NERDTreeFile",                  "∙")
 call nerdtree#defaultSetting("g:NERDTreeWinPos",                "left")
 call nerdtree#defaultSetting("g:NERDTreeWinSize",               31)
 call nerdtree#defaultSetting("g:NERDTreeTabsAutofind",          0)             " automatically find and select currently opened file
-call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     0)
+call nerdtree#defaultSetting("g:NERDTreeRespectWildIgnore",     1)
 call nerdtree#defaultSetting('g:NERDTreeIndicatorMap', {
                             \   'Modified'  : '✹',
                             \   'Staged'    : '✚',

@@ -144,9 +144,13 @@ function! s:UI.render()
     " delete all lines in the buffer (being careful not to clobber a register)
     silent 1,$delete _
 
-    for i in range(1, 1)
-        call setline(i, "")
-    endfor
+    " for i in range(1, winheight(0))
+    "     call setline(i, repeat(' ', winwidth(0)))
+    " endfor
+
+    " for i in range(1, 1)
+    "     call setline(i, "")
+    " endfor
 
     call cursor(1, col("."))
 
