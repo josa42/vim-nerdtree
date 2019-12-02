@@ -16,9 +16,9 @@ function! nerdtree#api#refresh()
 endfunction
 
 function! nerdtree#api#close()
-  if nerdtree#tabs#mirrored()
-    call nerdtree#tabs#closeAllTabs()
-  else
+  " if nerdtree#tabs#mirrored()
+  "   call nerdtree#tabs#closeAllTabs()
+  " else
     if exists("b:NERDTree") && b:NERDTree.isWinTree() && b:NERDTree.previousBuf() != -1
       exec "buffer " . b:NERDTree.previousBuf()
     else
@@ -29,12 +29,12 @@ function! nerdtree#api#close()
       "   call nerdtree#echo("Cannot close last window")
       " endif
     endif
-  endif
+  " endif
 endfunction
 
-function! nerdtree#api#openAllTabs()
-  call nerdtree#tabs#openAllTabs()
-endfunction
+" function! nerdtree#api#openAllTabs()
+"   call nerdtree#tabs#openAllTabs()
+" endfunction
 
 function! nerdtree#api#render()
     call nerdtree#renderView()
@@ -129,15 +129,25 @@ function! nerdtree#api#revealPath(pathStr)
     call l:node.putCursorHere(1, 0)
 endfunction
 
-function! nerdtree#api#create(...)
-  call g:NERDTreeCreator.CreateTabTree(a:0 ? a:1 : '')
+" New public API
+
+function! nerdtree#api#open()
+  call g:NERDTreeCreator.CreateTabTree('')
 endfunction
 
-function! nerdtree#api#toggle(...)
-   call g:NERDTreeCreator.ToggleTabTree(a:0 ? a:1 : '')
+function! nerdtree#api#toggle()
+   call g:NERDTreeCreator.ToggleTabTree('')
 endfunction
 
-function! nerdtree#api#ceateMirror()
+function! nerdtree#api#createMirror()
   call g:NERDTreeCreator.CreateMirror()
 endfunction
+
+" function! nerdtree#api#focusOrClose()
+"   if &filetype == 'nerdtree'
+"     silent call nerdtree#tabs#close()
+"   else
+"     silent call nerdtree#api#open()
+"   endif
+" endfunction
 

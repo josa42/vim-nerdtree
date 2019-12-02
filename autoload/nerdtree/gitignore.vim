@@ -1,18 +1,17 @@
-
 let s:ignored = []
 
-function! nerdtree#gitignore#registerFilter()
-  call nerdtree#gitignore#updateIgnored()
+function! nerdtree#gitignore#load()
+  call s:updateIgnored()
   call nerdtree#api#addPathFilter('nerdtree#gitignore#filter')
 
   augroup NERDTreeGitignore
     autocmd!
-    autocmd BufWrite .gitignore call nerdtree#gitignore#updateIgnored()
+    autocmd BufWrite .gitignore call s:updateIgnored()
     call nerdtree#api#refresh()
   augroup END
 endfunction
 
-function! nerdtree#gitignore#updateIgnored()
+function! s:updateIgnored()
   let out = system("git clean -ndX | sed 's/^Would remove //' | sed 's/^Would skip repository //'")
   let s:ignored = split(out, "\n")
 endfunction

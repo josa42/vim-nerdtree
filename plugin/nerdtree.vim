@@ -74,7 +74,7 @@ augroup END
 
 call nerdtree#commands#setup()
 call nerdtree#git#load()
-call nerdtree#tabs#load()
-call nerdtree#gitignore#registerFilter()
+" call nerdtree#tabs#load()
+call nerdtree#gitignore#load()
 
 " vim: set sw=4 sts=4 et fdm=marker:
